@@ -1,0 +1,40 @@
+#.rst:
+# libctr-config
+# -------------
+# 
+# :command:`find_package` interface to libctr. 
+# 
+# Finds and configures libctr.
+# 
+
+######################################################################
+# This file is part of libctr.
+# 
+# libctr is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# libctr is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with libctr.  If not, see <http://www.gnu.org/licenses/>.
+######################################################################
+
+@PACKAGE_INIT@
+
+set(CMAKE_CONFIG_PREFIX @PACKAGE_CONFIG_PREFIX@)
+
+include(${CMAKE_CONFIG_PREFIX}/libctr-targets.cmake OPTIONAL)
+
+if(TARGET CTR::libctr)
+	get_property(LIBCTR_LIBRARY TARGET CTR::libctr PROPERTY LOCATION)
+	get_property(LIBCTR_INCLUDE_DIR TARGET CTR::libctr PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+endif()
+
+include(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
+
+find_package_handle_standard_args(libctr DEFAULT_MSG LIBCTR_LIBRARY)
