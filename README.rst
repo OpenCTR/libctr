@@ -2,9 +2,9 @@
 
 |Logo|
 
-=======
-OpenCTR
-=======
+======
+libctr
+======
 
 :repository: `libctr <https://github.com/OpenCTR/libctr>`_
 :license: `GPL3 <http://www.gnu.org/licenses/gpl-3.0.html>`_
@@ -59,7 +59,7 @@ Authors
 License
 =======
 
-OpenCTR is licensed under version 3 of the `GNU General Public License`_. 
+libctr is licensed under version 3 of the `GNU General Public License`_. 
 See `LICENSE`_ for terms.
 
 
