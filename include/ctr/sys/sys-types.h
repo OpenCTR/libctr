@@ -25,25 +25,8 @@
 
 #include <stdint.h>
 
-/** Domain for all System errors. */
-#define SYS_ERROR_BASE (0x10000000)
-/** Expander for a Systen error. */
-#define SYS_ERROR(i) (SYS_ERROR_BASE + (i))
-
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if 0
-/**
- * @enum SYSError
- * @brief System errors.
- * @warning Use of SYSError as a type is discouraged. A 
- * variable meant to contain an error should be an int.
- */
-typedef enum {
-	SYS_ERROR_BAD_THREAD 	= SYS_ERROR(0x01), /**< Object is not a valid handle to a thread. */
-} SYSError;
 #endif
 
 /**

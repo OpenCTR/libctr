@@ -17,9 +17,11 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <errno.h>
 
 #include "ctr/sys/sys.h"
 #include "ctr/svc/svc.h"
+#include "ctr/error/error-private.h"
 
 /* 'THR' */
 #define SYS_THREAD_MAGIC (0x00544852)
@@ -35,15 +37,18 @@ int sys_thread_new(SYSThread* thread, SYSThreadFunc entrypoint, void* arg, uint3
 	int ret;
 
 	if(thread == NULL) {
+		(*cerrorptr()) = EINVAL;
 		return -1;
 	}
 
 	if(entrypoint == NULL) {
+		(*cerrorptr()) = EINVAL;
 		return -1;
 	}
 
 	ret = svc_thread_create(&thread->handle, entrypoint, (uint32_t)arg, stack_top, priority, idnum);
 	if(ret != 0) {
+		// TODO: (*cerrorptr()) = ???
 		return -1;
 	}
 

@@ -20,8 +20,8 @@
  * along with libctr.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __LIBCTR_SYSTYPES_H__
-#define __LIBCTR_SYSTYPES_H__
+#ifndef __LIBCTR_SYS_H__
+#define __LIBCTR_SYS_H__
 
 #include "sys-types.h"
 
@@ -36,9 +36,10 @@ extern "C" {
  * @param[in] entrypoint Function to execute inside the new thread.
  * @param[in] arg Argument given to the thread function. May be <code>NULL</code>.
  * @param[in] stack_top Address to use for the thread-specific stack.
- * @param[in] priority Priority assigned to the new thread. Higher values 
- * mean a lower priority.
+ * @param[in] priority Priority assigned to the new thread. Higher values mean a lower priority.
  * @param[in] idnum Processor the thread should be created by.
+ * @return 0 if successful, -1 otherwise.
+ * @return On success, 0 is returned. On error, -1 is returned, and cerror is updated appropriately.
  */
 int sys_thread_new(SYSThread* thread, SYSThreadFunc entrypoint, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
 

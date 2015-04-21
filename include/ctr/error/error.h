@@ -1,6 +1,6 @@
 /**
- * @file ctr/error/error-types.h
- * @brief Error types.
+ * @file ctr/error/error.h
+ * @brief Error interface.
  */
 
 /*
@@ -20,21 +20,24 @@
  * along with libctr.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __LIBCTR_ERROR_TYPES_H__
-#define __LIBCTR_ERROR_TYPES_H__
+#ifndef __LIBCTR_ERROR_H__
+#define __LIBCTR_ERROR_H__
 
-#include <stdint.h>
+#include "error-types.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /**
- * @brief Error type.
- * @details All errors in libctr are a 32-bit signed
- * integer.
+ * @brief Return the latest error number.
+ * @details The libctr equivalent of errno. libctr functions 
+ * return 0 if they were successful, or -1 if they encountered an 
+ * error. In the later case, <code>cerror()</code> may be called
+ * to obtain an error number code corresponding to the error 
+ * encountered inside the libctr function.
  */
-typedef int32_t CError;
+int cerror(void);
 
 #ifdef __cplusplus
 }

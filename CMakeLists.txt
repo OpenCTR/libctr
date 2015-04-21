@@ -24,17 +24,17 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 if(NOT DEFINED CTR_ROOT)
-	message(SEND_ERROR "CTR_ROOT undefined")
+	message(SEND_ERROR "CTR_ROOT is not set.")
 endif()
 
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/OpenCTR-Toolchain.cmake")
 set(CMAKE_INSTALL_PREFIX "${CTR_ROOT}" CACHE INTERNAL "CMAKE_INSTALL_ROOT")
 
-project(libctr)
-
 include(CMakePackageConfigHelpers)
 include(CMakeProjectSettings)
 include(CMakeProjectVersion)
+
+project(libctr)
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
@@ -43,10 +43,13 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-add_library(ctr
-	src/sys.c
+add_library(ctr 
+	src/svc.s
+	src/sys.c 
+	src/error.c 
 )
 
+# Export CTR::libctr instead of CTR::ctr
 set_property(TARGET ctr PROPERTY EXPORT_NAME "libctr")
 
 if(WIN32)
@@ -57,6 +60,7 @@ else()
 	set(CONFIG_PREFIX "share/cmake")
 endif()
 
+# Configure libctr-config.cmake
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/libctr-config.cmake.in
 	${CMAKE_CURRENT_BINARY_DIR}/libctr-config.cmake
@@ -64,25 +68,35 @@ configure_package_config_file(
 	PATH_VARS CONFIG_PREFIX
 )
 
+# Install libctr headers
+install(DIRECTORY include/
+	DESTINATION include
+	USE_SOURCE_PERMISSIONS
+	PATTERN .* EXCLUDE
+)
+
+# Install libctr CMake modules
+install(DIRECTORY cmake/Modules/
+	DESTINATION ${CONFIG_PREFIX}
+	PATTERN .* EXCLUDE
+	PATTERN CMake*.cmake EXCLUDE
+)
+
+# Install libctr.a
 install(TARGETS ctr 
 	EXPORT libctr
 	ARCHIVE DESTINATION lib
 	INCLUDES DESTINATION include
 )
 
+# Install libctr-targets.cmake
 install(EXPORT libctr
 	DESTINATION ${CONFIG_PREFIX}
 	FILE libctr-targets.cmake
 	NAMESPACE CTR::
 )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libctr-config.cmake
+# Install libctr-config.cmake
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libctr-config.cmake 
 	DESTINATION ${CONFIG_PREFIX}
-)
-
-install(DIRECTORY include/
-	DESTINATION include
-	USE_SOURCE_PERMISSIONS
-	#REGEX "^\\..*$" EXCLUDE
-	PATTERN .* EXCLUDE
 )

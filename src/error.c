@@ -1,8 +1,3 @@
-/**
- * @file ctr/error/error-types.h
- * @brief Error types.
- */
-
 /*
  * This file is part of libctr.
  * 
@@ -20,24 +15,25 @@
  * along with libctr.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __LIBCTR_ERROR_TYPES_H__
-#define __LIBCTR_ERROR_TYPES_H__
-
+#include <stdio.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "ctr/error/error.h"
+#include "ctr/svc/svc.h"
 
-/**
- * @brief Error type.
- * @details All errors in libctr are a 32-bit signed
- * integer.
+/*
+ * Yes, this isn't thread-safe **YET**.
+ *
+ * I will make it so later, but right now I just want to
+ * focus on my interface APIs.
  */
-typedef int32_t CError;
+static int cerrorno = 0;
 
-#ifdef __cplusplus
+int cerror(void) {
+	return cerrorno;
 }
-#endif
 
-#endif
+int* cerrorptr(void) {
+	return &cerrorno;
+}
+
