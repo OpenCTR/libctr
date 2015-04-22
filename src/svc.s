@@ -19,8 +19,10 @@
 .align 4
 
 .global svc_thread_create
+.global svcOutputDebugString
 
 .type svc_thread_create, %function
+.type svc_output_debug_string, %function
 
 svc_thread_create:
 	stmfd sp!, {r0, r4}
@@ -30,5 +32,12 @@ svc_thread_create:
 	ldr r2, [sp], #4
 	str r1, [r2]
 	ldr r4, [sp], #4
+	bx lr
+
+svc_output_debug_string:
+	str r0, [sp,#-0x4]!
+	svc 0x3D
+	ldr r2, [sp], #4
+	str r1, [r2]
 	bx lr
 

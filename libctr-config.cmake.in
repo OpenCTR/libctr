@@ -37,4 +37,4 @@ endif()
 
 include(${CMAKE_ROOT}/Modules/FindPackageHandleStandardArgs.cmake)
 
-find_package_handle_standard_args(libctr DEFAULT_MSG LIBCTR_LIBRARY)
+find_package_handle_standard_args(libctr DEFAULT_MSG LIBCTR_LIBRARY LIBCTR_INCLUDE_DIR)

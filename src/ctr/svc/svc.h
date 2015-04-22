@@ -31,6 +31,8 @@ extern "C" {
 
 int svc_thread_create(SVCHandle* handle, SVCThreadFunc entrypoint, uint32_t arg, uint32_t stacktop, int32_t priority, int32_t processorid);
 
+int svc_output_debug_string(const char* str, const int len);
+
 #ifdef __cplusplus
 }
 #endif

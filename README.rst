@@ -53,7 +53,17 @@ https://openctr.github.io/
 Authors
 =======
 
-* Alex Shaw
+* Symbitic
+
+https://openctr.github.io/Authors.html
+
+=======
+Credits
+=======
+
+* smealum for ctrulib, which provides the basis of ~90% of the code logic.
+
+https://openctr.github.io/Credits.html
 
 =======
 License

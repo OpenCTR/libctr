@@ -57,3 +57,9 @@ int sys_thread_new(SYSThread* thread, SYSThreadFunc entrypoint, void* arg, uint3
 	return 0;
 }
 
+void sys_print_debug(const char* str) {
+	const int len = strlen(str);
+
+	svc_output_debug_string(str, len);
+}
+

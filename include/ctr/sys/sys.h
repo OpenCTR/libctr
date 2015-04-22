@@ -38,10 +38,18 @@ extern "C" {
  * @param[in] stack_top Address to use for the thread-specific stack.
  * @param[in] priority Priority assigned to the new thread. Higher values mean a lower priority.
  * @param[in] idnum Processor the thread should be created by.
- * @return 0 if successful, -1 otherwise.
  * @return On success, 0 is returned. On error, -1 is returned, and cerror is updated appropriately.
  */
 int sys_thread_new(SYSThread* thread, SYSThreadFunc entrypoint, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
+
+/**
+ * @brief Print a debug string.
+ * @details String is printed to the debug console. On retail 
+ * consoles this function has no effect. On emulators it will 
+ * be printed as debug output.
+ * @param[in] str String to print.
+ */
+void sys_print_debug(const char* str);
 
 #ifdef __cplusplus
 }
