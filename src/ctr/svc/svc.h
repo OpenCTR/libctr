@@ -33,6 +33,16 @@ int svc_thread_create(SVCHandle* handle, SVCThreadFunc entrypoint, uint32_t arg,
 
 int svc_output_debug_string(const char* str, const int len);
 
+static inline void* svc_get_tls(void) {
+	void* ret = NULL;
+	asm volatile("mrc p15, 0, %[data], c13, c0, 3" : [data] "=r" (ret));
+	return ret;
+}
+
+static inline uint32_t* svc_get_commandbuffer(void) {
+	return (uint32_t*)((uint8_t*)svc_get_tls() + 0x80);
+}
+
 #ifdef __cplusplus
 }
 #endif

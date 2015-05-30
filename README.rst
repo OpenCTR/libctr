@@ -1,93 +1,70 @@
-|Building| |Coverage| |License|
-
 |Logo|
 
-======
-libctr
-======
+========
+ libctr 
+========
 
-:repository: `libctr <https://github.com/OpenCTR/libctr>`_
-:license: `GPL3 <http://www.gnu.org/licenses/gpl-3.0.html>`_
-:owner: `Alex Shaw <mailto:alex.shaw.as@gmail.com>`_
-:description: OpenCTR is a free, open-source, and cross-platform SDK for developing homebrew for the Nintendo 3DS.
+|Release| 
 
-===========
-Description
-===========
+|License|
 
-OpenCTR is a free, open-source, and cross-platform SDK for developing homebrew for the Nintendo 3DS.
+OpenCTR is a free, open-source, and cross-platform SDK for developing 
+Nintendo 3DS homebrew.
 
 This repository contains libctr - the software library API for OpenCTR.
 
-========
-Building
-========
+===============
+Getting Started
+===============
 
-If you have already installed OpenCTR, libctr should already be installed.
-If you would like to build libctr from source, then configure and build 
-libctr like any other CMake project, with one exception. libctr requires that 
-the CMake variable ``CTR_ROOT`` be set to the location of OpenCTR. When libctr 
-is build as part of OpenCTR, this is set automatically. When libctr is being 
-built independently of OpenCTR, this variable must be set manually. It is used 
-to help libctr find a cross-compiler to use, and it also allows libctr to be 
-installed to a sub-directory of OpenCTR.
+libctr is installed as part of the OpenCTR SDK. 
 
-=====================
-Configuration Options
-=====================
+Download and install the latest version of the OpenCTR SDK from 
+https://github.com/OpenCTR/OpenCTR/releases/latest
 
-Pass these values to CMake to change how libctr is built.
-
-:CMAKE_BUILD_TYPE: Build Configuration. Values are Debug/Release/RelWithDebInfo/MinSizeRel
-:CMAKE_INSTALL_PREFIX: Directory to install libctr into.
-:CTR_ROOT: Location of OpenCTR. Used to enable cross-compiling.
-:ENABLE_DOC: Enable/Disable building the libctr API Documentation.
+Alternatively, libctr can be built from source using CMake.
+This requires several advanced CMake settings, and is not 
+recommended for inexperienced users.
 
 =============
 Documentation
 =============
 
-https://openctr.github.io/
+Documentation for libctr is available online at 
+https://openctr.github.io/libctr/
 
-=======
-Authors
-=======
-
-* Symbitic
-
-https://openctr.github.io/Authors.html
-
-=======
-Credits
-=======
-
-* smealum for ctrulib, which provides the basis of ~90% of the code logic.
-
-https://openctr.github.io/Credits.html
+Also, the documentation can be manually generated from source, by passing 
+``-DENABLE_DOC=ON`` to CMake.
 
 =======
 License
 =======
 
-libctr is licensed under version 3 of the `GNU General Public License`_. 
-See `LICENSE`_ for terms.
+**libctr** is licensed under the `GNU General Public License v3.0`_. 
 
+See `LICENSE.txt`_ for terms.
 
-.. _GNU General Public License: http://www.gnu.org/licenses/gpl.html
+===============
+Acknowledgments
+===============
 
-.. _LICENSE: ./LICENSE.txt
+Credit goes to smealum for ctrulib, which provides the basis of ~90% of 
+the code logic.
 
-.. |Building| image:: http://img.shields.io/travis/OpenCTR/libctr/master.svg?style=flat
-   :alt: TravisCI build status
-   :target: https://travis-ci.org/OpenCTR/libctr
+.. |Logo| image:: https://openctr.github.io/_static/logo.svg
+   :alt: OpenCTR Logo
+   :width: 250px
+   :target: https://openctr.github.io/
 
-.. |Coverage| image:: http://img.shields.io/coveralls/OpenCTR/libctr/master.svg?style=flat
-   :alt: Coveralls.io coverage
-   :target: https://coveralls.io/r/OpenCTR/libctr?branch=master
+.. |Release| image:: https://img.shields.io/github/release/OpenCTR/libctr.svg?style=flat-square&label=Release
+   :alt: Latest Release
+   :target: https://github.com/OpenCTR/libctr/releases/latest
 
-.. |License| image:: http://img.shields.io/badge/license-gpl3-blue.svg?style=flat
-   :alt: GNU GPL3 License
-   :target: http://www.gnu.org/licenses/gpl-3.0.html
+.. |License| image:: https://img.shields.io/github/license/OpenCTR/libctr.svg?style=flat-square&label=License
+   :alt: GNU General Public License v3.0
+   :target: http://choosealicense.com/licenses/gpl-3.0/
 
-.. |Logo| image:: https://avatars2.githubusercontent.com/u/11789047
+.. _`GNU General Public License v3.0`: http://www.gnu.org/licenses/gpl.html
+
+.. _`LICENSE.txt`: ./LICENSE.txt
 
