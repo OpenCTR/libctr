@@ -49,7 +49,7 @@
 #include <stdint.h>
 
 /** Function attribute that informs the compiler it will never return. */
-#define SYS_NORETURN (__attribute__((noreturn)))
+#define SYS_NORETURN __attribute__((noreturn))
 
 #ifdef __cplusplus
 extern "C" {

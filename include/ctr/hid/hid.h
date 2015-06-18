@@ -60,6 +60,26 @@ int hid_context_free(HIDContext* hid);
  */
 int hid_context_update(HIDContext* hid);
 
+#if 0
+
+// Ideas for future API:
+
+typedef void(*HIDEventCB)(HIDKey key, HIDStatus status);
+
+int hid_add_callback(HIDContext* hid, HIDEventCB callback, HIDEventType);
+	+ Adds a callback to hid.
+	+ hid->callbacks[HID_SLOT_Y] = callback;
+
+uint8_t* hid_get_state(HIDContext* hid);
+	+ uint8_t* keystate = malloc(HID_KEYS_MAX);
+	+ memset(state, 0x00, HID_KEYS_MAX);
+	+ if(isKeyPressedA()) state[HID_KEY_A] = 0x01;
+	+ return state;
+
+#endif
+
+
+
 /**
  * @ingroup hid
  * @brief Get the current status of one HID key/button.
@@ -69,6 +89,9 @@ int hid_context_update(HIDContext* hid);
  * @return On success, 0 is returned. On error, -1 is returned.
  */
 int hid_get_key_status(HIDContext* hid, HIDKeyStatus* status, HIDKeyCode key);
+
+
+
 
 /**
  * @ingroup hid

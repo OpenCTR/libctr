@@ -29,6 +29,10 @@
 extern "C" {
 #endif
 
+int svc_control_memory(uint32_t* outaddr, uint32_t addr0, uint32_t addr1, uint32_t size, uint32_t operation, uint32_t permissions);
+
+void __attribute__((noreturn)) svc_exit_process(void);
+
 int svc_thread_create(SVCHandle* handle, SVCThreadFunc entrypoint, uint32_t arg, uint32_t stacktop, int32_t priority, int32_t processorid);
 
 int svc_output_debug_string(const char* str, const int len);

@@ -53,8 +53,10 @@ enable_language(ASM)
 
 add_library(ctr STATIC 
 	src/svc.s
-	src/sys.c 
-	src/error.c 
+	src/init.c
+	src/stack.s
+	src/sys.c
+	src/error.c
 )
 
 # Export CTR::CTR instead of CTR::ctr
