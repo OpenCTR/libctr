@@ -1,0 +1,7 @@
+Introduction
+------------
+
+Testing:
+
+.. doxygenfunction:: cerror
+
