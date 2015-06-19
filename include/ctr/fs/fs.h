@@ -49,7 +49,7 @@ int fs_session_new(FSContext* ctx, FSDevice device);
  */
 int fs_session_close(FSContext* ctx);
 
-
+#if 0
 int fs_open_file(FSContext* ctx, FSHandle* fd, const char* path, FSOpenFlag openflags, FSAttribute attributes);
 int fs_close_file(FSContext* ctx, FSHandle fd);
 int fs_read_file(FSContext* ctx, FSHandle fd, uint64_t offset, )
@@ -58,6 +58,7 @@ int fs_read_file(FSContext* ctx, FSHandle fd, uint64_t offset, )
 int fs_create_file(FSContext* ctx, const char* path);
 int fs_delete_file(FSContext* ctx, const char* path);
 int fs_rename_file(FSContext* ctx, const char* source, const char* destination);
+#endif
 
 
 #if 0

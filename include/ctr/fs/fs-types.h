@@ -87,7 +87,7 @@ typedef enum {
 
 /**
  * @ingroup fs
- * @enum FSAttributeFlag
+ * @enum FSAttribute
  * @brief Flags for controlling the individual attributes of files.
  */
 typedef enum {

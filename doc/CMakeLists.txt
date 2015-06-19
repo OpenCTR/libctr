@@ -19,56 +19,62 @@
 ####################################################################
 
 find_package(Doxygen QUIET REQUIRED)
+find_package(Sphinx QUIET REQUIRED)
+find_package(Breathe QUIET REQUIRED)
 
+option(ENABLE_UPLOAD "Enable 'upload' target to upload documentation" OFF)
+
+# Libctr headers directory.
 get_filename_component(LIBCTR_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../include ABSOLUTE)
-get_filename_component(LIBCTR_DOC_DIR ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
 
-if(NOT DEFINED OUTPUT_DIRECTORY)
-	set(OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-endif()
+# Sphinx settings
+set(CONFIG_PATH "${CMAKE_CURRENT_BINARY_DIR}")
+set(HTML_PATH "${CMAKE_CURRENT_BINARY_DIR}/html")
+set(XML_PATH "${CMAKE_CURRENT_BINARY_DIR}/xml")
+set(RST_PATH "${CMAKE_CURRENT_SOURCE_DIR}/rst")
+set(UPLOAD_PATH "${CMAKE_CURRENT_BINARY_DIR}/upload")
+set(THEME_PATH "${CMAKE_CURRENT_SOURCE_DIR}/_themes")
+set(STATIC_PATH "${CMAKE_CURRENT_SOURCE_DIR}/_static")
 
+# Doxygen settings
 set(PROJECT_NAME libctr)
 set(PROJECT_VERSION ${LIBCTR_VERSION})
 set(PROJECT_BRIEF "\"Software library for Nintendo 3DS homebrew\"")
-set(PROJECT_LOGO ${CMAKE_CURRENT_SOURCE_DIR}/logo.svg)
-set(LAYOUT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/layout.xml)
-set(EXAMPLE_PATH)
-set(IMAGE_PATH)
-set(HTML_OUTPUT html)
-set(HTML_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/header.html)
-set(HTML_FOOTER ${CMAKE_CURRENT_SOURCE_DIR}/footer.html)
-set(HTML_EXTRA_STYLESHEET ${CMAKE_CURRENT_SOURCE_DIR}/style.css)
-set(HTML_EXTRA_FILES)
-set(XML_OUTPUT xml)
+set(PROJECT_LOGO ${STATIC_PATH}/logo.svg)
 
-set(STRIP_FROM_PATH "${LIBCTR_INCLUDE_DIR}/ ${LIBCTR_DOC_DIR}/")
-set(STRIP_FROM_INC_PATH)
-set(EXCLUDE "${LIBCTR_INCLUDE_DIR}/ctr/ctr.h")
-
+# Generate a list of libctr headers.
 file(GLOB_RECURSE H_FILES "${LIBCTR_INCLUDE_DIR}/*.h")
-file(GLOB_RECURSE MD_FILES "${LIBCTR_DOC_DIR}/*.md")
-file(GLOB_RECURSE DOX_FILES "${LIBCTR_DOC_DIR}/*.dox")
+# Generate a list of rst file dependencies.
+file(GLOB_RECURSE RST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/rst/*.rst)
 
-set(INPUT "${H_FILES};${MD_FILES};${DOX_FILES}")
-string(REPLACE ";" " " INPUT "${INPUT}")
+# Convert from a CMake list into a string
+string(REPLACE ";" " " LIBCTR_HEADERS "${H_FILES}")
 
+# Configure Doxyfile.in
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
 	${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
 	@ONLY
 )
 
+# Configure conf.py.in
+configure_file(
+	${CMAKE_CURRENT_SOURCE_DIR}/conf.py.in
+	${CMAKE_CURRENT_BINARY_DIR}/conf.py
+	@ONLY
+)
+
 # Generate HTML documentation
-add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/html
+add_custom_command(OUTPUT ${HTML_PATH} 
+	DEPENDS "${RST_FILES};${H_FILES}"
 	COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+	COMMAND ${SPHINX_EXECUTABLE} -b html -c . -q ${RST_PATH} ${HTML_PATH}
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 	COMMENT "Generating HTML"
 )
 
 # Documentation target to generate all documentation formats
-add_custom_target(doc ALL 
-	DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/html
-)
+add_custom_target(doc ALL DEPENDS ${HTML_PATH})
 
 if(ENABLE_UPLOAD)
 	# Git is required for pushing to GitHub Pages.
@@ -92,19 +98,19 @@ if(ENABLE_UPLOAD)
 		# Commit the new files
 		COMMAND ${GIT_EXECUTABLE} -C ${CMAKE_CURRENT_BINARY_DIR}/upload commit --quiet -m "Updated HTML documentation"
 		# Push the new files into GitHub
-		COMMAND ${GIT_EXECUTABLE} -C ${CMAKE_CURRENT_BINARY_DIR}/upload push --quiet origin master
+		COMMAND ${GIT_EXECUTABLE} -C ${CMAKE_CURRENT_BINARY_DIR}/upload push --quiet origin gh-pages
 	)
 
 	# Cleanup
 	set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "upload")
 endif()
 
-# Cleanup
-set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "html")
-
-# Install libctr
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html/
-	DESTINATION share/doc/libctr/html
-	PATTERN ".*" EXCLUDE
+# Install bookmarks
+install(DIRECTORY ${HTML_PATH}/
+	DESTINATION share/doc/libctr
+	REGEX "\\." EXCLUDE
 )
 
+# Cleanup
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "html")
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "xml")
