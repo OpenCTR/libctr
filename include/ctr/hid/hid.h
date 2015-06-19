@@ -1,5 +1,6 @@
 /**
- * @file ctr/hid/hid-types.h
+ * @file ctr/hid/hid.h
+ * @brief Interface to the HID service.
  */
 
 /*
@@ -33,19 +34,19 @@ extern "C" {
 
 /**
  * @ingroup hid
- * @brief Create a new HID context.
- * @param[out] hid New HID context.
+ * @brief Create a new session with the HID service.
+ * @param[out] ctx New HID context.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_context_new(HIDContext* hid);
+int hid_session_new(HIDContext* ctx);
 
 /**
  * @ingroup hid
- * @brief Release a HID context.
- * @param[in] hid HID context to release
+ * @brief Close an HID session.
+ * @param[in] ctx HID context representing a session.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_context_free(HIDContext* hid);
+int hid_session_close(HIDContext* ctx);
 
 /**
  * @ingroup hid
@@ -55,10 +56,10 @@ int hid_context_free(HIDContext* hid);
  * updated, and hid_read_touchpad(), hid_read_circlepad(), hid_read_accel(),
  * and hid_read_gyro() will return the exact same values as when they were 
  * last called.
- * @param[in] hid HID context to update.
+ * @param[in] ctx HID context to update.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_context_update(HIDContext* hid);
+int hid_context_update(HIDContext* ctx);
 
 #if 0
 
@@ -83,12 +84,12 @@ uint8_t* hid_get_state(HIDContext* hid);
 /**
  * @ingroup hid
  * @brief Get the current status of one HID key/button.
- * @param[in] hid HID Context.
+ * @param[in] ctx HID Context.
  * @param[out] status Current status of @a key.
  * @param[in] key Key/Button to query.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_get_key_status(HIDContext* hid, HIDKeyStatus* status, HIDKeyCode key);
+int hid_get_key_status(HIDContext* ctx, HIDKeyStatus* status, HIDKeyCode key);
 
 
 
@@ -96,53 +97,53 @@ int hid_get_key_status(HIDContext* hid, HIDKeyStatus* status, HIDKeyCode key);
 /**
  * @ingroup hid
  * @brief Read the current touchpad values.
- * @param[in] hid HID Context.
+ * @param[in] ctx HID Context.
  * @param[out] px Current touchpad pixel (X).
  * @param[out] py Current touchpad pixel (Y).
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_read_touchpad(HIDContext* hid, uint16_t* px, uint16_t* py);
+int hid_read_touchpad(HIDContext* ctx, uint16_t* px, uint16_t* py);
 
 /**
  * @ingroup hid
  * @brief Read the current circlepad values.
- * @param[in] hid HID Context.
+ * @param[in] ctx HID Context.
  * @param[out] dx Current circlepad offset (X).
  * @param[out] dy Current circlepad offset (Y).
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_read_circlepad(HIDContext* hid, int16_t* dx, int16_t dy);
+int hid_read_circlepad(HIDContext* ctx, int16_t* dx, int16_t dy);
 
 /**
  * @ingroup hid
  * @brief Read the current accelerometer values.
- * @param[in] hid HID Context.
+ * @param[in] ctx HID Context.
  * @param[out] x Current position (X-axis).
  * @param[out] y Current position (Y-axis).
  * @param[out] z Current position (Z-axis).
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_read_accel(HIDContext* hid, int16_t* x, int16_t* y, int16_t* z);
+int hid_read_accel(HIDContext* ctx, int16_t* x, int16_t* y, int16_t* z);
 
 /**
  * @ingroup hid
  * @brief Read the current gyroscope values.
- * @param[in] hid HID Context.
+ * @param[in] ctx HID Context.
  * @param[out] roll Current roll rotation.
  * @param[out] yaw Current yaw rotation.
  * @param[out] pitch Current pitch rotation.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_read_gyro(HIDContext* hid, int16_t* roll, int16_t* yaw, int16_t* pitch);
+int hid_read_gyro(HIDContext* ctx, int16_t* roll, int16_t* yaw, int16_t* pitch);
 
 /**
  * @ingroup hid
  * @brief Get the current volume level (using the volume slider).
- * @param[in] hid HID Context.
+ * @param[in] ctx HID Context.
  * @param[out] volume Current volume level (#HID_VOLUME_MIN to #HID_VOLUME_MAX).
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int hid_get_volume(HIDContext* hid, uint8_t* volume);
+int hid_get_volume(HIDContext* ctx, uint8_t* volume);
 
 #ifdef __cplusplus
 }

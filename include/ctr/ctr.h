@@ -21,6 +21,8 @@
 #ifndef __LIBCTR_H__
 #define __LIBCTR_H__
 
+#include "ctr/fs/fs.h"
+#include "ctr/hid/hid.h"
 #include "ctr/sys/sys.h"
 
 #endif

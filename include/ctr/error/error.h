@@ -42,6 +42,13 @@ extern "C" {
  */
 int cerror(void);
 
+/**
+ * @brief Return a brief description of an error number.
+ * @param err Error number (usually obtained through <code>cerror()</code>).
+ * @return Brief description of the error.
+ */
+const char* cstrerror(int err);
+
 #ifdef __cplusplus
 }
 #endif

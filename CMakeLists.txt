@@ -32,6 +32,7 @@ project(libctr)
 set(LIBCTR_VERSION 0.1.0)
 
 option(ENABLE_DOC "Enable Doxygen Documentation" OFF)
+option(ENABLE_DOC_ONLY "Build documentation only, no other targets" OFF)
 
 # Only require the OpenCTR Toolchain and artool
 find_package(OpenCTR COMPONENTS artool CONFIG REQUIRED)
@@ -41,6 +42,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 if(ENABLE_DOC)
 	add_subdirectory(doc)
+	if(ENABLE_DOC_ONLY)
+		return()
+	endif()
 endif()
 
 include_directories(

@@ -53,6 +53,8 @@ extern "C" {
  * @ingroup hid
  * @typedef struct HIDContext HIDContext
  * @brief Handle to a HID session.
+ * @details An HIDContext represents a thread-safe handle to a session with
+ * the HID service.
  */
 typedef struct struct HIDContext;
 
@@ -72,9 +74,12 @@ typedef enum {
  * @enum HIDKeyCode
  * @brief Key codes.
  * @note The following keys are only available on the New 3DS: 
- * ::HID_KEY_ZL, ::HID_KEY_ZR, 
- * ::HID_KEY_CSTICK_RIGHT, ::HID_KEY_CSTICK_LEFT, 
- * ::HID_KEY_CSTICK_UP, ::HID_KEY_CSTICK_DOWN.
+ *     ::HID_KEY_ZL
+ *     ::HID_KEY_ZR
+ *     ::HID_KEY_CSTICK_RIGHT
+ *     ::HID_KEY_CSTICK_LEFT
+ *     ::HID_KEY_CSTICK_UP
+ *     ::HID_KEY_CSTICK_DOWN
  */
 typedef enum {
 	HID_KEY_A 				= (1 <<  0), /**< 'A' */
@@ -107,4 +112,3 @@ typedef enum {
 #endif
 
 #endif
-
