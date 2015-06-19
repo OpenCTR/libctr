@@ -20,23 +20,8 @@
 
 find_package(Doxygen QUIET REQUIRED)
 
-option(ENABLE_HTML "Enable Doxygen HTML output" ON)
-option(ENABLE_XML "Enable Doxygen XML output" OFF)
-
 get_filename_component(LIBCTR_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../include ABSOLUTE)
 get_filename_component(LIBCTR_DOC_DIR ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
-
-if(ENABLE_HTML)
-	set(GENERATE_HTML YES)
-else()
-	set(GENERATE_HTML NO)
-endif()
-
-if(ENABLE_XML)
-	set(GENERATE_XML YES)
-else()
-	set(GENERATE_XML NO)
-endif()
 
 if(NOT DEFINED OUTPUT_DIRECTORY)
 	set(OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
@@ -116,3 +101,10 @@ endif()
 
 # Cleanup
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "html")
+
+# Install libctr
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html/
+	DESTINATION share/doc/libctr/html
+	PATTERN ".*" EXCLUDE
+)
+
