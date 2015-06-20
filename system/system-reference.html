@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>System Reference &mdash; libctr</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+    <link rel="top" title="libctr" href="../index.html"/>
+        <link rel="up" title="System API" href="index.html"/>
+        <link rel="next" title="Human Input Device API" href="../hid/index.html"/>
+        <link rel="prev" title="System Overview" href="system-overview.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> libctr
+        
+
+        
+          
+          <img src="../_static/logo.svg" class="logo" />
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="system-overview.html">System Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">System Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hid/index.html">Human Input Device API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-overview.html">Human Input Device API Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-reference.html">Human Input Device API Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fs/index.html">Filesystem API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-overview.html">Filesystem Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-reference.html">Filesystem Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">libctr</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">System API</a> &raquo;</li>
+      
+    <li>System Reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="system-reference">
+<h1>System Reference</h1>
+<div class="section" id="data-structures">
+<h2>Data Structures</h2>
+<dl class="type">
+<dt id="_CPPv212sys_thread_t">
+<span id="sys_thread_t"></span><span class="target" id="project0sys-types_8h_1af63aa2447cabb7b11ebf17492fd86da4"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">sys_thread_t</code></dt>
+<dd><p>Handle to a kernel thread. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv211sys_mutex_t">
+<span id="sys_mutex_t"></span><span class="target" id="project0sys-types_8h_1a3730adda22ffddfaf3209349ad874a88"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">sys_mutex_t</code></dt>
+<dd><p>Handle to a kernel mutex. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv213sys_thread_cb">
+<span id="sys_thread_cb"></span><span class="target" id="project0sys-types_8h_1af6a333de858fdf912fdc86228b46b739"></span><em class="property">typedef </em><code class="descclassname"></code><code class="descname">sys_thread_cb</code></dt>
+<dd><p>Function to run inside a thread. </p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">sys_thread_cb(void*</span> <span class="pre">arg)</span></code> <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">arg</span></code> - <p>Parameter passed to the thread function. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions</h2>
+<dl class="function">
+<dt id="_CPPv214sys_thread_newP12sys_thread_t13sys_thread_cbPv8uint32_ti14SYSProcessorID">
+<span id="sys_thread_new__sys_thread_tP.sys_thread_cb.voidP.uint32_t.i.SYSProcessorID"></span><span class="target" id="project0sys_8h_1a769320aac1ed9635b60659afbc1b8ebf"></span>int <code class="descclassname"></code><code class="descname">sys_thread_new</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv212sys_thread_t" title="sys_thread_t">sys_thread_t</a> *<em>id</em>, <a class="reference internal" href="#_CPPv213sys_thread_cb" title="sys_thread_cb">sys_thread_cb</a> <em>entry</em>, void *<em>arg</em>, uint32_t <em>stack_top</em>, int <em>priority</em>, SYSProcessorID <em>idnum</em><span class="sig-paren">)</span></dt>
+<dd><p>Create a new thread. </p>
+<p>Obtains a handle to a thread created by the kernel. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">id</span></code> - <p>Thread ID. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">entry</span></code> - <p>Function to execute inside the new thread. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">arg</span></code> - <p>Argument given to the thread function. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">stack_top</span></code> - <p>Address to use for the thread-specific stack. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">priority</span></code> - <p>Priority assigned to the new thread. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">idnum</span></code> - <p>Processor the thread should be created by. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215sys_thread_join12sys_thread_t">
+<span id="sys_thread_join__sys_thread_t"></span><span class="target" id="project0sys_8h_1adc1e34f52e0a3e35453932169f5dfe9f"></span>int <code class="descclassname"></code><code class="descname">sys_thread_join</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv212sys_thread_t" title="sys_thread_t">sys_thread_t</a> <em>id</em><span class="sig-paren">)</span></dt>
+<dd><p>Wait for a thread to finish. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">id</span></code> - <p>Thread ID. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216sys_thread_sleep8uint64_t">
+<span id="sys_thread_sleep__uint64_t"></span><span class="target" id="project0sys_8h_1a692c501486f240f5ae40ce20548ba5e6"></span>void <code class="descclassname"></code><code class="descname">sys_thread_sleep</code><span class="sig-paren">(</span>uint64_t <em>nsec</em><span class="sig-paren">)</span></dt>
+<dd><p>Put the current thread to sleep. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">nsec</span></code> - <p>Time to suspend execution, in nanoseconds. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215sys_thread_exitv">
+<span id="sys_thread_exit__void"></span><span class="target" id="project0sys_8h_1a9d834ac79475f7d439cf8c6afd5a1614"></span>void <code class="descclassname"></code><code class="descname">sys_thread_exit</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span></dt>
+<dd><p>Exit the current thread. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213sys_mutex_newP11sys_mutex_t10sys_lock_t">
+<span id="sys_mutex_new__sys_mutex_tP.sys_lock_t"></span><span class="target" id="project0sys_8h_1a66477ab25e1e5976af2dbf465ead08af"></span>int <code class="descclassname"></code><code class="descname">sys_mutex_new</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211sys_mutex_t" title="sys_mutex_t">sys_mutex_t</a> *<em>mutex_id</em>, sys_lock_t <em>status</em><span class="sig-paren">)</span></dt>
+<dd><p>Create a new mutex. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">mutex_id</span></code> - <p>Mutex ID. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">status</span></code> - <p>Boolean indicating if mutex should be locked upon creation. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214sys_mutex_free11sys_mutex_t">
+<span id="sys_mutex_free__sys_mutex_t"></span><span class="target" id="project0sys_8h_1a1493e348118a73880d6434fd5f511a2a"></span>int <code class="descclassname"></code><code class="descname">sys_mutex_free</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211sys_mutex_t" title="sys_mutex_t">sys_mutex_t</a> <em>mutex_id</em><span class="sig-paren">)</span></dt>
+<dd><p>Destroy a mutex variable. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">mutex_id</span></code> - <p>Mutex ID. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214sys_mutex_lock11sys_mutex_t">
+<span id="sys_mutex_lock__sys_mutex_t"></span><span class="target" id="project0sys_8h_1a1d25ce3e90265d561f127a210853bf7a"></span>int <code class="descclassname"></code><code class="descname">sys_mutex_lock</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211sys_mutex_t" title="sys_mutex_t">sys_mutex_t</a> <em>mutex_id</em><span class="sig-paren">)</span></dt>
+<dd><p>Lock a mutex variable. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">mutex_id</span></code> - <p>Mutex ID. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216sys_mutex_unlock11sys_mutex_t">
+<span id="sys_mutex_unlock__sys_mutex_t"></span><span class="target" id="project0sys_8h_1a9dac63c3fa30157d1918d6e3592a1e73"></span>int <code class="descclassname"></code><code class="descname">sys_mutex_unlock</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211sys_mutex_t" title="sys_mutex_t">sys_mutex_t</a> <em>mutex_id</em><span class="sig-paren">)</span></dt>
+<dd><p>Unlock a mutex variable. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">mutex_id</span></code> - <p>Mutex ID. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215sys_print_debugPKc">
+<span id="sys_print_debug__cCP"></span><span class="target" id="project0sys_8h_1a70ae13a499f4871c151d70353a520b90"></span>void <code class="descclassname"></code><code class="descname">sys_print_debug</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>str</em><span class="sig-paren">)</span></dt>
+<dd><p>Print a debug string. </p>
+<p>String is printed to the debug console. On retail consoles this function has no effect. On emulators it will be printed as debug output. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">str</span></code> - <p>String to print. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../hid/index.html" class="btn btn-neutral float-right" title="Human Input Device API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="system-overview.html" class="btn btn-neutral" title="System Overview" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
