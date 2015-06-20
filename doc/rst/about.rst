@@ -7,7 +7,7 @@ The first and foremost disclaimer about libctr is this:
    smealum), and still other users will be dissatisfied with both. 
 
 There is nothing about libctr that makes it inherently better than libctru, or 
-inherently worse. It simply serves a different croud.
+inherently worse. It simply targets a different audience.
 
 In particular, because libctr is tailored towards application and game
 developers, system kernel-level homebrew like 
