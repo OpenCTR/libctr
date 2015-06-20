@@ -1,5 +1,5 @@
 /**
- * @file ctr/error/error-types.h
+ * @file ctr/error/error-private.h
  * @brief Private interface for libctr Errors.
  */
 

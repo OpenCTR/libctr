@@ -1,6 +1,6 @@
 /**
  * @file ctr/fs/fs.h
- * Interface to the filesystem service.
+ * @brief Filesystem API.
  */
 
 /*
@@ -33,59 +33,157 @@ extern "C" {
 #endif
 
 /**
- * @ingroup fs
- * @brief Create a new session with the FS service, and mount a filesystem.
- * @param[out] ctx New FS context.
- * @param[in] device Device to mount as the default filesystem.
+ * @brief Open a file.
+ * @param[out] fd File descriptor.
+ * @param[in] path Path to file.
+ * @param[in] flags Flags. Available flags are listed below.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int fs_session_new(FSContext* ctx, FSDevice device);
+int ctrFsOpen(int* fd, const char* path, int flags);
 
 /**
- * @ingroup fs
- * @brief Close a session with the filesystem service.
- * @param[in] ctx FS context representing a session.
+ * @brief Read from a file.
+ * @param[in] fd File descriptor.
+ * @param[out] buffer Buffer to hold file contents.
+ * @param[in] size Size to read.
+ * @param[out] osize Actual size read from file.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int fs_session_close(FSContext* ctx);
+int ctrFsRead(int fd, void* buffer, uint64_t size, uint64_t* osize);
 
-#if 0
-int fs_open_file(FSContext* ctx, FSHandle* fd, const char* path, FSOpenFlag openflags, FSAttribute attributes);
-int fs_close_file(FSContext* ctx, FSHandle fd);
-int fs_read_file(FSContext* ctx, FSHandle fd, uint64_t offset, )
+/**
+ * @brief Write to a file.
+ * @param[in] fd File descriptor.
+ * @param[in] buffer Buffer to write to file.
+ * @param[in] size Size to write.
+ * @param[out] osize Actual size written to file.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsWrite(int fd, const void* buffer, uint64_t size, uint64_t* osize);
 
+/**
+ * @brief Close a file.
+ * @param[in] fd File descriptor.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsClose(int fd);
 
-int fs_create_file(FSContext* ctx, const char* path);
-int fs_delete_file(FSContext* ctx, const char* path);
-int fs_rename_file(FSContext* ctx, const char* source, const char* destination);
-#endif
+/**
+ * @brief Open a directory.
+ * @param[out] fd File descriptor.
+ * @param[in] path Path to directory.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsOpendir(int* fd, const char* path);
 
+/**
+ * @brief Read a directory entry.
+ * @param[in] fd File descriptor.
+ * @param[out] dir Directory information.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsReaddir(int fd, CtrFsDirent* dir);
 
-#if 0
+/**
+ * @brief Close a directory.
+ * @param[in] fd File descriptor.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsClosedir(int fd);
 
-Result FSUSER_OpenArchive(Handle* handle, FS_archive* archive);
-Result FSUSER_OpenDirectory(Handle* handle, Handle* out, FS_archive archive, FS_path dirLowPath);
-Result FSUSER_CloseArchive(Handle* handle, FS_archive* archive);
-Result FSUSER_CreateDirectory(Handle* handle, FS_archive archive, FS_path dirLowPath);
-Result FSUSER_DeleteDirectory(Handle *handle, FS_archive archive, FS_path dirLowPath);
-Result FSUSER_DeleteDirectoryRecursively(Handle *handle, FS_archive archive, FS_path dirLowPath);
-Result FSUSER_RenameDirectory(Handle *handle, FS_archive srcArchive, FS_path srcDirLowPath, FS_archive destArchive, FS_path destDirLowPath);
-Result FSUSER_IsSdmcDetected(Handle *handle, u8 *detected);
-Result FSUSER_IsSdmcWritable(Handle *handle, u8 *writable);
+/**
+ * @brief Get file status/information (using a filename path).
+ * @param[in] path Path to a file or directory.
+ * @param[out] st File information.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsStat(const char* path, CtrFsStat* st);
 
-Result FSFILE_Close(Handle handle);
-Result FSFILE_Read(Handle handle, u32 *bytesRead, u64 offset, void *buffer, u32 size);
-Result FSFILE_Write(Handle handle, u32 *bytesWritten, u64 offset, const void *buffer, u32 size, u32 flushFlags);
-Result FSFILE_GetSize(Handle handle, u64 *size);
-Result FSFILE_SetSize(Handle handle, u64 size);
-Result FSFILE_GetAttributes(Handle handle, u32 *attributes);
-Result FSFILE_SetAttributes(Handle handle, u32 attributes);
-Result FSFILE_Flush(Handle handle);
+/**
+ * @brief Get file status/information (using a file descriptor).
+ * @param[in] fd File descriptor.
+ * @param[out] st File information.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsFstat(int fd, CtrFsStat* st);
 
-Result FSDIR_Read(Handle handle, u32 *entriesRead, u32 entrycount, FS_dirent *buffer);
-Result FSDIR_Close(Handle handle);
-#endif
+/**
+ * @brief Create a new directory.
+ * @param[in] path Path to directory to be created.
+ * @param[in] mode Mode for the new directory.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsMkdir(const char* path, CtrFsMode mode);
 
+/**
+ * @brief Change the name of a file.
+ * @param[in] source Path of an existing filename.
+ * @param[in] dest Path to the new filename.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsRename(const char* source, const char* dest);
+
+/**
+ * @brief Delete a directory.
+ * @param[in] path Path to a directory.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsRmdir(const char* path);
+
+/**
+ * @brief Delete a file.
+ * @param[in] path Path to a file.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsUnlink(const char* path);
+
+/**
+ * @brief Change the current position of a file.
+ * @param[in] fd File descriptor.
+ * @param[in] offset Offset from the origin.
+ * @param[in] origin Seek mode.
+ * @param[out] pos Current position of file (after seeking).
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsLseek(int fd, int64_t offset, ctrFsOrigin origin, uint64_t* pos);
+
+/**
+ * @brief Synchronize a file's data with the filesystem.
+ * @param[in] fd File descriptor.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsFsync(int fd);
+
+/**
+ * @brief Get the SD card status.
+ * @param[out] status Current status.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsSdmcStatus(CtrFsStatus* status);
+
+/**
+ * @brief Change file size (using a filename path).
+ * @param[in] path Path to a file.
+ * @param[in] size New file size.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsTruncate(const char* path, uint64_t size);
+
+/**
+ * @brief Change file size (using a file descriptor).
+ * @param[in] fd File descriptor.
+ * @param[in] size New file size.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsFtruncate(int fd, uint64_t size);
+
+/**
+ * @brief Get free space on the SD card and NAND filesystem.
+ * @param[out] sdmc_size Available space on the SD card.
+ * @param[out] nand_size Available space on the NAND filesystem.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int ctrFsGetAvailableSize(uint64_t* sdmc_size, uint64_t* nand_size);
 
 #ifdef __cplusplus
 }

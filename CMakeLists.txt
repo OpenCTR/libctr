@@ -57,6 +57,7 @@ add_library(ctr STATIC
 	src/stack.s
 	src/sys.c
 	src/error.c
+	src/fs.c
 )
 
 # Export CTR::CTR instead of CTR::ctr

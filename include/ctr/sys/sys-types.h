@@ -1,26 +1,6 @@
 /**
  * @file ctr/sys/sys-types.h
  * @brief System types.
- * 
- * @defgroup systhread System Threads
- * @brief Module for creating and using system threads.
- * @details The Nintendo 3DS kernel provides support for 
- * running multiple threads on each ARM11 core. The thread scheduler is 
- * cooperative, meaning that control will not pass to the next thread until 
- * the current thread yields control. Often, threads yield by using an 
- * address arbiter.
- * 
- * Besides support for threads themselves, libctr also provides various 
- * synchronization methods.
- * 
- * 
- * @defgroup sysdebug System Debugging Features
- * @brief Module used for debugging application software.
- * @details Several functions are available to help with debugging 
- * a program during runtime. Although they are very useful during 
- * development, few if any of these should be used in production 
- * software.
- * 
  */
 
 /*
@@ -58,8 +38,7 @@ extern "C" {
 /**
  * @enum SYSProcessorID
  * @brief Identify which core a thread should run on.
- * @note If you are unsure which value you should use, 
- * use SYS_PROCESSOR_APPCORE.
+ * @note If you are unsure which value to use, use SYS_PROCESSOR_APPCORE.
  */
 typedef enum {
 	SYS_PROCESSOR_ALL 		= 0xFFFFFFFC, /**< Enable syscore and appcore. */
@@ -68,36 +47,33 @@ typedef enum {
 } SYSProcessorID;
 
 /**
- * @enum SYSMutexLocked
- * @ingroup systhread
- * @brief Mutex states
+ * @enum sys_lock_t
+ * @brief Mutex states.
  */
 typedef enum {
 	SYS_MUTEX_LOCKED 		= 0x00000000, /**< Mutex is locked. */
 	SYS_MUTEX_UNLOCKED 		= 0x00000001, /**< Mutex is unlocked. */
-} SYSMutexLocked;
+} sys_lock_t;
 
 /** 
- * @typedef struct SYSThread SYSThread
- * @ingroup systhread
+ * @typedef uint32_t sys_thread_t
  * @brief Handle to a kernel thread.
  */
-typedef struct SYSThread SYSThread;
+typedef uint32_t sys_thread_t;
 
 /**
- * @typedef struct SYSMutex SYSMutex
- * @ingroup systhread
+ * @typedef uint32_t sys_mutex_t
  * @brief Handle to a kernel mutex.
  */
-typedef struct SYSMutex SYSMutex;
+typedef uint32_t sys_mutex_t;
 
 /**
- * @typedef void(*SYSThreadFunc)(void* arg)
- * @ingroup systhread
+ * @typedef sys_thread_cb
  * @brief Function to run inside a thread.
+ * @details <code>void sys_thread_cb(void* arg)</code>
  * @param[in] arg Parameter passed to the thread function.
  */
-typedef void(*SYSThreadFunc)(void* arg);
+typedef void(*sys_thread_cb)(void* arg);
 
 #ifdef __cplusplus
 }

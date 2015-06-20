@@ -1,11 +1,6 @@
 /**
  * @file ctr/hid/hid-types.h
  * @brief Input types.
- * 
- * @defgroup hid HID Input
- * @brief Input device API.
- * 
- * 
  */
 
 /*
@@ -34,13 +29,11 @@
 #include <stdint.h>
 
 /**
- * @ingroup hid
  * @brief Minimum sound volume level.
  */
 #define HID_VOLUME_MIN (0x00)
 
 /**
- * @ingroup hid
  * @brief Maximum sound volume level.
  */
 #define HID_VOLUME_MAX (0x3F)

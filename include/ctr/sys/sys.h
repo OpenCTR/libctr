@@ -23,7 +23,6 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef __LIBCTR_SYS_H__
 #define __LIBCTR_SYS_H__
 
@@ -34,84 +33,67 @@ extern "C" {
 #endif
 
 /**
- * @ingroup systhread
  * @brief Create a new thread.
  * @details Obtains a handle to a thread created by the kernel.
- * @param[out] thread Handle to the new thread.
- * @param[in] entrypoint Function to execute inside the new thread.
+ * @param[out] id Thread ID.
+ * @param[in] entry Function to execute inside the new thread.
  * @param[in] arg Argument given to the thread function. 
  * @param[in] stack_top Address to use for the thread-specific stack.
  * @param[in] priority Priority assigned to the new thread. 
  * @param[in] idnum Processor the thread should be created by.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_thread_new(SYSThread* thread, SYSThreadFunc entrypoint, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
+int sys_thread_new(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
 
 /**
- * @ingroup systhread
  * @brief Wait for a thread to finish.
- * @param[in] thread Handle to a kernel thread.
+ * @param[in] id Thread ID.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_thread_join(SYSThread* thread);
+int sys_thread_join(sys_thread_t id);
 
 /**
- * @ingroup systhread
- * @brief Set the priority of a thread.
- * @param[in] thread Handle to a thread.
- * @param[in] priority New thread priority level.
- * @return On success, 0 is returned. On error, -1 is returned.
- */
-int sys_thread_set_priority(SYSThread* thread, int32_t priority);
-
-/**
- * @ingroup systhread
  * @brief Put the current thread to sleep.
- * @param[in] nanoseconds Time to suspend execution, in nanoseconds.
+ * @param[in] nsec Time to suspend execution, in nanoseconds.
  */
-void sys_thread_sleep(uint64_t nanoseconds);
+void sys_thread_sleep(uint64_t nsec);
 
 /**
- * @ingroup systhread
  * @brief Exit the current thread.
  */
-SYS_NORETURN void sys_exit_thread(void);
+void sys_thread_exit(void) SYS_NORETURN;
 
 /**
- * @ingroup systhread
  * @brief Create a new mutex.
- * @param[out] mutex New mutex variable.
+ * @param[out] mutex_id Mutex ID.
  * @param[in] status Boolean indicating if mutex should be locked upon creation.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_mutex_new(SYSMutex* mutex, SYSMutexLocked status);
+int sys_mutex_new(sys_mutex_t* mutex_id, sys_lock_t status);
 
 /**
- * @ingroup systhread
- * @brief Lock a mutex variable.
- * @param[in] mutex Mutex variable to lock.
+ * @brief Destroy a mutex variable.
+ * @param[in] mutex_id Mutex ID.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_mutex_lock(SYSMutex* mutex);
+int sys_mutex_free(sys_mutex_t mutex_id);
+
+/**
+ * @brief Lock a mutex variable.
+ * @param[in] mutex_id Mutex ID.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+int sys_mutex_lock(sys_mutex_t mutex_id);
 
 /**
  * @ingroup systhread
  * @brief Unlock a mutex variable.
- * @param[in] mutex Mutex variable to unlock.
+ * @param[in] mutex_id Mutex ID.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_mutex_unlock(SYSMutex* mutex);
+int sys_mutex_unlock(sys_mutex_t mutex_id);
 
 /**
- * @ingroup systhread
- * @brief Release a mutex variable.
- * @param[in] mutex Mutex variable to release.
- * @return On success, 0 is returned. On error, -1 is returned.
- */
-int sys_mutex_free(SYSMutex* mutex);
-
-/**
- * @ingroup sysdebug
  * @brief Print a debug string.
  * @details String is printed to the debug console. On retail 
  * consoles this function has no effect. On emulators it will 

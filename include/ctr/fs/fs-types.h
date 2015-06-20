@@ -1,14 +1,6 @@
 /**
  * @file ctr/fs/fs-types.h
- * @brief FileSystem types.
- * 
- * @defgroup fs File System.
- * @brief Filesystem API.
- * @note sdmcInit() will be the only function most users will need to call
- * directly.
- * @note Don't worry, I will add an equivalent to <code>sdmcInit()</code>, 
- * AFTER I get thread-local variables in GCC working.
- * 
+ * @brief Filesystem types.
  */
 
 /*
@@ -36,77 +28,68 @@
 
 #include <stdint.h>
 
+/** Maximum length of a filename.  */
+#define CTR_FS_MAX_FILENAME_LENGTH (0x00000100)
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/** 
- * @ingroup fs
- * @typedef struct FSContext FSContext
- * @brief Handle to a filesystem session.
- * @details Each filesystem is represented by a context. Having each 
- * filesystem represented by a context makes it much more thread-safe, although
- * caution should still be used. Also, each individual session with the 
- * filesystem service may only have up to 32 handles open at one time. By 
- * giving each context its own session (whenever possible) this means that 
- * resource limits may not need to be shared across different individual 
- * filesystem, e.g. thread 1 may have 32 files from the SDMC filesystem open, 
- * and thread 2 can still have 32 files from the gamecart filesystem open.
- */
-typedef struct struct FSContext;
-
 /**
- * @ingroup fs
- * @typedef uint32_t FSHandle
- * @brief Handle to a file on a filesystem.
- */
-typedef uint32_t FSHandle;
-
-/**
- * @ingroup fs
- * @enum FSDevice
- * @brief Individual filesystem devices.
+ * @brief Mode values
+ * @sa ctrFsMkdir()
  */
 typedef enum {
-	FS_DEVICE_GAMEDATA 			= 0x00000000, /**< Game data filesystem. */
-	FS_DEVICE_SAVEDATA 			= 0x00000001, /**< Save data filesystem. */
-	FS_DEVICE_SDMC 				= 0x00000002, /**< SDMC filesystem. */
-	FS_DEVICE_NAND 				= 0x00000003, /**< NAND filesystem. */
-} FSDevice;
+	CTR_FS_MODE_NONE 	= 0x00, /**< Default mode. */
+} CtrFsMode;
 
 /**
- * @ingroup fs
- * @enum FSOpenFlag
- * @brief Flags for controlling how files should be opened.
+ * @brief File position values.
  */
 typedef enum {
-	FS_OPEN_READ 				= (1 << 0), /**< Open file for reading. */
-	FS_OPEN_WRITE 				= (1 << 1), /**< Open file for writing. */
-	FS_OPEN_CREATE 				= (1 << 2), /**< Create file if it does not already exist. */
-} FSOpenFlag;
+	CTR_FS_SEEK_SET 	= 0x00, /**< Seek from the beginning. */
+	CTR_FS_SEEK_CUR 	= 0x01, /**< Seek from the current position. */
+	CTR_FS_SEEK_END 	= 0x02, /**< Seek from the end. */
+} ctrFsOrigin;
 
 /**
- * @ingroup fs
- * @enum FSAttribute
- * @brief Flags for controlling the individual attributes of files.
+ * @brief File types.
  */
 typedef enum {
-	FS_ATTRIBUTE_NONE 			= 0x00000000, /**< No attributes. */
-	FS_ATTRIBUTE_READONLY 		= 0x00000001, /**< Create with read-only attribute. */
-	FS_ATTRIBUTE_ARCHIVE 		= 0x00000100, /**< Create with archive attribute. */
-	FS_ATTRIBUTE_HIDDEN 		= 0x00010000, /**< Create with hidden attribute. */
-	FS_ATTRIBUTE_DIRECTORY 		= 0x01000000, /**< Create with directory attribute. */
-} FSAttribute;
+	CTR_FS_TYPE_UNKNOWN 	= 0x00, /**< Unknown. */
+	CTR_FS_TYPE_DIRECTORY 	= 0x01, /**< Directory. */
+	CTR_FS_TYPE_REGULAR 	= 0x02, /**< Regular. */
+} CtrFsType;
 
 /**
- * @ingroup fs
- * @enum FSWriteFlag
- * @brief Flags for controlling how files should be written.
+ * @brief File status.
  */
-typedef enum {
-	FS_WRITE_NOFLUSH 			= 0x00000000, /**< Do not flush the contents of the file. */
-	FS_WRITE_FLUSH 				= 0x00010001, /**< Flush the contents of the file. */
-} FSWriteFlag;
+typedef struct {
+	/** File size. */
+	uint64_t st_size;
+} CtrFsStat;
+
+/**
+ * @brief Filesystem status.
+ */
+typedef struct {
+	/** Is the filesystem usable? */
+	uint8_t available;
+	/** Is the filesystem writable? */
+	uint8_t writable;
+} CtrFsStatus;
+
+/**
+ * @brief Directory entry.
+ */
+typedef struct {
+	/** File type. */
+	uint8_t d_type;
+	/** Length of string in d_name. */
+	uint8_t d_namelen;
+	/** Filename. */
+	char d_name[CTR_FS_MAX_FILENAME_LENGTH + 1];
+} CtrFsDirent;
 
 #ifdef __cplusplus
 }
