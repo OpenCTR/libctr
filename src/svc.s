@@ -22,11 +22,19 @@
 .global svc_output_debug_string
 .global svc_exit_process
 .global svc_control_memory
+.global svc_connect_to_port
+.global svc_send_sync_request
+.global svc_close_handle
+.global svc_thread_sleep
 
 .type svc_thread_create, %function
 .type svc_output_debug_string, %function
 .type svc_exit_process, %function
 .type svc_control_memory, %function
+.type svc_connect_to_port, %function
+.type svc_send_sync_request, %function
+.type svc_close_handle, %function
+.type svc_thread_sleep, %function
 
 svc_thread_create:
 	stmfd sp!, {r0, r4}
@@ -59,3 +67,21 @@ svc_control_memory:
 	ldr r4, [sp], #4
 	bx lr
 
+svc_connect_to_port:
+	str r0, [sp, #-0x4]!
+	svc 0x2D
+	ldr r3, [sp], #4
+	str r1, [r3]
+	bx lr
+
+svc_send_sync_request:
+	svc 0x32
+	bx lr
+
+svc_close_handle:
+	svc 0x23
+	bx lr
+
+svc_thread_sleep:
+	svc 0x0A
+	bx lr

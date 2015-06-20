@@ -18,6 +18,7 @@
 #include <sys/iosupport.h>
 
 #include "ctr/svc/svc.h"
+#include "ctr/service/service.h"
 
 int __system_argc;
 char** __system_argv;
@@ -59,5 +60,7 @@ void __attribute__((weak)) ctr_init(void (*retAddr)(void)) {
 	// Set up newlib heap
 	fake_heap_start = (char*)__heapBase;
 	fake_heap_end = fake_heap_start + __heap_size;
+
+	//ctrServiceInit();
 }
 

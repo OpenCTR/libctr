@@ -64,6 +64,11 @@ void sys_thread_sleep(uint64_t nsec);
 void sys_thread_exit(void) SYS_NORETURN;
 
 /**
+ * @brief Exit the current process.
+ */
+void sys_process_exit(void) SYS_NORETURN;
+
+/**
  * @brief Create a new mutex.
  * @param[out] mutex_id Mutex ID.
  * @param[in] status Boolean indicating if mutex should be locked upon creation.
@@ -101,6 +106,18 @@ int sys_mutex_unlock(sys_mutex_t mutex_id);
  * @param[in] str String to print.
  */
 void sys_print_debug(const char* str);
+
+/**
+ * @brief Print a debug string (formatted).
+ * @details String is printed to the debug console. On retail 
+ * consoles this function has no effect. On emulators it will 
+ * be printed as debug output.
+ * @sa sys_print_debug()
+ * @param[in] str String to print.
+ */
+void sys_debug_printf(const char* str, ...);
+
+
 
 #ifdef __cplusplus
 }

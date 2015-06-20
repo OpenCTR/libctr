@@ -26,6 +26,7 @@
 #ifndef __LIBCTR_SYS_TYPES_H__
 #define __LIBCTR_SYS_TYPES_H__
 
+#include <stdarg.h>
 #include <stdint.h>
 
 /** Function attribute that informs the compiler it will never return. */

@@ -28,6 +28,8 @@
 
 #include <stdint.h>
 
+#if 0
+
 /**
  * @brief Minimum sound volume level.
  */
@@ -102,6 +104,8 @@ typedef enum {
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

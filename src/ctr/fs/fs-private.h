@@ -47,7 +47,7 @@ extern "C" {
  * 
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsInit(void);
+//int ctrFsInit(void);
 
 
 #ifdef __cplusplus

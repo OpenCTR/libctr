@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <malloc.h>
 #include <errno.h>
 
 #include "ctr/sys/sys.h"
@@ -50,5 +51,30 @@ void sys_print_debug(const char* str) {
 	const int len = strlen(str);
 
 	svc_output_debug_string(str, len);
+}
+
+void sys_debug_printf(const char* str, ...) {
+	char* buffer = NULL;
+	va_list args;
+	int ret;
+
+	va_start(args, str);
+	ret = vasprintf(&buffer, str, args);
+	if(ret == -1) {
+		return;
+	}
+	va_end(args);
+
+	svc_output_debug_string(buffer, ret);
+
+	free(buffer);
+}
+
+void sys_process_exit(void) {
+	svc_exit_process();
+}
+
+void sys_thread_sleep(uint64_t nsecs) {
+	svc_thread_sleep((int64_t)nsecs);
 }
 

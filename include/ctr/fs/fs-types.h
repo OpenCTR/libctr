@@ -62,6 +62,20 @@ typedef enum {
 } CtrFsType;
 
 /**
+ * @brief ctrFsOpen() flags.
+ */
+typedef enum {
+	/** Open in read-only mode. */
+	CTR_FS_O_RDONLY 	= 0x00000001,
+	/** Open in write-only mode. */
+	CTR_FS_O_WRONLY 	= 0x00000002,
+	/** Open in read/write mode. */
+	CTR_FS_O_RDWR 		= 0x00000003,
+	/** Create file if it doesn't exist. */
+	CTR_FS_O_CREAT 		= 0x00000004,
+} CtrFsOpenFlags;
+
+/**
  * @brief File status.
  */
 typedef struct {

@@ -37,6 +37,14 @@ int svc_thread_create(SVCHandle* handle, SVCThreadFunc entrypoint, uint32_t arg,
 
 int svc_output_debug_string(const char* str, const int len);
 
+int svc_connect_to_port(SVCHandle* handle, const char* port);
+
+int svc_send_sync_request(SVCHandle handle);
+
+int svc_close_handle(SVCHandle handle);
+
+void svc_thread_sleep(int64_t ns);
+
 static inline void* svc_get_tls(void) {
 	void* ret = NULL;
 	asm volatile("mrc p15, 0, %[data], c13, c0, 3" : [data] "=r" (ret));
@@ -46,6 +54,7 @@ static inline void* svc_get_tls(void) {
 static inline uint32_t* svc_get_commandbuffer(void) {
 	return (uint32_t*)((uint8_t*)svc_get_tls() + 0x80);
 }
+
 
 #ifdef __cplusplus
 }

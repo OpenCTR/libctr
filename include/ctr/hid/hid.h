@@ -32,6 +32,7 @@
 extern "C" {
 #endif
 
+#if 0
 /**
  * @ingroup hid
  * @brief Create a new session with the HID service.
@@ -144,6 +145,8 @@ int hid_read_gyro(HIDContext* ctx, int16_t* roll, int16_t* yaw, int16_t* pitch);
  * @return On success, 0 is returned. On error, -1 is returned.
  */
 int hid_get_volume(HIDContext* ctx, uint8_t* volume);
+
+#endif
 
 #ifdef __cplusplus
 }

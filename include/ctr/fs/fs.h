@@ -36,7 +36,7 @@ extern "C" {
  * @brief Open a file.
  * @param[out] fd File descriptor.
  * @param[in] path Path to file.
- * @param[in] flags Flags. Available flags are listed below.
+ * @param[in] flags Flags. See ::CtrFsOpenFlags.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
 int ctrFsOpen(int* fd, const char* path, int flags);
