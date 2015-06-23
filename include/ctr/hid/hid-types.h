@@ -28,8 +28,6 @@
 
 #include <stdint.h>
 
-#if 0
-
 /**
  * @brief Minimum sound volume level.
  */
@@ -40,9 +38,19 @@
  */
 #define HID_VOLUME_MAX (0x3F)
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#if 0
 
 /** 
  * @ingroup hid
@@ -101,10 +109,6 @@ typedef enum {
 	HID_KEY_CPAD_UP 		= (1 << 30), /**< Up (Circle Pad) */
 	HID_KEY_CPAD_DOWN 		= (1 << 31), /**< Down (Circle Pad) */
 } HIDKeyCode;
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
 

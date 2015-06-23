@@ -23,11 +23,17 @@
 #ifndef __LIBCTR_SVC_H__
 #define __LIBCTR_SVC_H__
 
+#include <stdbool.h>
+
 #include "svc-types.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+uint32_t* svc_get_tls(void);
+
+uint32_t* svc_get_commandbuffer(void);
 
 int svc_control_memory(uint32_t* outaddr, uint32_t addr0, uint32_t addr1, uint32_t size, uint32_t operation, uint32_t permissions);
 
@@ -35,26 +41,23 @@ void __attribute__((noreturn)) svc_exit_process(void);
 
 int svc_thread_create(SVCHandle* handle, SVCThreadFunc entrypoint, uint32_t arg, uint32_t stacktop, int32_t priority, int32_t processorid);
 
-int svc_output_debug_string(const char* str, const int len);
+void __attribute__((noreturn)) svc_exit_thread(void);
+
+void svc_thread_sleep(int64_t ns);
+
+int svc_create_mutex(SVCHandle* mutex, bool initially_locked);
+
+int svc_release_mutex(SVCHandle mutex);
+
+int svc_close_handle(SVCHandle handle);
+
+int svc_wait_synchronization(SVCHandle handle, int64_t nanoseconds);
 
 int svc_connect_to_port(SVCHandle* handle, const char* port);
 
 int svc_send_sync_request(SVCHandle handle);
 
-int svc_close_handle(SVCHandle handle);
-
-void svc_thread_sleep(int64_t ns);
-
-static inline void* svc_get_tls(void) {
-	void* ret = NULL;
-	asm volatile("mrc p15, 0, %[data], c13, c0, 3" : [data] "=r" (ret));
-	return ret;
-}
-
-static inline uint32_t* svc_get_commandbuffer(void) {
-	return (uint32_t*)((uint8_t*)svc_get_tls() + 0x80);
-}
-
+int svc_output_debug_string(const char* str, const int len);
 
 #ifdef __cplusplus
 }

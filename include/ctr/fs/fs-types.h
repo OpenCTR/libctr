@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Mode values
+ * @brief Mode values.
  * @sa ctrFsMkdir()
  */
 typedef enum {

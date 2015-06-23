@@ -1,6 +1,6 @@
 /**
  * @file ctr/hid/hid.h
- * @brief Interface to the HID service.
+ * @brief HID API.
  */
 
 /*
@@ -32,35 +32,19 @@
 extern "C" {
 #endif
 
-#if 0
-/**
- * @ingroup hid
- * @brief Create a new session with the HID service.
- * @param[out] ctx New HID context.
- * @return On success, 0 is returned. On error, -1 is returned.
- */
-int hid_session_new(HIDContext* ctx);
 
 /**
- * @ingroup hid
- * @brief Close an HID session.
- * @param[in] ctx HID context representing a session.
- * @return On success, 0 is returned. On error, -1 is returned.
+ * @brief Read the current touchpad position.
+ * @
  */
-int hid_session_close(HIDContext* ctx);
+int ctrHidTouchRead(uint16_t* px, uint16_t* py);
 
-/**
- * @ingroup hid
- * @brief Update the HID context state.
- * @details hid_context_update() <b>MUST</b> be called once-per-frame. If 
- * hid_context_update() is not called, then the internal HID state will not be
- * updated, and hid_read_touchpad(), hid_read_circlepad(), hid_read_accel(),
- * and hid_read_gyro() will return the exact same values as when they were 
- * last called.
- * @param[in] ctx HID context to update.
- * @return On success, 0 is returned. On error, -1 is returned.
- */
-int hid_context_update(HIDContext* ctx);
+int ctrHidCircleRead(int16_t* dx, int16_t* dy);
+int ctrHidAccelRead(int16_t* x, int16_t* y, int16_t* z);
+int ctrHidGyroRead(int16_t* roll, int16_t* yaw, int16_t* pitch);
+int ctrHidGetVolume(uint8_t* volume); //Return the volume slider value (0-63)
+int ctrHidGyroGetRawToDpsCoefficient(float* coeff);
+
 
 #if 0
 
@@ -77,11 +61,6 @@ uint8_t* hid_get_state(HIDContext* hid);
 	+ memset(state, 0x00, HID_KEYS_MAX);
 	+ if(isKeyPressedA()) state[HID_KEY_A] = 0x01;
 	+ return state;
-
-#endif
-
-
-
 /**
  * @ingroup hid
  * @brief Get the current status of one HID key/button.

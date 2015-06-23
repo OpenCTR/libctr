@@ -25,7 +25,7 @@
 #include "ctr/svc/svc.h"
 #include "ctr/error/error-private.h"
 
-int sys_thread_new(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum) {
+int sys_thread_create(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum) {
 	int ret;
 
 	if(id == NULL) {
@@ -47,10 +47,87 @@ int sys_thread_new(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t st
 	return 0;
 }
 
-void sys_print_debug(const char* str) {
-	const int len = strlen(str);
+int sys_thread_join(sys_thread_t id) {
+	int ret;
 
-	svc_output_debug_string(str, len);
+	ret = svc_wait_synchronization((SVCHandle)id, UINT64_MAX);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	svc_close_handle((SVCHandle)id);
+
+	return 0;
+}
+
+void sys_thread_sleep(uint64_t nsecs) {
+	svc_thread_sleep((int64_t)nsecs);
+}
+
+void sys_thread_yield(void) {
+	svc_thread_sleep(0);
+}
+
+void sys_thread_exit(void) {
+	svc_exit_thread();
+}
+
+void sys_process_exit(void) {
+	svc_exit_process();
+}
+
+int sys_mutex_new(sys_mutex_t* mutex_id, sys_lock_t status) {
+	int ret;
+
+	switch(status) {
+		case SYS_MUTEX_LOCKED:
+			ret = svc_create_mutex((SVCHandle*)mutex_id, true);
+			break;
+		case SYS_MUTEX_UNLOCKED:
+			ret = svc_create_mutex((SVCHandle*)mutex_id, false);
+			break;
+		default:
+			break;
+	}
+
+	return ret;
+}
+
+int sys_mutex_free(sys_mutex_t mutex_id) {
+	int ret;
+
+	ret = svc_close_handle(mutex_id);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	return 0;
+}
+
+int sys_mutex_lock(sys_mutex_t mutex_id) {
+	int ret;
+
+	ret = svc_wait_synchronization(mutex_id, UINT64_MAX);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	return 0;
+}
+
+int sys_mutex_unlock(sys_mutex_t mutex_id) {
+	int ret;
+
+	ret = svc_release_mutex(mutex_id);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	return 0;
 }
 
 void sys_debug_printf(const char* str, ...) {
@@ -69,12 +146,3 @@ void sys_debug_printf(const char* str, ...) {
 
 	free(buffer);
 }
-
-void sys_process_exit(void) {
-	svc_exit_process();
-}
-
-void sys_thread_sleep(uint64_t nsecs) {
-	svc_thread_sleep((int64_t)nsecs);
-}
-

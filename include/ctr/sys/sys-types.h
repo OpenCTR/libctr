@@ -27,6 +27,7 @@
 #define __LIBCTR_SYS_TYPES_H__
 
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdint.h>
 
 /** Function attribute that informs the compiler it will never return. */

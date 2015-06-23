@@ -43,7 +43,7 @@ extern "C" {
  * @param[in] idnum Processor the thread should be created by.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_thread_new(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
+int sys_thread_create(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
 
 /**
  * @brief Wait for a thread to finish.
@@ -57,6 +57,11 @@ int sys_thread_join(sys_thread_t id);
  * @param[in] nsec Time to suspend execution, in nanoseconds.
  */
 void sys_thread_sleep(uint64_t nsec);
+
+/**
+ * @brief Yield the current thread.
+ */
+void sys_thread_yield(void);
 
 /**
  * @brief Exit the current thread.
@@ -105,19 +110,7 @@ int sys_mutex_unlock(sys_mutex_t mutex_id);
  * be printed as debug output.
  * @param[in] str String to print.
  */
-void sys_print_debug(const char* str);
-
-/**
- * @brief Print a debug string (formatted).
- * @details String is printed to the debug console. On retail 
- * consoles this function has no effect. On emulators it will 
- * be printed as debug output.
- * @sa sys_print_debug()
- * @param[in] str String to print.
- */
 void sys_debug_printf(const char* str, ...);
-
-
 
 #ifdef __cplusplus
 }
