@@ -26,17 +26,9 @@
 #ifndef __LIBCTR_HID_TYPES_H__
 #define __LIBCTR_HID_TYPES_H__
 
-#include <stdint.h>
+#include "ctr/base/base.h"
 
-/**
- * @brief Minimum sound volume level.
- */
-#define HID_VOLUME_MIN (0x00)
 
-/**
- * @brief Maximum sound volume level.
- */
-#define HID_VOLUME_MAX (0x3F)
 
 
 #ifdef __cplusplus
@@ -72,43 +64,7 @@ typedef enum {
 	HID_KEYPAD_RELEASED 	= 0x00000003, /**< Key is not currently being presses. */
 } HIDKeyStatus;
 
-/**
- * @ingroup hid
- * @enum HIDKeyCode
- * @brief Key codes.
- * @note The following keys are only available on the New 3DS: 
- *     ::HID_KEY_ZL
- *     ::HID_KEY_ZR
- *     ::HID_KEY_CSTICK_RIGHT
- *     ::HID_KEY_CSTICK_LEFT
- *     ::HID_KEY_CSTICK_UP
- *     ::HID_KEY_CSTICK_DOWN
- */
-typedef enum {
-	HID_KEY_A 				= (1 <<  0), /**< 'A' */
-	HID_KEY_B 				= (1 <<  1), /**< 'B' */
-	HID_KEY_SELECT 			= (1 <<  2), /**< Select */
-	HID_KEY_START 			= (1 <<  3), /**< Start */
-	HID_KEY_DPAD_RIGHT 		= (1 <<  4), /**< Right (DPad) */
-	HID_KEY_DPAD_LEFT 		= (1 <<  5), /**< Left (DPad) */
-	HID_KEY_DPAD_UP 		= (1 <<  6), /**< Up (DPad) */
-	HID_KEY_DPAD_DOWN 		= (1 <<  7), /**< Down (DPad) */
-	HID_KEY_R 				= (1 <<  8), /**< 'R' */
-	HID_KEY_L 				= (1 <<  9), /**< 'L' */
-	HID_KEY_X 				= (1 << 10), /**< 'X' */
-	HID_KEY_Y 				= (1 << 11), /**< 'Y' */
-	HID_KEY_ZL 				= (1 << 14), /**< 'ZL' */
-	HID_KEY_ZR 				= (1 << 15), /**< 'ZR' */
-	HID_KEY_TOUCH 			= (1 << 20), /**< Touchpad */
-	HID_KEY_CSTICK_RIGHT 	= (1 << 24), /**< Right (C-Stick) */
-	HID_KEY_CSTICK_LEFT 	= (1 << 25), /**< Left (C-Stick) */
-	HID_KEY_CSTICK_UP 		= (1 << 26), /**< Up (C-Stick) */
-	HID_KEY_CSTICK_DOWN 	= (1 << 27), /**< Down (C-Stick) */
-	HID_KEY_CPAD_RIGHT 		= (1 << 28), /**< Right (Circle Pad) */
-	HID_KEY_CPAD_LEFT 		= (1 << 29), /**< Left (Circle Pad) */
-	HID_KEY_CPAD_UP 		= (1 << 30), /**< Up (Circle Pad) */
-	HID_KEY_CPAD_DOWN 		= (1 << 31), /**< Down (Circle Pad) */
-} HIDKeyCode;
+
 
 #endif
 

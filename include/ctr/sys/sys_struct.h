@@ -18,23 +18,34 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base.h"
-#include "ctr/sys.h"
-#include "ctr/error.h"
+#ifndef __LIBCTR_SYS_STRUCT_H__
+#define __LIBCTR_SYS_STRUCT_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/sys/sys_struct.h
+ * @brief System data structures.
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-	return cerrorno;
-}
+CTR_API_BEGIN
 
-int* cerrorptr(void) {
-	return &cerrorno;
-}
+/**
+ * @brief Handle to a kernel thread.
+ */
+typedef uint32_t sys_thread_t;
 
+/**
+ * @brief Handle to a kernel mutex.
+ */
+typedef uint32_t sys_mutex_t;
+
+/**
+ * @typedef sys_thread_cb
+ * @brief Function to run inside a thread.
+ * @details <code>void sys_thread_cb(void* arg)</code>
+ * @param[in] arg Parameter passed to the thread function.
+ */
+typedef void(*sys_thread_func)(void* arg);
+
+CTR_API_END
+
+#endif

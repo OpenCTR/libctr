@@ -1,8 +1,3 @@
-/**
- * @file ctr/fs/fs.h
- * @brief Filesystem API.
- */
-
 /*
  * libctr - Library for Nintendo 3DS homebrew.
  * 
@@ -23,14 +18,17 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_FS_H__
-#define __LIBCTR_FS_H__
+#ifndef __LIBCTR_FS_METHODS_H__
+#define __LIBCTR_FS_METHODS_H__
 
-#include "fs-types.h"
+/**
+ * @file ctr/fs/fs_methods.h
+ * @brief Filesystem functions.
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "ctr/base.h"
+
+CTR_API_BEGIN
 
 /**
  * @brief Open a file.
@@ -39,7 +37,7 @@ extern "C" {
  * @param[in] flags Flags. See ::CtrFsOpenFlags.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsOpen(int* fd, const char* path, int flags);
+CAPI int ctrFsOpen(int* fd, const char* path, int flags);
 
 /**
  * @brief Read from a file.
@@ -49,7 +47,7 @@ int ctrFsOpen(int* fd, const char* path, int flags);
  * @param[out] osize Actual size read from file.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsRead(int fd, void* buffer, uint64_t size, uint64_t* osize);
+CAPI int ctrFsRead(int fd, void* buffer, uint64_t size, uint64_t* osize);
 
 /**
  * @brief Write to a file.
@@ -59,14 +57,14 @@ int ctrFsRead(int fd, void* buffer, uint64_t size, uint64_t* osize);
  * @param[out] osize Actual size written to file.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsWrite(int fd, const void* buffer, uint64_t size, uint64_t* osize);
+CAPI int ctrFsWrite(int fd, const void* buffer, uint64_t size, uint64_t* osize);
 
 /**
  * @brief Close a file.
  * @param[in] fd File descriptor.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsClose(int fd);
+CAPI int ctrFsClose(int fd);
 
 /**
  * @brief Open a directory.
@@ -74,7 +72,7 @@ int ctrFsClose(int fd);
  * @param[in] path Path to directory.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsOpendir(int* fd, const char* path);
+CAPI int ctrFsOpendir(int* fd, const char* path);
 
 /**
  * @brief Read a directory entry.
@@ -82,14 +80,14 @@ int ctrFsOpendir(int* fd, const char* path);
  * @param[out] dir Directory information.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsReaddir(int fd, CtrFsDirent* dir);
+CAPI int ctrFsReaddir(int fd, CtrFsDirent* dir);
 
 /**
  * @brief Close a directory.
  * @param[in] fd File descriptor.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsClosedir(int fd);
+CAPI int ctrFsClosedir(int fd);
 
 /**
  * @brief Get file status/information (using a filename path).
@@ -97,7 +95,7 @@ int ctrFsClosedir(int fd);
  * @param[out] st File information.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsStat(const char* path, CtrFsStat* st);
+CAPI int ctrFsStat(const char* path, CtrFsStat* st);
 
 /**
  * @brief Get file status/information (using a file descriptor).
@@ -105,7 +103,7 @@ int ctrFsStat(const char* path, CtrFsStat* st);
  * @param[out] st File information.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsFstat(int fd, CtrFsStat* st);
+CAPI int ctrFsFstat(int fd, CtrFsStat* st);
 
 /**
  * @brief Create a new directory.
@@ -113,7 +111,7 @@ int ctrFsFstat(int fd, CtrFsStat* st);
  * @param[in] mode Mode for the new directory.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsMkdir(const char* path, CtrFsMode mode);
+CAPI int ctrFsMkdir(const char* path, CtrFsMode mode);
 
 /**
  * @brief Change the name of a file.
@@ -121,21 +119,21 @@ int ctrFsMkdir(const char* path, CtrFsMode mode);
  * @param[in] dest Path to the new filename.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsRename(const char* source, const char* dest);
+CAPI int ctrFsRename(const char* source, const char* dest);
 
 /**
  * @brief Delete a directory.
  * @param[in] path Path to a directory.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsRmdir(const char* path);
+CAPI int ctrFsRmdir(const char* path);
 
 /**
  * @brief Delete a file.
  * @param[in] path Path to a file.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsUnlink(const char* path);
+CAPI int ctrFsUnlink(const char* path);
 
 /**
  * @brief Change the current position of a file.
@@ -145,21 +143,21 @@ int ctrFsUnlink(const char* path);
  * @param[out] pos Current position of file (after seeking).
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsLseek(int fd, int64_t offset, ctrFsOrigin origin, uint64_t* pos);
+CAPI int ctrFsLseek(int fd, int64_t offset, ctrFsOrigin origin, uint64_t* pos);
 
 /**
  * @brief Synchronize a file's data with the filesystem.
  * @param[in] fd File descriptor.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsFsync(int fd);
+CAPI int ctrFsFsync(int fd);
 
 /**
  * @brief Get the SD card status.
  * @param[out] status Current status.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsSdmcStatus(CtrFsStatus* status);
+CAPI int ctrFsSdmcStatus(CtrFsStatus* status);
 
 /**
  * @brief Change file size (using a filename path).
@@ -167,7 +165,7 @@ int ctrFsSdmcStatus(CtrFsStatus* status);
  * @param[in] size New file size.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsTruncate(const char* path, uint64_t size);
+CAPI int ctrFsTruncate(const char* path, uint64_t size);
 
 /**
  * @brief Change file size (using a file descriptor).
@@ -175,7 +173,7 @@ int ctrFsTruncate(const char* path, uint64_t size);
  * @param[in] size New file size.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsFtruncate(int fd, uint64_t size);
+CAPI int ctrFsFtruncate(int fd, uint64_t size);
 
 /**
  * @brief Get free space on the SD card and NAND filesystem.
@@ -183,10 +181,8 @@ int ctrFsFtruncate(int fd, uint64_t size);
  * @param[out] nand_size Available space on the NAND filesystem.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int ctrFsGetAvailableSize(uint64_t* sdmc_size, uint64_t* nand_size);
+CAPI int ctrFsGetAvailableSize(uint64_t* sdmc_size, uint64_t* nand_size);
 
-#ifdef __cplusplus
-}
-#endif
+CTR_API_END
 
 #endif

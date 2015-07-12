@@ -1,8 +1,3 @@
-/**
- * @file ctr/error/error-types.h
- * @brief Error types.
- */
-
 /*
  * libctr - Library for Nintendo 3DS homebrew.
  * 
@@ -23,24 +18,38 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_ERROR_TYPES_H__
-#define __LIBCTR_ERROR_TYPES_H__
-
-#include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef __LIBCTR_ERROR_ENUM_H__
+#define __LIBCTR_ERROR_ENUM_H__
 
 /**
- * @brief Error type.
- * @details All errors in libctr are a 32-bit signed
- * integer.
+ * @file ctr/error/error_enum.h
+ * @brief Error enums.
  */
-typedef int32_t CError;
 
-#ifdef __cplusplus
-}
-#endif
+#include "ctr/base.h"
+
+CTR_API_BEGIN
+
+/**
+ * @enum CtrErrors
+ * @brief Basic libctr errors.
+ * @todo Add more errors.
+ */
+enum CtrErrors {
+	/** Request timed out. */
+	CTR_ERROR_TIMEOUT = (0x09401BFE),
+	/** Invalid handle. */
+	CTR_ERROR_INVALID_HANDLE = (0xD8E007F7),
+	/** Argument was outside of valid range. */
+	CTR_ERROR_ARG_INVALID_RANGE = (0xE0E01BFD),
+	/** Argument is an invalid pointer. */
+	CTR_ERROR_ARG_INVALID_POINTER = (0xD8E007F6),
+	/** Request could not be found. */
+	CTR_ERROR_NOT_FOUND = (0xD88007FA),
+	/** Port name was too long. */
+	CTR_ERROR_PORT_NAME_TOO_LONG = (0xE0E0181E),
+};
+
+CTR_API_END
 
 #endif

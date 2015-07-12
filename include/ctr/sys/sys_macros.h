@@ -18,23 +18,17 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base.h"
-#include "ctr/sys.h"
-#include "ctr/error.h"
+#ifndef __LIBCTR_SYS_MACROS_H__
+#define __LIBCTR_SYS_MACROS_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/sys/sys_macros.h
+ * @brief System macros.
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-	return cerrorno;
-}
+/** Highest thread priority. */
+#define SYS_THREAD_PRIORITY_MAX (0x00)
+/** Lowest thread priority. */
+#define SYS_THREAD_PRIORITY_MIN (0x1F)
 
-int* cerrorptr(void) {
-	return &cerrorno;
-}
-
+#endif

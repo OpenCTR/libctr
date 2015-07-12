@@ -18,23 +18,25 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base.h"
-#include "ctr/sys.h"
-#include "ctr/error.h"
+#ifndef __LIBCTR_ERROR_PRIVATE_H__
+#define __LIBCTR_ERROR_PRIVATE_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/error/error_private.h
+ * @brief Private Error API.
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-	return cerrorno;
-}
+#include "ctr/base.h"
 
-int* cerrorptr(void) {
-	return &cerrorno;
-}
+CTR_API_BEGIN
 
+/**
+ * @brief Obtain a pointer to the libctr errno.
+ * Returns a thread-safe pointer for libctr 
+ * functions to set.
+ */
+int* cerrorptr(void);
+
+CTR_API_END
+
+#endif

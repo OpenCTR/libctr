@@ -1,8 +1,3 @@
-/**
- * @file ctr/sys/sys.h
- * @brief System interface.
- */
-
 /*
  * libctr - Library for Nintendo 3DS homebrew.
  * 
@@ -23,14 +18,15 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_SYS_H__
-#define __LIBCTR_SYS_H__
+#ifndef __LIBCTR_SYS_METHODS_H__
+#define __LIBCTR_SYS_METHODS_H__
 
-#include "sys-types.h"
+/**
+ * @file ctr/sys/sys_methods.h
+ * @brief System functions.
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+CTR_API_BEGIN
 
 /**
  * @brief Create a new thread.
@@ -43,35 +39,35 @@ extern "C" {
  * @param[in] idnum Processor the thread should be created by.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_thread_create(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
+CAPI int sys_thread_create(sys_thread_t* id, sys_thread_func entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
 
 /**
  * @brief Wait for a thread to finish.
  * @param[in] id Thread ID.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_thread_join(sys_thread_t id);
+CAPI int sys_thread_join(sys_thread_t id);
 
 /**
  * @brief Put the current thread to sleep.
  * @param[in] nsec Time to suspend execution, in nanoseconds.
  */
-void sys_thread_sleep(uint64_t nsec);
+CAPI void sys_thread_sleep(uint64_t nsec);
 
 /**
  * @brief Yield the current thread.
  */
-void sys_thread_yield(void);
+CAPI void sys_thread_yield(void);
 
 /**
  * @brief Exit the current thread.
  */
-void sys_thread_exit(void) SYS_NORETURN;
+CAPI void sys_thread_exit(void) CTR_NORETURN;
 
 /**
  * @brief Exit the current process.
  */
-void sys_process_exit(void) SYS_NORETURN;
+CAPI void sys_process_exit(void) CTR_NORETURN;
 
 /**
  * @brief Create a new mutex.
@@ -79,21 +75,21 @@ void sys_process_exit(void) SYS_NORETURN;
  * @param[in] status Boolean indicating if mutex should be locked upon creation.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_mutex_new(sys_mutex_t* mutex_id, sys_lock_t status);
+CAPI int sys_mutex_new(sys_mutex_t* mutex_id, sys_lock_t status);
 
 /**
  * @brief Destroy a mutex variable.
  * @param[in] mutex_id Mutex ID.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_mutex_free(sys_mutex_t mutex_id);
+CAPI int sys_mutex_free(sys_mutex_t mutex_id);
 
 /**
  * @brief Lock a mutex variable.
  * @param[in] mutex_id Mutex ID.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_mutex_lock(sys_mutex_t mutex_id);
+CAPI int sys_mutex_lock(sys_mutex_t mutex_id);
 
 /**
  * @ingroup systhread
@@ -101,7 +97,7 @@ int sys_mutex_lock(sys_mutex_t mutex_id);
  * @param[in] mutex_id Mutex ID.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-int sys_mutex_unlock(sys_mutex_t mutex_id);
+CAPI int sys_mutex_unlock(sys_mutex_t mutex_id);
 
 /**
  * @brief Print a debug string.
@@ -110,10 +106,8 @@ int sys_mutex_unlock(sys_mutex_t mutex_id);
  * be printed as debug output.
  * @param[in] str String to print.
  */
-void sys_debug_printf(const char* str, ...);
+CAPI void sys_debug_printf(const char* str, ...);
 
-#ifdef __cplusplus
-}
-#endif
+CTR_API_END
 
 #endif

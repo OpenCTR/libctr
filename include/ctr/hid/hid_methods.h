@@ -18,23 +18,20 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base.h"
-#include "ctr/sys.h"
-#include "ctr/error.h"
+#ifndef __LIBCTR_HID_METHODS_H__
+#define __LIBCTR_HID_METHODS_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/hid/hid_methods.h
+ * @brief HID functions.
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-	return cerrorno;
-}
+#include "ctr/base.h"
 
-int* cerrorptr(void) {
-	return &cerrorno;
-}
+CTR_API_BEGIN
 
+
+
+CTR_API_END
+
+#endif

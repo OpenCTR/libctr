@@ -18,23 +18,24 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base.h"
-#include "ctr/sys.h"
-#include "ctr/error.h"
+#ifndef __LIBCTR_SYS_H__
+#define __LIBCTR_SYS_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/sys.h
+ * @brief libctr system header.
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-	return cerrorno;
-}
+#include "ctr/base.h"
 
-int* cerrorptr(void) {
-	return &cerrorno;
-}
+#include "ctr/sys/sys_macros.h"
+#include "ctr/sys/sys_errors.h"
+#include "ctr/sys/sys_enum.h"
+#include "ctr/sys/sys_struct.h"
+#include "ctr/sys/sys_methods.h"
 
+#ifdef INSIDE_LIBCTR
+#include "ctr/sys/sys_private.h"
+#endif
+
+#endif

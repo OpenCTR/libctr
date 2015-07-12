@@ -1,8 +1,3 @@
-/**
- * @file ctr/fs/fs-types.h
- * @brief Filesystem types.
- */
-
 /*
  * libctr - Library for Nintendo 3DS homebrew.
  * 
@@ -23,17 +18,17 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_FS_TYPES_H__
-#define __LIBCTR_FS_TYPES_H__
+#ifndef __LIBCTR_FS_ENUM_H__
+#define __LIBCTR_FS_ENUM_H__
 
-#include <stdint.h>
+/**
+ * @file ctr/fs/fs_enum.h
+ * @brief Filesystem enums.
+ */
 
-/** Maximum length of a filename.  */
-#define CTR_FS_MAX_FILENAME_LENGTH (0x00000100)
+#include "ctr/base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+CTR_API_BEGIN
 
 /**
  * @brief Mode values.
@@ -75,38 +70,6 @@ typedef enum {
 	CTR_FS_O_CREAT 		= 0x00000004,
 } CtrFsOpenFlags;
 
-/**
- * @brief File status.
- */
-typedef struct {
-	/** File size. */
-	uint64_t st_size;
-} CtrFsStat;
-
-/**
- * @brief Filesystem status.
- */
-typedef struct {
-	/** Is the filesystem usable? */
-	uint8_t available;
-	/** Is the filesystem writable? */
-	uint8_t writable;
-} CtrFsStatus;
-
-/**
- * @brief Directory entry.
- */
-typedef struct {
-	/** File type. */
-	uint8_t d_type;
-	/** Length of string in d_name. */
-	uint8_t d_namelen;
-	/** Filename. */
-	char d_name[CTR_FS_MAX_FILENAME_LENGTH + 1];
-} CtrFsDirent;
-
-#ifdef __cplusplus
-}
-#endif
+CTR_API_END
 
 #endif

@@ -1,31 +1,52 @@
 /*
- * This file is part of libctr.
+ * libctr - Library for Nintendo 3DS homebrew.
  * 
- * libctr is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Copyright (C) 2015 The OpenCTR Project. 
  * 
- * libctr is distributed in the hope that it will be useful,
+ * This file is part of libctr. 
+ * 
+ * libctr is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU General Public License version 3 as 
+ * published by the Free Software Foundation.
+ * 
+ * libctr is distributed in the hope that it will be useful, 
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License
- * along with libctr.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * You should have received a copy of the GNU General Public License 
+ * along with libctr. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include <malloc.h>
-#include <errno.h>
+#include "ctr/base.h"
+#include "ctr/sys.h"
+#include "ctr/error.h"
 
-#include "ctr/sys/sys.h"
-#include "ctr/svc/svc.h"
-#include "ctr/error/error-private.h"
+int sys_control_memory(uint32_t* outaddr, uint32_t addr0, uint32_t addr1, uint32_t size, uint32_t operation, uint32_t permissions) {
+	int ret;
 
-int sys_thread_create(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum) {
+	ret = sys_control_memory_ex(outaddr, addr0, addr1, size, operation, permissions);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	return 0;
+}
+
+int sys_query_memory(sys_memory_info* meminfo, sys_page_info* pageinfo, uint32_t addr) {
+	int ret;
+
+	ret = sys_query_memory_ex(meminfo, pageinfo, addr);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	return 0;
+}
+
+int sys_thread_create(sys_thread_t* id, sys_thread_func entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum) {
 	int ret;
 
 	if(id == NULL) {
@@ -38,7 +59,7 @@ int sys_thread_create(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t
 		return -1;
 	}
 
-	ret = svc_thread_create(id, entry, (uint32_t)arg, stack_top, priority, idnum);
+	ret = sys_thread_create_ex(id, entry, (uint32_t)arg, stack_top, priority, idnum);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -50,54 +71,41 @@ int sys_thread_create(sys_thread_t* id, sys_thread_cb entry, void* arg, uint32_t
 int sys_thread_join(sys_thread_t id) {
 	int ret;
 
-	ret = svc_wait_synchronization((SVCHandle)id, UINT64_MAX);
+	ret = sys_wait_synchronization(id, UINT64_MAX);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
 	}
 
-	svc_close_handle((SVCHandle)id);
+	sys_close_handle(id);
 
 	return 0;
 }
 
 void sys_thread_sleep(uint64_t nsecs) {
-	svc_thread_sleep((int64_t)nsecs);
+	sys_thread_sleep_ex((int64_t)nsecs);
 }
 
 void sys_thread_yield(void) {
-	svc_thread_sleep(0);
+	sys_thread_sleep_ex(0);
 }
 
-void sys_thread_exit(void) {
-	svc_exit_thread();
-}
-
-void sys_process_exit(void) {
-	svc_exit_process();
-}
-
-int sys_mutex_new(sys_mutex_t* mutex_id, sys_lock_t status) {
+int sys_mutex_new(sys_mutex_t* mutex, sys_lock_t status) {
 	int ret;
 
-	switch(status) {
-		case SYS_MUTEX_LOCKED:
-			ret = svc_create_mutex((SVCHandle*)mutex_id, true);
-			break;
-		case SYS_MUTEX_UNLOCKED:
-			ret = svc_create_mutex((SVCHandle*)mutex_id, false);
-			break;
-		default:
-			break;
+	ret = sys_mutex_new_ex(mutex, status);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
 	}
 
-	return ret;
+	return 0;
 }
 
 int sys_mutex_free(sys_mutex_t mutex_id) {
 	int ret;
 
-	ret = svc_close_handle(mutex_id);
+	ret = sys_close_handle(mutex_id);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -109,7 +117,7 @@ int sys_mutex_free(sys_mutex_t mutex_id) {
 int sys_mutex_lock(sys_mutex_t mutex_id) {
 	int ret;
 
-	ret = svc_wait_synchronization(mutex_id, UINT64_MAX);
+	ret = sys_wait_synchronization(mutex_id, UINT64_MAX);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -121,7 +129,7 @@ int sys_mutex_lock(sys_mutex_t mutex_id) {
 int sys_mutex_unlock(sys_mutex_t mutex_id) {
 	int ret;
 
-	ret = svc_release_mutex(mutex_id);
+	ret = sys_mutex_unlock_ex(mutex_id);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -142,7 +150,7 @@ void sys_debug_printf(const char* str, ...) {
 	}
 	va_end(args);
 
-	svc_output_debug_string(buffer, ret);
+	sys_debug_printf_ex(buffer, ret);
 
 	free(buffer);
 }

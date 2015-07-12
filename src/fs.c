@@ -1,83 +1,71 @@
 /*
- * This file is part of libctr.
+ * libctr - Library for Nintendo 3DS homebrew.
  * 
- * libctr is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Copyright (C) 2015 The OpenCTR Project. 
  * 
- * libctr is distributed in the hope that it will be useful,
+ * This file is part of libctr. 
+ * 
+ * libctr is free software: you can redistribute it and/or modify 
+ * it under the terms of the GNU General Public License version 3 as 
+ * published by the Free Software Foundation.
+ * 
+ * libctr is distributed in the hope that it will be useful, 
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License
+ * You should have received a copy of the GNU General Public License 
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/iosupport.h>
-
-#include "ctr/svc/svc.h"
-
-#include "ctr/service/service.h"
-
-#include "ctr/sys/sys.h"
-#include "ctr/sys/sys-private.h"
-
-#include "ctr/error/error.h"
-#include "ctr/error/error-private.h"
-
-#include "ctr/fs/fs.h"
-#include "ctr/fs/fs-private.h"
+#include "ctr/base.h"
+#include "ctr/sys.h"
+#include "ctr/error.h"
+#include "ctr/fs.h"
 
 #define CTR_FS_SDMC (0x00000009)
 
-static SVCHandle ctr_fs_handle = 0;
-static uint64_t* ctr_fs_offset_table = NULL;
-static uint64_t ctr_fs_offset_table_size = 0;
-static uint64_t ctr_fs_offset_table_index = 0;
+static uint32_t ctr_fs_handle = 0;
 
-static void ctrFsInit(void) __attribute__((constructor (107)));
-static void ctrFsExit(void) __attribute__((destructor (107)));
+static void ctrFsInit(void) CTR_INIT;
+static void ctrFsExit(void) CTR_FINI;
 
 static void ctrFsInit(void) {
 	uint32_t* cmdbuf = NULL;
 	int ret;
 
-	ret = ctrServiceGetHandle(&ctr_fs_handle, "fs:USER");
+	ret = sys_service_get_handle(&ctr_fs_handle, "fs:USER");
 	if(ret != 0) {
 		sys_debug_printf("Error getting fs:USER handle: 0x%08x\n", ret);
-		svc_exit_process();
+		sys_process_exit();
 	}
 
-	cmdbuf = svc_get_commandbuffer();
+	cmdbuf = sys_get_commandbuffer();
 
 	cmdbuf[0] = 0x08010002;
 	cmdbuf[1] = 0x00000020;
 
-	ret = svc_send_sync_request(ctr_fs_handle);
+	ret = sys_send_sync_request(ctr_fs_handle);
 	if(ret != 0) {
-		sys_debug_printf("Error init request for filesystem: 0x%08x\n", ret);
-		svc_exit_process();
+		sys_debug_printf("Error sending init request for filesystem: 0x%08x\n", ret);
+		sys_process_exit();
 	}
 
 	ret = cmdbuf[1];
 	if(ret != 0) {
 		sys_debug_printf("Error initializing filesystem: 0x%08x\n", ret);
-		svc_exit_process();
+		sys_process_exit();
 	}
-
-	ctr_fs_offset_table = (uint64_t*)malloc(sizeof(uint64_t));
-	ctr_fs_offset_table_size = 1;
-	ctr_fs_offset_table_index = 0;
 }
 
 static void ctrFsExit(void) {
-	svc_close_handle(ctr_fs_handle);
+	int ret;
+
+	ret = sys_close_handle(ctr_fs_handle);
+	if(ret != 0) {
+		sys_debug_printf("Error closing FS handle: 0x%08x\n", ret);
+		sys_process_exit();
+	}
 }
 
 int ctrFsOpen(int* fd, const char* path, int flags) {
@@ -106,7 +94,7 @@ int ctrFsOpen(int* fd, const char* path, int flags) {
 	 * Future: Use SDMC by default, allow switching between SDMC/NAND.
 	 */
 
-	cmdbuf = svc_get_commandbuffer();
+	cmdbuf = sys_get_commandbuffer();
 
 	cmdbuf[0] = 0x08030204;
 	cmdbuf[1] = 0x00000000;
@@ -122,7 +110,7 @@ int ctrFsOpen(int* fd, const char* path, int flags) {
 	cmdbuf[11] = ((len << 0x0E) | 0x02);
 	cmdbuf[12] = (uint32_t)path;
 
-	ret = svc_send_sync_request(ctr_fs_handle);
+	ret = sys_send_sync_request(ctr_fs_handle);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -148,7 +136,7 @@ int ctrFsRead(int fd, void* buffer, uint64_t size, uint64_t* osize) {
 	// TODO: Get offset.
 	const uint64_t offset = 0;
 
-	cmdbuf = svc_get_commandbuffer();
+	cmdbuf = sys_get_commandbuffer();
 
 	cmdbuf[0] = 0x080200C2;
 	cmdbuf[1] = (uint32_t)(offset);
@@ -157,7 +145,7 @@ int ctrFsRead(int fd, void* buffer, uint64_t size, uint64_t* osize) {
 	cmdbuf[4] = ((size << 0x04) | 0x0C);
 	cmdbuf[5] = ((uint32_t)buffer);
 
-	ret = svc_send_sync_request(fd);
+	ret = sys_send_sync_request(fd);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -182,7 +170,7 @@ int ctrFsWrite(int fd, const void* buffer, uint64_t size, uint64_t* osize) {
 
 	const uint64_t offset = 0;
 
-	cmdbuf = svc_get_commandbuffer();
+	cmdbuf = sys_get_commandbuffer();
 
 	cmdbuf[0] = 0x08030102;
 	cmdbuf[1] = (uint32_t)(offset);
@@ -192,7 +180,7 @@ int ctrFsWrite(int fd, const void* buffer, uint64_t size, uint64_t* osize) {
 	cmdbuf[5] = ((size << 0x04) | 0x0A);
 	cmdbuf[6] = (uint32_t)buffer;
 
-	ret = svc_send_sync_request(fd);
+	ret = sys_send_sync_request(fd);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -217,7 +205,7 @@ int ctrFsClose(int fd) {
 
 	cmdbuf[0] = 0x08080000;
 
-	ret = svc_send_sync_request(fd);
+	ret = sys_send_sync_request(fd);
 	if(ret != 0) {
 		(*cerrorptr()) = ret;
 		return -1;
@@ -229,7 +217,7 @@ int ctrFsClose(int fd) {
 		return -1;
 	}
 
-	svc_close_handle(fd);
+	sys_close_handle(fd);
 
 	return 0;
 }

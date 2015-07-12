@@ -1,8 +1,3 @@
-/**
- * @file ctr/error/error.h
- * @brief Error interface.
- */
-
 /*
  * libctr - Library for Nintendo 3DS homebrew.
  * 
@@ -23,14 +18,17 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_ERROR_H__
-#define __LIBCTR_ERROR_H__
+#ifndef __LIBCTR_ERROR_METHODS_H__
+#define __LIBCTR_ERROR_METHODS_H__
 
-#include "error-types.h"
+/**
+ * @file ctr/error/error_methods.h
+ * @brief Error functions.
+ */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "ctr/base.h"
+
+CTR_API_BEGIN
 
 /**
  * @brief Return the latest error number.
@@ -40,17 +38,15 @@ extern "C" {
  * to obtain an error number code corresponding to the error 
  * encountered inside the libctr function.
  */
-int cerror(void);
+CAPI int cerror(void);
 
 /**
  * @brief Return a brief description of an error number.
  * @param err Error number (usually obtained through <code>cerror()</code>).
  * @return Brief description of the error.
  */
-const char* cstrerror(int err);
+CAPI const char* cstrerror(int err);
 
-#ifdef __cplusplus
-}
-#endif
+CTR_API_END
 
 #endif

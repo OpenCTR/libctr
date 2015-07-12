@@ -18,23 +18,21 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base.h"
-#include "ctr/sys.h"
-#include "ctr/error.h"
+#ifndef __LIBCTR_FS_PRIVATE_H__
+#define __LIBCTR_FS_PRIVATE_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/fs/fs_private.h
+ * @brief Private Filesystem API.
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-	return cerrorno;
-}
+#include "ctr/base.h"
+#include <sys/iosupport.h>
 
-int* cerrorptr(void) {
-	return &cerrorno;
-}
+CTR_API_BEGIN
 
+
+
+CTR_API_END
+
+#endif

@@ -18,11 +18,15 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_H__
-#define __LIBCTR_H__
+/**
+ * @file ctr/base/base_headers.h
+ * @brief libctr base include files.
+ */
 
-#include "ctr/fs/fs.h"
-#include "ctr/hid/hid.h"
-#include "ctr/sys/sys.h"
-
-#endif
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <stdint.h>
+#include <stdarg.h>
+#include <stdbool.h>

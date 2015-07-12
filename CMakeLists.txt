@@ -51,14 +51,19 @@ include_directories(
 # Enable Assembly
 enable_language(ASM)
 
+# Import private APIs.
+add_definitions(-DINSIDE_LIBCTR=1)
+
 add_library(ctr STATIC 
-	src/svc.s
+	src/sys.c
+	src/sys_ex.s
 	src/init.c
 	src/stack.s
-	src/sys.c
-	src/error.c
 	src/service.c
+	src/error.c
+	src/atomic.s
 	src/fs.c
+	src/gsp.c
 )
 
 # Export CTR::CTR instead of CTR::ctr
