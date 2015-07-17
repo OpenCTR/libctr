@@ -18,15 +18,16 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_FS_METHODS_H__
-#define __LIBCTR_FS_METHODS_H__
+#ifndef __LIBCTR_FS_H__
+#define __LIBCTR_FS_H__
 
 /**
- * @file ctr/fs/fs_methods.h
- * @brief Filesystem functions.
+ * @file ctr/fs/fs.h
+ * @brief libctr Filesystem API.
  */
 
 #include "ctr/base.h"
+#include "ctr/fs/fs_types.h"
 
 CTR_API_BEGIN
 

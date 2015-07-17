@@ -18,13 +18,16 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_SYS_METHODS_H__
-#define __LIBCTR_SYS_METHODS_H__
+#ifndef __LIBCTR_SYS_H__
+#define __LIBCTR_SYS_H__
 
 /**
  * @file ctr/sys/sys_methods.h
- * @brief System functions.
+ * @brief libctr System API.
  */
+
+#include "ctr/base.h"
+#include "ctr/sys/sys_types.h"
 
 CTR_API_BEGIN
 
@@ -39,7 +42,7 @@ CTR_API_BEGIN
  * @param[in] idnum Processor the thread should be created by.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-CAPI int sys_thread_create(sys_thread_t* id, sys_thread_func entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum);
+CAPI int sys_thread_create(sys_thread_t* id, sys_thread_func entry, void* arg, uint32_t* stack_top, int priority, SYSProcessorID idnum);
 
 /**
  * @brief Wait for a thread to finish.

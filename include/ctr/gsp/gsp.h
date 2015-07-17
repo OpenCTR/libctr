@@ -18,31 +18,32 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_GSP_METHODS_H__
-#define __LIBCTR_GSP_METHODS_H__
+#ifndef __LIBCTR_GSP_H__
+#define __LIBCTR_GSP_H__
 
 /**
- * @file ctr/gsp/gsp_methods.h
- * @brief GSP functions.
+ * @file ctr/gsp/gsp.h
+ * @brief libctr GSP API.
  */
 
 #include "ctr/base.h"
+#include "ctr/gsp/gsp_types.h"
 
 CTR_API_BEGIN
 
 /**
- * @brief Initialize a GSP context.
- * @param[out] context Newly created GSP context.
- * @return On success, 0 is returned. On error, -1 is returned.
+ * @brief Create a new GSP context.
+ * @warning <em>NEVER</em> use this function to initialize CTR_GSP_THIS.
+ * @return A newly created GSP Context.
  */
-CAPI int ctrGspContextDataInitialize(CtrGspContextData* context) CTR_ARG_NONNULL(1);
+CAPI CtrGspContextData* ctrGspContextDataNew(void);
 
 /**
  * @brief Release a GSP context.
+ * @warning <em>NEVER</em> call this function for CTR_GSP_THIS.
  * @param[in] context Unused GSP context.
- * @return On success, 0 is returned. On error, -1 is returned.
  */
-CAPI int ctrGspContextDataFinalize(CtrGspContextData* context) CTR_ARG_NONNULL(1);
+CAPI void ctrGspContextDataFree(CtrGspContextData* context) CTR_ARG_NONNULL(1);
 
 /**
  * @brief Allocate & align local memory.
@@ -57,7 +58,7 @@ CAPI void* ctrGspLocalAlign(const uint32_t alignment, const uint32_t size);
  * @param[in,out] addr Address allocated with ctrGspLocalFree().
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-CAPI int ctrGspLocalFree(void* addr);
+CAPI int ctrGspLocalFree(void* addr) CTR_ARG_NONNULL(1);
 
 /**
  * @brief Sync the displays and the GPU.
@@ -67,11 +68,11 @@ CAPI int ctrGspLocalFree(void* addr);
 CAPI int ctrGspFlush(CtrGspContextData* context) CTR_ARG_NONNULL(1);
 
 /**
- * @brief Wait for a vsync to occur on a screen.
+ * @brief Wait for a vertical blank interrupt to occur on a screen.
  * @param[in] screen Screen to wait for.
  * @return On success, 0 is returned. On error, -1 is returned.
  */
-CAPI int ctrGspWaitForVSync(CtrGspContextData* context, CtrGspScreen screen) CTR_ARG_NONNULL(1);
+CAPI int ctrGspWaitForVBlank(CtrGspContextData* context, CtrGspScreen screen) CTR_ARG_NONNULL(1);
 
 /**
  * @brief Register a display target.

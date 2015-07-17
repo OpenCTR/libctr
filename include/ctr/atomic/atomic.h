@@ -18,12 +18,12 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_ATOMIC_METHODS_H__
-#define __LIBCTR_ATOMIC_METHODS_H__
+#ifndef __LIBCTR_ATOMIC_H__
+#define __LIBCTR_ATOMIC_H__
 
 /**
- * @file ctr/atomic/atomic_methods.h
- * @brief Atomic functions.
+ * @file ctr/atomic/atomic.h
+ * @brief Atomic API.
  */
 
 #include "ctr/base.h"

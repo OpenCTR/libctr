@@ -28,15 +28,88 @@
 
 #include "ctr/base.h"
 
+/** Default thread stack size. */
+#define CTR_GSP_STACK_SIZE (0x00001000)
+
 CTR_API_BEGIN
+
+enum {
+	CTR_GSP_EVENT_PSC0 = 0x00,
+	CTR_GSP_EVENT_PSC1 = 0x01,
+	CTR_GSP_EVENT_VBLANK0 = 0x02,
+	CTR_GSP_EVENT_VBLANK1 = 0x03,
+	CTR_GSP_EVENT_PPF = 0x04,
+	CTR_GSP_EVENT_P3D = 0x05,
+	CTR_GSP_EVENT_DMA = 0x06,
+
+	CTR_GSP_EVENT_MAX,
+};
+
+enum {
+	CTR_GSP_EXIT = 0x00,
+	CTR_GSP_RUNNING = 0x01,
+};
 
 struct CtrGspContextDataPrivate {
 	/**
-	 * @brief Number of users.
-	 * @details context->users is always incremented 
+	 * @brief GSP::GPU Service Handle.
 	 */
-	uint32_t users;
+	uint32_t handle;
+	/**
+	 * @brief Event handle.
+	 */
+	uint32_t event_handle;
+	/**
+	 * @brief Thread handle.
+	 */
+	uint32_t thread_handle;
+	/**
+	 * @brief Shared memory handle.
+	 */
+	uint32_t shmem_handle;
+	/**
+	 * @brief Shared memory address.
+	 */
+	uint8_t* shmem;
+	/**
+	 * @brief Handles to GSP events.
+	 */
+	uint32_t events[CTR_GSP_EVENT_MAX];
+	/**
+	 * @brief Event data.
+	 */
+	volatile uint8_t* event_data;
+	/**
+	 * @brief Stack for the event thread.
+	 */
+	uint8_t event_stack[CTR_GSP_STACK_SIZE] __attribute__((aligned(8)));
+	/**
+	 * @brief Atomic status integer. Set to CTR_GSP_RUNNING when
+	 * running, CTR_GSP_EXIT when time to exit.
+	*/
+	uint32_t status;
+
+	uint8_t* top_framebuffer;
+	uint8_t* stereo_framebuffer;
+	uint8_t* bottom_framebuffer;
+	CtrGspColorFormat top_format;
+	CtrGspColorFormat stereo_format;
+	CtrGspColorFormat bottom_format;
+
 };
+
+static int ctrGspAcquireRight(CtrGspContextData* context);
+
+static int ctrGspCreateEventHandler(CtrGspContextData* context);
+
+static void ctrGspEventThreadMain(void* arg);
+
+static int ctrGspReleaseRight(CtrGspContextData* context);
+
+static int ctrGspSetLcdForceBlack(CtrGspContextData* context);
+
+static int ctrGspFlushDataCache(CtrGspContextData* context, uint8_t* addr, uint32_t size);
+
 
 CTR_API_END
 

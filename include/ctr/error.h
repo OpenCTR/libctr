@@ -18,20 +18,9 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_ERROR_H__
-#define __LIBCTR_ERROR_H__
-
-/**
- * @file ctr/error.h
- * @brief libctr error header.
- */
-
-#include "ctr/error/error_macros.h"
-#include "ctr/error/error_enum.h"
-#include "ctr/error/error_methods.h"
+#include "ctr/error/error_types.h"
+#include "ctr/error/error.h"
 
 #ifdef INSIDE_LIBCTR
 #include "ctr/error/error_private.h"
-#endif
-
 #endif

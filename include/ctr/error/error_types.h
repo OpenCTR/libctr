@@ -18,19 +18,41 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_HID_METHODS_H__
-#define __LIBCTR_HID_METHODS_H__
+#ifndef __LIBCTR_ERROR_TYPES_H__
+#define __LIBCTR_ERROR_TYPES_H__
 
 /**
- * @file ctr/hid/hid_methods.h
- * @brief HID functions.
+ * @file ctr/error/error_types.h
+ * @brief libctr Error types.
+ */
+
+/**
+ * @todo Fill ctr/error/error_types.h using 3DBrew errors page.
  */
 
 #include "ctr/base.h"
 
 CTR_API_BEGIN
 
-
+/**
+ * @enum CtrErrors
+ * @brief Basic libctr errors.
+ * @todo Add more errors.
+ */
+enum CtrErrors {
+	/** Request timed out. */
+	CTR_ERROR_TIMEOUT = (0x09401BFE),
+	/** Invalid handle. */
+	CTR_ERROR_INVALID_HANDLE = (0xD8E007F7),
+	/** Argument was outside of valid range. */
+	CTR_ERROR_ARG_INVALID_RANGE = (0xE0E01BFD),
+	/** Argument is an invalid pointer. */
+	CTR_ERROR_ARG_INVALID_POINTER = (0xD8E007F6),
+	/** Request could not be found. */
+	CTR_ERROR_NOT_FOUND = (0xD88007FA),
+	/** Port name was too long. */
+	CTR_ERROR_PORT_NAME_TOO_LONG = (0xE0E0181E),
+};
 
 CTR_API_END
 

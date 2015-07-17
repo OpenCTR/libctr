@@ -36,6 +36,11 @@
 .global sys_connect_to_port
 .global sys_send_sync_request
 .global sys_debug_printf_ex
+.global sys_event_create
+.global sys_event_signal
+.global sys_event_clear
+.global sys_map_memoryblock
+.global sys_wait_synchronization2
 
 .type sys_get_tls, %function
 .type sys_get_commandbuffer, %function
@@ -52,6 +57,11 @@
 .type sys_connect_to_port, %function
 .type sys_send_sync_request, %function
 .type sys_debug_printf_ex, %function
+.type sys_event_create, %function
+.type sys_event_signal, %function
+.type sys_event_clear, %function
+.type sys_map_memoryblock, %function
+.type sys_wait_synchronization2, %function
 
 sys_get_tls:
 	mrc p15, 0, r0, c13, c0, 3
@@ -144,3 +154,35 @@ sys_debug_printf_ex:
 	ldr r2, [sp], #4
 	str r1, [r2]
 	bx lr
+
+sys_event_create:
+	str r0, [sp, #-4]!
+	svc 0x17
+	ldr r2, [sp], #4
+	str r1, [r2]
+	bx lr
+
+sys_event_signal:
+	svc 0x18
+	bx lr
+
+sys_event_clear:
+	svc 0x19
+	bx lr
+
+sys_map_memoryblock:
+	svc 0x1F
+	bx lr
+
+sys_wait_synchronization2:
+	str r5, [sp, #-4]!
+	str r4, [sp, #-4]!
+	mov r5, r0
+	ldr r0, [sp, #0x8]
+	ldr r4, [sp, #0x8+0x4]
+	svc 0x25
+	str r1, [r5]
+	ldr r4, [sp], #4
+	ldr r5, [sp], #4
+	bx lr
+

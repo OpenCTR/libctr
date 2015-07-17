@@ -1,5 +1,6 @@
+=====
 About
------
+=====
 
 This document provides a basic overview of libctr: what it is, what it is *not*,
 what it does, and explains the reasons behind several of its choices. After
@@ -7,7 +8,7 @@ reading this, you should have a pretty good idea of whether or not libctr is
 what you are looking for - if it *fits the bill*.
 
 Important Notice
-----------------
+~~~~~~~~~~~~~~~~
 
 The first and foremost disclaimer about libctr is this:
    libctr is not a catch-all, end-all, be-all solution. Some users will be

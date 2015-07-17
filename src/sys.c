@@ -46,7 +46,7 @@ int sys_query_memory(sys_memory_info* meminfo, sys_page_info* pageinfo, uint32_t
 	return 0;
 }
 
-int sys_thread_create(sys_thread_t* id, sys_thread_func entry, void* arg, uint32_t stack_top, int priority, SYSProcessorID idnum) {
+int sys_thread_create(sys_thread_t* id, sys_thread_func entry, void* arg, uint32_t* stack_top, int priority, SYSProcessorID idnum) {
 	int ret;
 
 	if(id == NULL) {
@@ -154,3 +154,4 @@ void sys_debug_printf(const char* str, ...) {
 
 	free(buffer);
 }
+

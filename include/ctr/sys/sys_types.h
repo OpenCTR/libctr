@@ -18,17 +18,20 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_SYS_ENUM_H__
-#define __LIBCTR_SYS_ENUM_H__
+#ifndef __LIBCTR_SYS_TYPES_H__
+#define __LIBCTR_SYS_TYPES_H__
 
 /**
- * @file ctr/sys/sys_enum.h
- * @brief System enums.
+ * @file ctr/sys/sys_types.h
+ * @brief libctr System types.
  */
 
-#include <ctr/base.h>
-#include <ctr/base/base_headers.h>
-#include <ctr/base/base_macros.h>
+#include "ctr/base.h"
+
+/** Highest thread priority. */
+#define SYS_THREAD_PRIORITY_MAX (0x00)
+/** Lowest thread priority. */
+#define SYS_THREAD_PRIORITY_MIN (0x1F)
 
 CTR_API_BEGIN
 
@@ -49,6 +52,24 @@ typedef enum {
 	SYS_MUTEX_LOCKED 		= 0x00000000, /**< Mutex is locked. */
 	SYS_MUTEX_UNLOCKED 		= 0x00000001, /**< Mutex is unlocked. */
 } sys_lock_t;
+
+/**
+ * @brief Handle to a kernel thread.
+ */
+typedef uint32_t sys_thread_t;
+
+/**
+ * @brief Handle to a kernel mutex.
+ */
+typedef uint32_t sys_mutex_t;
+
+/**
+ * @typedef sys_thread_cb
+ * @brief Function to run inside a thread.
+ * @details <code>void sys_thread_cb(void* arg)</code>
+ * @param[in] arg Parameter passed to the thread function.
+ */
+typedef void(*sys_thread_func)(void* arg);
 
 CTR_API_END
 

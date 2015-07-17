@@ -1,5 +1,6 @@
+======
 libctr
-------
+======
 
 This is the documentation for libctr - a free and open-source software
 library for developing Nintendo 3DS homebrew, developed specifically for 
@@ -12,12 +13,17 @@ libctr is *heavily* based off of `ctrulib
    :hidden:
 
    about
+   overview
    system/index
    hid/index
    fs/index
+   gsp/index
 
 :doc:`about`
    About libctr.
+
+:doc:`overview`
+   Overview of libctr.
 
 :doc:`system/index`
    System API.
@@ -27,4 +33,7 @@ libctr is *heavily* based off of `ctrulib
 
 :doc:`fs/index`
    Filesystem API.
+
+:doc:`gsp/index`
+   GSP/GPU API.
 

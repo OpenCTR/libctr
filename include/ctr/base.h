@@ -23,8 +23,7 @@
  * @brief libctr base header.
  */
 
-#include "ctr/base/base_headers.h"
-#include "ctr/base/base_macros.h"
+#include "ctr/base/base.h"
 
 #ifdef INSIDE_LIBCTR
 #include "ctr/base/base_private.h"

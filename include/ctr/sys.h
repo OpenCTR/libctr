@@ -18,24 +18,9 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_SYS_H__
-#define __LIBCTR_SYS_H__
-
-/**
- * @file ctr/sys.h
- * @brief libctr system header.
- */
-
-#include "ctr/base.h"
-
-#include "ctr/sys/sys_macros.h"
-#include "ctr/sys/sys_errors.h"
-#include "ctr/sys/sys_enum.h"
-#include "ctr/sys/sys_struct.h"
-#include "ctr/sys/sys_methods.h"
+#include "ctr/sys/sys_types.h"
+#include "ctr/sys/sys.h"
 
 #ifdef INSIDE_LIBCTR
 #include "ctr/sys/sys_private.h"
-#endif
-
 #endif

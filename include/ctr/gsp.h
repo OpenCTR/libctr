@@ -18,22 +18,9 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_GSP_H__
-#define __LIBCTR_GSP_H__
-
-/**
- * @file ctr/gsp.h
- * @brief libctr GSP header.
- */
-
-#include "ctr/gsp/gsp_macros.h"
-#include "ctr/gsp/gsp_errors.h"
-#include "ctr/gsp/gsp_enum.h"
-#include "ctr/gsp/gsp_struct.h"
-#include "ctr/gsp/gsp_methods.h"
+#include "ctr/gsp/gsp_types.h"
+#include "ctr/gsp/gsp.h"
 
 #ifdef INSIDE_LIBCTR
 #include "ctr/gsp/gsp_private.h"
-#endif
-
 #endif

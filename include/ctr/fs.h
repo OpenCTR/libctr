@@ -18,22 +18,9 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LIBCTR_FS_H__
-#define __LIBCTR_FS_H__
-
-/**
- * @file ctr/fs.h
- * @brief libctr filesystem header.
- */
-
-#include "ctr/fs/fs_macros.h"
-#include "ctr/fs/fs_errors.h"
-#include "ctr/fs/fs_enum.h"
-#include "ctr/fs/fs_struct.h"
-#include "ctr/fs/fs_methods.h"
+#include "ctr/fs/fs_types.h"
+#include "ctr/fs/fs.h"
 
 #ifdef INSIDE_LIBCTR
 #include "ctr/fs/fs_private.h"
-#endif
-
 #endif

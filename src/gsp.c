@@ -24,24 +24,16 @@
 #include "ctr/atomic.h"
 #include "ctr/gsp.h"
 
-static uint32_t ctr_gsp_handle = 0;
-
 static void ctrGspInit(void) CTR_INIT;
 static void ctrGspExit(void) CTR_FINI;
 
-CtrGspContextData* gCtrGspCurrentContext = NULL;
+CtrGspContextData* CTR_GSP_THIS = NULL;
 
 static void ctrGspInit(void) {
 	int ret;
 
-	ret = sys_service_get_handle(&ctr_gsp_handle, "gsp::Gpu");
-	if(ret != 0) {
-		sys_debug_printf("Error obtaining GSP::GPU handle: 0x%08x\n", ret);
-		sys_process_exit();
-	}
-
-	ret = ctrGspContextDataInitialize(gCtrGspCurrentContext);
-	if(ret != 0) {
+	CTR_GSP_THIS = ctrGspContextDataNew();
+	if(CTR_GSP_THIS == NULL) {
 		sys_debug_printf("Error allocating GSP context: 0x%08x\n", cerror());
 		sys_process_exit();
 	}
@@ -49,7 +41,7 @@ static void ctrGspInit(void) {
 }
 
 static void ctrGspExit(void) {
-	sys_close_handle(ctr_gsp_handle);
+	ctrGspContextDataFree(CTR_GSP_THIS);
 }
 
 void* ctrGspLocalAlign(const uint32_t alignment, const uint32_t size) {
@@ -95,43 +87,122 @@ int ctrGspLocalFree(void* addr) {
 	return 0;
 }
 
-int ctrGspFlush(CtrGspContextData* context) {
-	if(context == NULL) {
-		(*cerrorptr()) = EINVAL;
-		return -1;
-	}
-
-	return -1;
-}
-
-int ctrGspWaitForVSync(CtrGspContextData* context, CtrGspScreen screen) {
-	if(context == NULL) {
-		(*cerrorptr()) = EINVAL;
-		return -1;
-	}
-
-	return -1;
-}
-
 int ctrGspSetTarget(CtrGspContextData* context, const CtrGspTarget* tgt) {
+	uint32_t* cmdbuf = NULL;
+	int ret;
+
 	if((context == NULL) || (tgt == NULL)) {
 		(*cerrorptr()) = EINVAL;
 		return -1;
 	}
 
-	return -1;
+	if((tgt->screen != CTR_GSP_TOP_SCREEN) && (tgt->screen != CTR_GSP_BOTTOM_SCREEN)) {
+		// TODO: CTR_GSP_ERROR_INVALID_SCREEN
+		(*cerrorptr()) = EINVAL;
+		return -1;
+	}
+
+	cmdbuf = sys_get_commandbuffer();
+
+	cmdbuf[0] = 0x00050200;
+
+	switch(tgt->screen) {
+		case CTR_GSP_TOP_SCREEN:
+			/* Use the target as the latest-registered framebuffers (when flushing) */
+			if(tgt->address[0] != NULL) {
+				context->top_framebuffer = tgt->address[0];
+			}
+			if(tgt->address[1] != NULL) {
+				context->stereo_framebuffer = tgt->address[1];
+			}
+			context->top_format = tgt->format;
+			context->stereo_format = tgt->format;
+
+
+			cmdbuf[1] = 0x00;
+			cmdbuf[5] = CTR_GSP_SCREEN0_WIDTH * ctrGspPixelSize(tgt->format);
+			if(tgt->address[1] != NULL) {
+				cmdbuf[6] = (1 << 8) | (1 << 6) | (1 << 5) | (tgt->format);
+			} else {
+				cmdbuf[6] = (1 << 8) | (1 << 6) | (0 << 5) | (tgt->format);
+			}
+			break;
+		case CTR_GSP_BOTTOM_SCREEN:
+			/* Use the target as the latest-registered framebuffers (when flushing) */
+			if(tgt->address[0] != NULL) {
+				context->bottom_framebuffer = tgt->address[0];
+			}
+			context->bottom_format = tgt->format;
+
+			cmdbuf[1] = 0x01;
+			cmdbuf[5] = CTR_GSP_SCREEN1_WIDTH * ctrGspPixelSize(tgt->format);
+			cmdbuf[6] = (tgt->format);
+			break;
+		default:
+			break;
+	}	
+
+	cmdbuf[2] = 0x01;
+	cmdbuf[3] = ((uint32_t)tgt->address[0]);
+	cmdbuf[4] = ((uint32_t)tgt->address[1]);
+	cmdbuf[7] = 0x01;
+	cmdbuf[8] = 0x00000000;
+
+	ret = sys_send_sync_request(context->handle);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	ret = cmdbuf[1];
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return -1;
+	}
+
+	return 0;
 }
 
-int ctrGspContextDataInitialize(CtrGspContextData* context) {
+CtrGspContextData* ctrGspContextDataNew(void) {
+	int ret;
+	CtrGspContextData* context = NULL;
+
 	context = (CtrGspContextData*)malloc(sizeof(struct CtrGspContextDataPrivate));
 	if(context == NULL) {
 		(*cerrorptr()) = ENOMEM;
-		return -1;
+		return NULL;
 	}
 
 	memset(context, 0x00, sizeof(struct CtrGspContextDataPrivate));
 
-	return 0;
+	ret = sys_service_get_handle(&context->handle, "gsp::Gpu");
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return NULL;
+	}
+
+#if 0
+	ret = ctrGspAcquireRight(context);
+	/* Removed because Citra-emu doesn't implement AcquireRight. */
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return NULL;
+	}
+#endif
+
+	ret = ctrGspCreateEventHandler(context);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return NULL;
+	}
+
+	ret = ctrGspSetLcdForceBlack(context);
+	if(ret != 0) {
+		(*cerrorptr()) = ret;
+		return NULL;
+	}
+
+	return context;
 }
 
 uint8_t ctrGspPixelSize(CtrGspColorFormat format) {
@@ -146,6 +217,299 @@ uint8_t ctrGspPixelSize(CtrGspColorFormat format) {
 	} else if(format == CTR_GSP_COLOR_FORMAT_RGBA4) {
 		return 2;
 	}
+	return 0;
+}
+
+static int ctrGspAcquireRight(CtrGspContextData* context) {
+	int ret;
+	uint32_t* cmdbuf = NULL;
+
+	cmdbuf = sys_get_commandbuffer();
+	cmdbuf[0] = 0x00160042;
+	cmdbuf[1] = 0x00000000;
+	cmdbuf[2] = 0x00000000;
+	cmdbuf[3] = 0xFFFF8001;
+
+	ret = sys_send_sync_request(context->handle);
+	if(ret != 0) {
+		return ret;
+	}
+
+	ret = cmdbuf[1];
+	if(ret != 0) {
+		return ret;
+	}
+
+	return 0;
+}
+
+static int ctrGspCreateEventHandler(CtrGspContextData* context) {
+	int ret;
+	uint8_t i;
+	uint8_t j;
+	uint32_t* cmdbuf = NULL;
+	uint32_t thread_id = 0;
+
+	ret = sys_event_create(&context->event_handle, 0x00);
+	if(ret != 0) {
+		return ret;
+	}
+
+	cmdbuf = sys_get_commandbuffer();
+	cmdbuf[0] = 0x00130042;
+	cmdbuf[1] = 0x00000001;
+	cmdbuf[2] = 0x00000000;
+	cmdbuf[3] = ((uint32_t)context->event_handle);
+
+	ret = sys_send_sync_request(context->handle);
+	if(ret != 0) {
+		return ret;
+	}
+
+#if 0
+	/* Caused errors in Citra */
+	ret = cmdbuf[1];
+	if(ret != 0) {
+		return ret;
+	}
+#endif
+
+	thread_id = cmdbuf[2];
+
+	context->shmem_handle = cmdbuf[4];
+	context->shmem = ((uint8_t*)0x10002000);
+
+	ret = sys_map_memoryblock(context->shmem_handle, (uint32_t)context->shmem, 0x00000003, 0x10000000);
+	if(ret != 0) {
+		return ret;
+	}
+
+	for(i=0; i<CTR_GSP_EVENT_MAX; i++) {
+		ret = sys_event_create(&context->events[i], 0x00);
+		if(ret != 0) {
+			for(j=0; j<i; j++) {
+				sys_close_handle(context->events[i]);
+			}
+			return ret;
+		}
+	}
+
+	context->event_data = ((volatile uint8_t*)context->shmem) + (thread_id * 0x00000040);
+
+	uint32_t* stack = (uint32_t*)(context->event_stack + 0x00004000);
+
+	/* Set status to running. */
+	ctrAtomicStore(&context->status, CTR_GSP_RUNNING);
+
+	ret = sys_thread_create_ex(&context->thread_handle, ctrGspEventThreadMain, (uint32_t)context, stack, 0x31, 0xFFFFFFFE);
+	if(ret != 0) {
+		return ret;
+	}
+
+	return 0;
+}
+
+static void ctrGspEventThreadMain(void* arg) {
+	uint32_t i;
+	CtrGspContextData* context = (CtrGspContextData*)arg;
+
+	sys_debug_printf("GSP: Thread Start\n");
+
+	while(ctrAtomicRead(&context->status) == CTR_GSP_RUNNING) {
+		sys_wait_synchronization(context->event_handle, UINT64_MAX);
+		sys_event_clear(context->event_handle);
+
+		int count = context->event_data[1];
+		int cur = context->event_data[0];
+		int last = cur + count;
+		while(last >= 0x34) {
+			last -= 0x34;
+		}
+		for(i=0; i<count; i++) {
+			int curEvent = context->event_data[0x0C + cur];
+			cur++;
+			if(cur >= 0x34) {
+				cur -= 0x34;
+			}
+			if(curEvent >= CTR_GSP_EVENT_MAX) {
+				continue;
+			}
+			sys_event_signal(context->events[curEvent]);
+		}
+		context->event_data[0] = last;
+		context->event_data[1] -= count;
+		context->event_data[2] = 0;
+	}
+
+	sys_thread_exit();
+}
+
+void ctrGspContextDataFree(CtrGspContextData* context) {
+	uint8_t i;
+
+	if(context == NULL) {
+		(*cerrorptr()) = EINVAL;
+		return;
+	}
+
+	ctrAtomicStore(&context->status, CTR_GSP_EXIT);
+
+	sys_wait_synchronization(context->thread_handle, 1000000000);
+	sys_close_handle(context->thread_handle);
+	sys_close_handle(context->event_handle);
+
+	/* TODO: Free SHMEM/SHMEM handle? */
+
+	for(i=0; i<CTR_GSP_EVENT_MAX; i++) {
+		sys_close_handle(context->events[i]);
+	}
+
+	ctrGspReleaseRight(context);
+
+	sys_close_handle(context->handle);
+
+	free(context);
+}
+
+static int ctrGspReleaseRight(CtrGspContextData* context) {
+	int ret;
+	uint32_t* cmdbuf = NULL;
+
+	cmdbuf = sys_get_commandbuffer();
+	cmdbuf[0] = 0x00170000;
+
+	ret = sys_send_sync_request(context->handle);
+	if(ret != 0) {
+		return ret;
+	}
+
+	ret = cmdbuf[1];
+	if(ret != 0) {
+		return ret;
+	}
+
+	return 0;
+}
+
+static int ctrGspSetLcdForceBlack(CtrGspContextData* context) {
+	int ret;
+	uint32_t* cmdbuf = NULL;
+
+	cmdbuf = sys_get_commandbuffer();
+	cmdbuf[0] = 0x000B0040;
+	cmdbuf[1] = 0x00000000;
+
+	ret = sys_send_sync_request(context->handle);
+	if(ret != 0) {
+		return ret;
+	}
+
+	ret = cmdbuf[1];
+	if(ret != 0) {
+		return ret;
+	}
+
+	return 0;
+}
+
+int ctrGspWaitForVBlank(CtrGspContextData* context, CtrGspScreen screen) {
+	int ret;
+
+	switch(screen) {
+		case CTR_GSP_SCREEN0:
+		{
+			sys_event_clear(context->events[CTR_GSP_EVENT_VBLANK0]);
+			sys_wait_synchronization(context->events[CTR_GSP_EVENT_VBLANK0], UINT64_MAX);
+			break;
+		}
+		case CTR_GSP_SCREEN1:
+		{
+			sys_event_clear(context->events[CTR_GSP_EVENT_VBLANK1]);
+			sys_wait_synchronization(context->events[CTR_GSP_EVENT_VBLANK1], UINT64_MAX);
+			break;
+		}
+		case CTR_GSP_SCREEN_ALL:
+		{
+			int32_t count;
+			uint32_t events[2] = { context->events[CTR_GSP_EVENT_VBLANK0], context->events[CTR_GSP_EVENT_VBLANK1] };
+			sys_event_clear(context->events[CTR_GSP_EVENT_VBLANK0]);
+			sys_event_clear(context->events[CTR_GSP_EVENT_VBLANK1]);
+			ret = sys_wait_synchronization2(&count, events, 2, 1, UINT64_MAX);
+			if(ret != 0) {
+				(*cerrorptr()) = ret;
+				return -1;
+			}
+			break;
+		}
+		default:
+		{
+			(*cerrorptr()) = EINVAL;
+			return -1;
+		}
+	}
+
+	return 0;
+}
+
+int ctrGspFlush(CtrGspContextData* context) {
+	int ret;
+
+	if(context == NULL) {
+		(*cerrorptr()) = EINVAL;
+		return -1;
+	}
+
+	const uint32_t top_size = CTR_GSP_SCREEN0_WIDTH * CTR_GSP_SCREEN0_HEIGHT * ctrGspPixelSize(context->top_format);
+	const uint32_t bottom_size = CTR_GSP_SCREEN1_WIDTH * CTR_GSP_SCREEN1_HEIGHT * ctrGspPixelSize(context->bottom_format);
+
+	if(context->top_framebuffer != NULL) {
+		ret = ctrGspFlushDataCache(context, context->top_framebuffer, top_size);
+		if(ret != 0) {
+			(*cerrorptr()) = ret;
+			return ret;
+		}
+	}
+
+	if(context->stereo_framebuffer != NULL) {
+		ret = ctrGspFlushDataCache(context, context->stereo_framebuffer, top_size);
+		if(ret != 0) {
+			(*cerrorptr()) = ret;
+			return ret;
+		}
+	}
+
+	if(context->bottom_framebuffer != NULL) {
+		ret = ctrGspFlushDataCache(context, context->bottom_framebuffer, bottom_size);
+		if(ret != 0) {
+			(*cerrorptr()) = ret;
+			return ret;
+		}
+	}
+
+	return 0;
+}
+
+static int ctrGspFlushDataCache(CtrGspContextData* context, uint8_t* addr, uint32_t size) {
+	int ret;
+	uint32_t* cmdbuf = NULL;
+
+	cmdbuf = sys_get_commandbuffer();
+	cmdbuf[0] = 0x00080082;
+	cmdbuf[1] = ((uint32_t)addr);
+	cmdbuf[2] = ((uint32_t)size);
+	cmdbuf[3] = 0x00000000;
+	cmdbuf[4] = 0xFFFF8001;
+
+	ret = sys_send_sync_request(context->handle);
+	if(ret != 0) {
+		return ret;
+	}
+
+	ret = cmdbuf[1];
+	if(ret != 0) {
+		return ret;
+	}
+
 	return 0;
 }
 
