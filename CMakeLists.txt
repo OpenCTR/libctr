@@ -51,9 +51,6 @@ include_directories(
 # Enable Assembly
 enable_language(ASM)
 
-# Import private APIs.
-add_definitions(-DINSIDE_LIBCTR=1)
-
 add_library(ctr STATIC 
 	src/sys.c
 	src/sys_ex.s

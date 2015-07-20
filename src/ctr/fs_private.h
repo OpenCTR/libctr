@@ -18,22 +18,26 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base_private.h"
-#include "ctr/sys_private.h"
-#include "ctr/error_private.h"
+#ifndef __LIBCTR_FS_PRIVATE_H__
+#define __LIBCTR_FS_PRIVATE_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/fs_private.h
+ * @brief Filesystem API (Private).
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-    return cerrorno;
-}
+#include "ctr/base_private.h"
+#include "ctr/fs.h"
 
-int* cerrorptr(void) {
-    return &cerrorno;
-}
+CTR_API_BEGIN
+
+struct CtrFsContextDataPrivate {
+    /**
+     * @brief FS::USER Service Handle.
+     */
+    uint32_t handle;
+};
+
+CTR_API_END
+
+#endif

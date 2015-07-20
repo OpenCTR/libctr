@@ -7,7 +7,7 @@ This presents an overview of several concepts used in libctr.
 Thread-safety
 -------------
 
-Concurrent and parallel computing are first-class topics in libctr.
+Concurrency and parallelism are first-class topics in libctr.
 *Everything* should be thread-safe. To make this possible, as well as practical,
 libctr does *not* expose any ``init()`` functions to the user. The replacement
 makes heavy use of a GCC extension: constructor/destructor attributes. Any

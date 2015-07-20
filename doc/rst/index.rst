@@ -23,7 +23,7 @@ libctr is *heavily* based off of `ctrulib
    About libctr.
 
 :doc:`overview`
-   Overview of libctr.
+   Overview of the libctr API.
 
 :doc:`system/index`
    System API.

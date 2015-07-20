@@ -8,7 +8,7 @@ Data Structures
 
 .. doxygenenum:: CtrFsMode
 
-.. doxygenenum:: ctrFsOrigin
+.. doxygenenum:: CtrFsOrigin
 
 .. doxygenenum:: CtrFsType
 

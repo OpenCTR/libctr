@@ -18,22 +18,21 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ctr/base_private.h"
-#include "ctr/sys_private.h"
-#include "ctr/error_private.h"
+#ifndef __LIBCTR_BASE_PRIVATE_H__
+#define __LIBCTR_BASE_PRIVATE_H__
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+/**
+ * @file ctr/base_private.h
+ * @brief Base API (Private).
  */
-static int cerrorno = 0;
 
-int cerror(void) {
-    return cerrorno;
-}
+#include <sys/iosupport.h>
+#include <malloc.h>
+#include <errno.h>
 
-int* cerrorptr(void) {
-    return &cerrorno;
-}
+#include "ctr/base.h"
+
+#define CTR_INIT __attribute__((constructor(107)))
+#define CTR_FINI __attribute__((destructor(107)))
+
+#endif
