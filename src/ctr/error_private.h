@@ -38,6 +38,15 @@ CTR_API_BEGIN
  */
 int *cerrorptr(void);
 
+/**
+ * @brief Set the libctr errno.
+ * @details Uses atomic operations to set the value of cerrno.
+ * Only downside is that while cerrno is <i>thread-safe</i>, it
+ * is <em>not</em> <i>thread-local</i>.
+ * @param[in] error Error number to set cerrno as.
+ */
+void cerror_set(int error);
+
 CTR_API_END
 
 #endif

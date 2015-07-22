@@ -18,22 +18,25 @@
  * along with libctr. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "ctr/atomic.h"
+
 #include "ctr/base_private.h"
 #include "ctr/sys_private.h"
 #include "ctr/error_private.h"
 
-/*
- * Yes, this isn't thread-safe **YET**.
- *
- * I will make it so later, but right now I just want to
- * focus on my interface APIs.
+
+/**
+ * @var cerrorno
+ * @brief This is thread-safe, because we only allow reading
+ * or writing <code>cerrorno</code> using atomic operations,
+ * which are <em>always</em> thread-safe.
  */
 static int cerrorno = 0;
 
 int cerror(void) {
-    return cerrorno;
+    return (int)ctrAtomicRead((uint32_t*)&cerrorno);
 }
 
-int* cerrorptr(void) {
-    return &cerrorno;
+void cerror_set(int error) {
+    ctrAtomicStore((uint32_t*)&cerrorno, error);
 }
