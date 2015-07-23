@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Concepts &mdash; libctr</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="libctr" href="../index.html"/>
+        <link rel="next" title="Contributing" href="contributing.html"/>
+        <link rel="prev" title="About" href="about.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> libctr
+        
+
+        
+          
+          <img src="../_static/logo.svg" class="logo" />
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../system/system-overview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/system-reference.html">System Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../atomic/index.html">Atomic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-reference.html">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hid/index.html">Human Input Device API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-overview.html">Human Input Device API Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-reference.html">Human Input Device API Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fs/index.html">Filesystem API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-overview.html">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#context-data">Context Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-reference.html">Filesystem Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">libctr</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Concepts</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="concepts">
+<h1>Concepts</h1>
+<p>This presents an overview of several concepts used in libctr. libctr tries to
+be an excellent example of software engineering, exemplifying many of the best
+professional practices and metrics in software development.</p>
+<p><a class="reference internal" href="#thread-safety">Thread-safety</a> provides an overview for how libctr achieves thread-safety.
+<a class="reference internal" href="#contexts">Contexts</a> provides an overview for how libctr prefers to encapsule data
+into a structure versus using global variables.</p>
+<div class="section" id="thread-safety">
+<h2>Thread-safety</h2>
+<p>Concurrency and parallelism are first-class topics in libctr.
+<em>Everything</em> should be thread-safe. To make this possible, as well as practical,
+libctr does <em>not</em> expose any <code class="docutils literal"><span class="pre">init()</span></code> functions to the user. The replacement
+makes heavy use of a GCC extension: constructor/destructor attributes. Any
+module or service which needs an <code class="docutils literal"><span class="pre">init()</span></code> function should instead declare
+an <code class="docutils literal"><span class="pre">init()</span></code> and <code class="docutils literal"><span class="pre">fini()</span></code> function in the source code file. As an example,
+consider the file gsp.c:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">void</span> <span class="n">gspInit</span><span class="p">()</span> <span class="n">CTR_INIT</span><span class="p">;</span>
+<span class="kt">void</span> <span class="n">gspExit</span><span class="p">()</span> <span class="n">CTR_FINI</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>After the <code class="docutils literal"><span class="pre">init()</span></code> function for a module is called, all other functions should
+be completely thread-safe. <code class="docutils literal"><span class="pre">init()</span></code> functions are automatically called by the
+CRT0 startup function during program startup, which is the only time the program
+can be certain that there is only one thread running.</p>
+<p>The <code class="docutils literal"><span class="pre">init()</span></code> function should do only one thing: Create the global context
+data.</p>
+<p>The <code class="docutils literal"><span class="pre">exit()</span></code> function is optional, though highly recommended. It should
+free up any resources allocated, including the global context variable.</p>
+<p>It is important to remember this: GCC Constructors/Destructors will only
+be called if the file they are declared in is used. As an example, if a
+sample program uses the Filesystem API but not the GSP API, the <code class="docutils literal"><span class="pre">init</span></code>
+function for filesystem will be called, but the <code class="docutils literal"><span class="pre">init</span></code> function for GSP will
+<em>not</em> be called.</p>
+</div>
+<div class="section" id="contexts">
+<h2>Contexts</h2>
+<p>A <em>context</em> in libctr is a data structure which encapsulates all access to the
+data of a particular service or module. Because a context data structure is
+thread-safe once allocated, this makes them excellent replacements for global
+variables. A context data structure can be shared by as many threads as needed,
+provided that the context data was initialized before being passed to any
+threads.</p>
+<p>Each module has one global context, and can be referenced by using the macro
+named <code class="docutils literal"><span class="pre">CTR_&lt;MODULE_NAME&gt;_THIS</span></code>. As an example, to refer to the global
+filesystem context data, use <code class="docutils literal"><span class="pre">CTR_FS_THIS</span></code>.</p>
+<p>A context data structure can contain as many data fields as needed. The only
+required part is the service handle. This means that every time a new context
+data is created for a particular service, a new session for that service is
+opened with the kernel. The session will be closed when the context data is
+freed.</p>
+<p>Although not mandatory, it is strongly encouraged to use atomic operations
+to ensure exclusive access, instead of mutex variables. The reason for this is
+because atomic operations do not block. An example of using atomic operations
+in a context data structure can be found in <code class="docutils literal"><span class="pre">gsp.c</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="about.html" class="btn btn-neutral" title="About" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

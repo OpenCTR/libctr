@@ -32,11 +32,9 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
     <link rel="top" title="libctr" href="../index.html"/>
         <link rel="up" title="System API" href="index.html"/>
-        <link rel="next" title="Human Input Device API" href="../hid/index.html"/>
+        <link rel="next" title="Atomic API" href="../atomic/index.html"/>
         <link rel="prev" title="System Overview" href="system-overview.html"/> 
 
   
@@ -79,13 +77,45 @@
         
           
           
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">System API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system-overview.html">System Overview</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">System Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../atomic/index.html">Atomic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-reference.html">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -100,10 +130,29 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fs/index.html">Filesystem API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../fs/fs-overview.html">Filesystem Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-overview.html">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#context-data">Context Data</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../fs/fs-reference.html">Filesystem Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -151,19 +200,19 @@
 <h2>Data Structures</h2>
 <dl class="type">
 <dt id="_CPPv212sys_thread_t">
-<span id="sys_thread_t"></span><span class="target" id="project0sys-types_8h_1af63aa2447cabb7b11ebf17492fd86da4"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">sys_thread_t</code></dt>
+<span id="sys_thread_t"></span><span class="target" id="project0sys_8h_1a483833cfbc81d3ad1e927269b6b922c6"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">sys_thread_t</code></dt>
 <dd><p>Handle to a kernel thread. </p>
 </dd></dl>
 
 <dl class="type">
 <dt id="_CPPv211sys_mutex_t">
-<span id="sys_mutex_t"></span><span class="target" id="project0sys-types_8h_1a3730adda22ffddfaf3209349ad874a88"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">sys_mutex_t</code></dt>
+<span id="sys_mutex_t"></span><span class="target" id="project0sys_8h_1ac3d1eba010d1e0352fe13b3df1eb3a55"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">sys_mutex_t</code></dt>
 <dd><p>Handle to a kernel mutex. </p>
 </dd></dl>
 
 <dl class="type">
-<dt id="_CPPv213sys_thread_cb">
-<span id="sys_thread_cb"></span><span class="target" id="project0sys-types_8h_1af6a333de858fdf912fdc86228b46b739"></span><em class="property">typedef </em><code class="descclassname"></code><code class="descname">sys_thread_cb</code></dt>
+<dt id="_CPPv215sys_thread_func">
+<span id="sys_thread_func"></span><span class="target" id="project0sys_8h_1ab3aa7a4e8c07c90ceaf6b0daffa7f227"></span><em class="property">typedef </em><code class="descclassname"></code><code class="descname">sys_thread_func</code></dt>
 <dd><p>Function to run inside a thread. </p>
 <p><code class="docutils literal"><span class="pre">void</span> <span class="pre">sys_thread_cb(void*</span> <span class="pre">arg)</span></code> <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -180,8 +229,8 @@
 <div class="section" id="functions">
 <h2>Functions</h2>
 <dl class="function">
-<dt id="_CPPv214sys_thread_newP12sys_thread_t13sys_thread_cbPv8uint32_ti14SYSProcessorID">
-<span id="sys_thread_new__sys_thread_tP.sys_thread_cb.voidP.uint32_t.i.SYSProcessorID"></span><span class="target" id="project0sys_8h_1a769320aac1ed9635b60659afbc1b8ebf"></span>int <code class="descclassname"></code><code class="descname">sys_thread_new</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv212sys_thread_t" title="sys_thread_t">sys_thread_t</a> *<em>id</em>, <a class="reference internal" href="#_CPPv213sys_thread_cb" title="sys_thread_cb">sys_thread_cb</a> <em>entry</em>, void *<em>arg</em>, uint32_t <em>stack_top</em>, int <em>priority</em>, SYSProcessorID <em>idnum</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv217sys_thread_createP12sys_thread_t15sys_thread_funcPvP8uint32_ti14SYSProcessorID">
+<span id="sys_thread_create__sys_thread_tP.sys_thread_func.voidP.uint32_tP.i.SYSProcessorID"></span><span class="target" id="project0sys_8h_1ab1a6fa0c265086cc39511b7938b8bc15"></span>int <code class="descclassname"></code><code class="descname">sys_thread_create</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv212sys_thread_t" title="sys_thread_t">sys_thread_t</a> *<em>id</em>, <a class="reference internal" href="#_CPPv215sys_thread_func" title="sys_thread_func">sys_thread_func</a> <em>entry</em>, void *<em>arg</em>, uint32_t *<em>stack_top</em>, int <em>priority</em>, SYSProcessorID <em>idnum</em><span class="sig-paren">)</span></dt>
 <dd><p>Create a new thread. </p>
 <p>Obtains a handle to a thread created by the kernel. <dl class="docutils">
 <dt><strong>Return</strong></dt>
@@ -240,7 +289,7 @@
 
 <dl class="function">
 <dt id="_CPPv215sys_thread_exitv">
-<span id="sys_thread_exit__void"></span><span class="target" id="project0sys_8h_1a9d834ac79475f7d439cf8c6afd5a1614"></span>void <code class="descclassname"></code><code class="descname">sys_thread_exit</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span></dt>
+<span id="sys_thread_exit__void"></span><span class="target" id="project0sys_8h_1ac045dec092c6414894c6e11ab240e704"></span>void <code class="descclassname"></code><code class="descname">sys_thread_exit</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span></dt>
 <dd><p>Exit the current thread. </p>
 </dd></dl>
 
@@ -315,8 +364,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv215sys_print_debugPKc">
-<span id="sys_print_debug__cCP"></span><span class="target" id="project0sys_8h_1a70ae13a499f4871c151d70353a520b90"></span>void <code class="descclassname"></code><code class="descname">sys_print_debug</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>str</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv216sys_debug_printfPKcz">
+<span id="sys_debug_printf__cCP.z"></span><span class="target" id="project0sys_8h_1a6d38e40da896cffa53f9d9f59b6ec802"></span>void <code class="descclassname"></code><code class="descname">sys_debug_printf</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>str</em>, ...<span class="sig-paren">)</span></dt>
 <dd><p>Print a debug string. </p>
 <p>String is printed to the debug console. On retail consoles this function has no effect. On emulators it will be printed as debug output. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -338,7 +387,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../hid/index.html" class="btn btn-neutral float-right" title="Human Input Device API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../atomic/index.html" class="btn btn-neutral float-right" title="Atomic API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="system-overview.html" class="btn btn-neutral" title="System Overview" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

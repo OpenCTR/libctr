@@ -33,8 +33,6 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="about.html"/>
     <link rel="top" title="libctr" href="index.html"/> 
 
   
@@ -78,12 +76,44 @@
           
           
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/concepts.html#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/concepts.html#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="system/index.html">System API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="system/system-overview.html">System Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system/system-reference.html">System Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="system/system-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="system/system-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atomic/index.html">Atomic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atomic/atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atomic/atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic/atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="atomic/atomic-reference.html">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atomic/atomic-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -98,10 +128,29 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fs/index.html">Filesystem API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="fs/fs-overview.html">Filesystem Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fs/fs-overview.html">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#context-data">Context Data</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="fs/fs-reference.html">Filesystem Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="fs/fs-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fs/fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -173,6 +222,10 @@
   </dt>
 
       
+  <dt><a href="fs/fs-reference.html#c.CTR_FS_THIS">CTR_FS_THIS (C macro)</a>
+  </dt>
+
+      
   <dt><a href="fs/fs-reference.html#_CPPv221CTR_FS_TYPE_DIRECTORY">CTR_FS_TYPE_DIRECTORY (C++ class)</a>
   </dt>
 
@@ -185,11 +238,59 @@
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsClosei">ctrFsClose (C++ function)</a>
+  <dt><a href="atomic/atomic-reference.html#_CPPv212ctrAtomicAddP8uint32_tK8uint32_t">ctrAtomicAdd (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv213ctrFsClosediri">ctrFsClosedir (C++ function)</a>
+  <dt><a href="atomic/atomic-reference.html#_CPPv212ctrAtomicAndP8uint32_tK8uint32_t">ctrAtomicAnd (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="atomic/atomic-reference.html#_CPPv223ctrAtomicCompareAndSwapP8uint32_t8uint32_t8uint32_t">ctrAtomicCompareAndSwap (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="atomic/atomic-reference.html#_CPPv218ctrAtomicDecrementP8uint32_t">ctrAtomicDecrement (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="atomic/atomic-reference.html#_CPPv218ctrAtomicIncrementP8uint32_t">ctrAtomicIncrement (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="atomic/atomic-reference.html#_CPPv211ctrAtomicOrP8uint32_tK8uint32_t">ctrAtomicOr (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="atomic/atomic-reference.html#_CPPv213ctrAtomicReadP8uint32_t">ctrAtomicRead (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="atomic/atomic-reference.html#_CPPv214ctrAtomicStoreP8uint32_tK8uint32_t">ctrAtomicStore (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="atomic/atomic-reference.html#_CPPv212ctrAtomicSubP8uint32_tK8uint32_t">ctrAtomicSub (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsCloseP16CtrFsContextDatai">ctrFsClose (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv213ctrFsClosedirP16CtrFsContextDatai">ctrFsClosedir (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv216CtrFsContextData">CtrFsContextData (C++ type)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv220ctrFsContextDataFreeP16CtrFsContextData">ctrFsContextDataFree (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv219ctrFsContextDataNewv">ctrFsContextDataNew (C++ function)</a>
   </dt>
 
       
@@ -208,66 +309,70 @@
   <dt><a href="fs/fs-reference.html#_CPPv2N11CtrFsDirent6d_typeE">CtrFsDirent::d_type (C++ member)</a>
   </dt>
 
-      
-  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsFstatiP9CtrFsStat">ctrFsFstat (C++ function)</a>
-  </dt>
-
-      
-  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsFsynci">ctrFsFsync (C++ function)</a>
-  </dt>
-
-      
-  <dt><a href="fs/fs-reference.html#_CPPv214ctrFsFtruncatei8uint64_t">ctrFsFtruncate (C++ function)</a>
-  </dt>
-
-      
-  <dt><a href="fs/fs-reference.html#_CPPv221ctrFsGetAvailableSizeP8uint64_tP8uint64_t">ctrFsGetAvailableSize (C++ function)</a>
-  </dt>
-
-      
-  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsLseeki7int64_t11ctrFsOriginP8uint64_t">ctrFsLseek (C++ function)</a>
-  </dt>
-
-      
-  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsMkdirPKc9CtrFsMode">ctrFsMkdir (C++ function)</a>
-  </dt>
-
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsFstatP16CtrFsContextDataiP9CtrFsStat">ctrFsFstat (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsFsyncP16CtrFsContextDatai">ctrFsFsync (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv214ctrFsFtruncateP16CtrFsContextDatai8uint64_t">ctrFsFtruncate (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv221ctrFsGetAvailableSizeP16CtrFsContextDataP8uint64_tP8uint64_t">ctrFsGetAvailableSize (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsLseekP16CtrFsContextDatai7int64_t11CtrFsOriginP8uint64_t">ctrFsLseek (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsMkdirP16CtrFsContextDataPKc9CtrFsMode">ctrFsMkdir (C++ function)</a>
+  </dt>
+
       
   <dt><a href="fs/fs-reference.html#_CPPv29CtrFsMode">CtrFsMode (C++ type)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv29ctrFsOpenPiPKci">ctrFsOpen (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsMountP16CtrFsContextData">ctrFsMount (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv212ctrFsOpendirPiPKc">ctrFsOpendir (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv29ctrFsOpenP16CtrFsContextDataPiPKci">ctrFsOpen (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv211ctrFsOrigin">ctrFsOrigin (C++ type)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv212ctrFsOpendirP16CtrFsContextDataPiPKc">ctrFsOpendir (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv29ctrFsReadiPv8uint64_tP8uint64_t">ctrFsRead (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv211CtrFsOrigin">CtrFsOrigin (C++ type)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv212ctrFsReaddiriP11CtrFsDirent">ctrFsReaddir (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv29ctrFsReadP16CtrFsContextDataiPv8uint64_tP8uint64_t">ctrFsRead (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv211ctrFsRenamePKcPKc">ctrFsRename (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv212ctrFsReaddirP16CtrFsContextDataiP11CtrFsDirent">ctrFsReaddir (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsRmdirPKc">ctrFsRmdir (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv211ctrFsRenameP16CtrFsContextDataPKcPKc">ctrFsRename (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv215ctrFsSdmcStatusP11CtrFsStatus">ctrFsSdmcStatus (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsRmdirP16CtrFsContextDataPKc">ctrFsRmdir (C++ function)</a>
+  </dt>
+
+      
+  <dt><a href="fs/fs-reference.html#_CPPv215ctrFsSdmcStatusP16CtrFsContextDataP11CtrFsStatus">ctrFsSdmcStatus (C++ function)</a>
   </dt>
 
       
@@ -275,7 +380,7 @@
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv29ctrFsStatPKcP9CtrFsStat">ctrFsStat (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv29ctrFsStatP16CtrFsContextDataPKcP9CtrFsStat">ctrFsStat (C++ function)</a>
   </dt>
 
       
@@ -295,7 +400,7 @@
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv213ctrFsTruncatePKc8uint64_t">ctrFsTruncate (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv213ctrFsTruncateP16CtrFsContextDataPKc8uint64_t">ctrFsTruncate (C++ function)</a>
   </dt>
 
       
@@ -303,11 +408,11 @@
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv211ctrFsUnlinkPKc">ctrFsUnlink (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv211ctrFsUnlinkP16CtrFsContextDataPKc">ctrFsUnlink (C++ function)</a>
   </dt>
 
       
-  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsWriteiPKv8uint64_tP8uint64_t">ctrFsWrite (C++ function)</a>
+  <dt><a href="fs/fs-reference.html#_CPPv210ctrFsWriteP16CtrFsContextDataiPKv8uint64_tP8uint64_t">ctrFsWrite (C++ function)</a>
   </dt>
 
   </dl></td>
@@ -316,6 +421,10 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="system/system-reference.html#_CPPv216sys_debug_printfPKcz">sys_debug_printf (C++ function)</a>
+  </dt>
+
       
   <dt><a href="system/system-reference.html#_CPPv214sys_mutex_free11sys_mutex_t">sys_mutex_free (C++ function)</a>
   </dt>
@@ -336,14 +445,10 @@
   <dt><a href="system/system-reference.html#_CPPv216sys_mutex_unlock11sys_mutex_t">sys_mutex_unlock (C++ function)</a>
   </dt>
 
-      
-  <dt><a href="system/system-reference.html#_CPPv215sys_print_debugPKc">sys_print_debug (C++ function)</a>
-  </dt>
-
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="system/system-reference.html#_CPPv213sys_thread_cb">sys_thread_cb (C++ type)</a>
+  <dt><a href="system/system-reference.html#_CPPv217sys_thread_createP12sys_thread_t15sys_thread_funcPvP8uint32_ti14SYSProcessorID">sys_thread_create (C++ function)</a>
   </dt>
 
       
@@ -351,11 +456,11 @@
   </dt>
 
       
-  <dt><a href="system/system-reference.html#_CPPv215sys_thread_join12sys_thread_t">sys_thread_join (C++ function)</a>
+  <dt><a href="system/system-reference.html#_CPPv215sys_thread_func">sys_thread_func (C++ type)</a>
   </dt>
 
       
-  <dt><a href="system/system-reference.html#_CPPv214sys_thread_newP12sys_thread_t13sys_thread_cbPv8uint32_ti14SYSProcessorID">sys_thread_new (C++ function)</a>
+  <dt><a href="system/system-reference.html#_CPPv215sys_thread_join12sys_thread_t">sys_thread_join (C++ function)</a>
   </dt>
 
       

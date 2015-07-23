@@ -32,8 +32,6 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
     <link rel="top" title="libctr" href="../index.html"/>
         <link rel="up" title="Filesystem API" href="index.html"/>
         <link rel="next" title="Filesystem Reference" href="fs-reference.html"/>
@@ -79,13 +77,45 @@
         
           
           
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../system/index.html">System API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../system/system-overview.html">System Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../system/system-reference.html">System Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../atomic/index.html">Atomic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-reference.html">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -100,10 +130,29 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Filesystem API</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Filesystem Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#context-data">Context Data</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="fs-reference.html">Filesystem Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="fs-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -148,9 +197,74 @@
   <div class="section" id="filesystem-overview">
 <h1>Filesystem Overview</h1>
 <p>This is an overview of the Filesystem API.</p>
-<p>The two main filesystem used inside the Nintendo 3DS are: (1) The internal NAND
-filesystem, and (2) The external SD/microSD card.</p>
-<p>See <a class="reference internal" href="fs-reference.html"><em>Filesystem Reference</em></a> for more information.</p>
+<div class="section" id="files">
+<h2>Files</h2>
+<p>The files required to use the Filesystem API are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Filename</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>ctr/fs.h</td>
+<td>Header file for the Filesystem module.</td>
+</tr>
+<tr class="row-odd"><td>libctr.a</td>
+<td>Static library file containing the Filesystem modules.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="concepts">
+<h2>Concepts</h2>
+<p>On the Nintendo 3DS, files and directories are organized together in a
+container called an <em>archive</em>. An archive is stored on a physical block
+storage device (NAND, SDMC, or Gamecart). Each archive has a unique name and
+id, which reflect the type of data stored on it. Archives are managed entirely
+by the system software, but they must be mounted by the user before they can be
+used.</p>
+<p>Some example archives present on retail 3DS units include:
+* RomFS &#8211; Stored on the gamecart. Contains the read-only game data.
+* SDMC &#8211; An archive that automatically maps to a SD card (if available).
+Although usable on all 3DS units, most commercial games do not access the
+SD card directly.
+* SaveData &#8211; Application-specific save data. May be stored on a gamecard,
+on the SD card, or in the internal NAND, depending on the game and user
+settings.</p>
+<p>After an archive has been mounted, it can be used and accessed like a
+traditional filesystem (e.g. with <code class="docutils literal"><span class="pre">open()</span></code>, <code class="docutils literal"><span class="pre">close()</span></code>, <code class="docutils literal"><span class="pre">fopen()</span></code>,
+<code class="docutils literal"><span class="pre">fclose()</span></code>, etc.).</p>
+</div>
+<div class="section" id="using">
+<h2>Using</h2>
+<p>The SDMC is the primary filesystem most applications will use. Very few
+(probably none at all) homebrew developers will be able to release their
+applications on commercial game cartridges, and access to the NAND is
+strictly controlled by security settings, so it may not always be
+available to homebrew. The SD card is the only filesystem most homebrew
+can be guarenteed of having, because homebrew is usually launched from an SD
+card.</p>
+<p>Applications which require access to the NAND will probably be better off using
+<a class="reference external" href="https://github.com/smealum/ctrulib">ctrulib</a>.</p>
+<p>By default, the SDMC is mounted automatically during libctr startup. The global
+filesystem context (<code class="docutils literal"><span class="pre">CTR_FS_THIS</span></code>) is initalized to use the SD filesystem.
+The libfs API should be usable as soon as applications begin. Applications
+which wish to use the C Standard Library I/O functions can enable newlib
+integration by calling <code class="docutils literal"><span class="pre">ctrFsMount()</span></code>, which mounts an archive as the
+default filesystem to use in newlib. Calling <code class="docutils literal"><span class="pre">ctrFsMount(CTR_FS_THIS)</span></code> at the
+beginning of a program allows use of the full standard I/O functions.</p>
+</div>
+<div class="section" id="context-data">
+<h2>Context Data</h2>
+<p>Like most of libctr, the filesystem API uses context data as a way of avoiding
+global variables. A filesystem context represents a session with the filesystem
+service, one archive to access, and several cached settings.</p>
+<p>The global context in libfs is <code class="docutils literal"><span class="pre">CTR_FS_THIS</span></code>, which is created automatically
+during startup, and should <strong>never be allocated or deallocated by the user</strong>.</p>
+</div>
 </div>
 
 

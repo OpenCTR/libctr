@@ -32,10 +32,9 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="../about.html"/>
     <link rel="top" title="libctr" href="../index.html"/>
         <link rel="up" title="Filesystem API" href="index.html"/>
+        <link rel="next" title="GSP API" href="../gsp/index.html"/>
         <link rel="prev" title="Filesystem Overview" href="fs-overview.html"/> 
 
   
@@ -78,13 +77,45 @@
         
           
           
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../system/index.html">System API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../system/system-overview.html">System Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../system/system-reference.html">System Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../atomic/index.html">Atomic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-reference.html">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -99,10 +130,29 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Filesystem API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="fs-overview.html">Filesystem Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fs-overview.html">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fs-overview.html#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs-overview.html#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs-overview.html#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs-overview.html#context-data">Context Data</a></li>
+</ul>
+</li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Filesystem Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -150,48 +200,59 @@
 <h2>Data Structures</h2>
 <dl class="macro">
 <dt id="c.CTR_FS_MAX_FILENAME_LENGTH">
-<span class="target" id="project0fs-types_8h_1a325d74b74dbcdd875ef4b3914129dc8a"></span><code class="descname">CTR_FS_MAX_FILENAME_LENGTH</code></dt>
+<span class="target" id="project0fs_8h_1a325d74b74dbcdd875ef4b3914129dc8a"></span><code class="descname">CTR_FS_MAX_FILENAME_LENGTH</code></dt>
 <dd><p>Maximum length of a filename. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CTR_FS_THIS">
+<span class="target" id="project0fs_8h_1af989f0ebb9dfe73a32f74e0f63996f09"></span><code class="descname">CTR_FS_THIS</code></dt>
+<dd><p>Global Filesystem Context Data. </p>
+<p>A thread-safe reference to the global Filesystem context data. This is created automatically during libctr startup, and should <em>NEVER</em> be allocated or freed by the user. <dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>If the filesystem is mounted with <a class="reference internal" href="#project0fs_8h_1aef0469326a1c53a241f07e98f6a26636"><span>ctrFsMount()</span></a>, then users will not need to use this. By default, libctr uses CTR_FS_THIS when mounting the filesystem. </dd>
+</dl>
+</p>
 </dd></dl>
 
 <dl class="type">
 <dt id="_CPPv29CtrFsMode">
-<span id="CtrFsMode"></span><span class="target" id="project0fs-types_8h_1a1fe05044e49ed1d29b257223871e86ed"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">CtrFsMode</code></dt>
+<span id="CtrFsMode"></span><span class="target" id="project0fs_8h_1a1fe05044e49ed1d29b257223871e86ed"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">CtrFsMode</code></dt>
 <dd><p>Mode values. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#project0fs_8h_1a600aadc1f5efeee59c39c117320b5310"><span>ctrFsMkdir()</span></a> </dd>
+<dd><a class="reference internal" href="#project0fs_8h_1a0e145c5ac74779f787f2a0d4b375adce"><span>ctrFsMkdir()</span></a> </dd>
 </dl>
 </p>
 <p><em>Values:</em></p>
 <dl class="member">
 <dt id="_CPPv216CTR_FS_MODE_NONE">
-<span id="CTR_FS_MODE_NONE"></span><span class="target" id="project0fs-types_8h_1a1fe05044e49ed1d29b257223871e86edafc753029f3f6177785fff05b19d22780"></span><code class="descname">CTR_FS_MODE_NONE</code> = 0x00</dt>
+<span id="CTR_FS_MODE_NONE"></span><span class="target" id="project0fs_8h_1a1fe05044e49ed1d29b257223871e86edafc753029f3f6177785fff05b19d22780"></span><code class="descname">CTR_FS_MODE_NONE</code> = 0x00</dt>
 <dd><p>Default mode. </p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="type">
-<dt id="_CPPv211ctrFsOrigin">
-<span id="ctrFsOrigin"></span><span class="target" id="project0fs-types_8h_1a63182a7543ac3be7fe820fb2d67f9ced"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">ctrFsOrigin</code></dt>
+<dt id="_CPPv211CtrFsOrigin">
+<span id="CtrFsOrigin"></span><span class="target" id="project0fs_8h_1a87ff1a5db0cb10371b93b17a6852c45f"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">CtrFsOrigin</code></dt>
 <dd><p>File position values. </p>
 <p><em>Values:</em></p>
 <dl class="member">
 <dt id="_CPPv215CTR_FS_SEEK_SET">
-<span id="CTR_FS_SEEK_SET"></span><span class="target" id="project0fs-types_8h_1a63182a7543ac3be7fe820fb2d67f9ceda321bc9ba5f656102c406fa8e1fbd1db6"></span><code class="descname">CTR_FS_SEEK_SET</code> = 0x00</dt>
+<span id="CTR_FS_SEEK_SET"></span><span class="target" id="project0fs_8h_1a87ff1a5db0cb10371b93b17a6852c45fa321bc9ba5f656102c406fa8e1fbd1db6"></span><code class="descname">CTR_FS_SEEK_SET</code> = 0x00</dt>
 <dd><p>Seek from the beginning. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv215CTR_FS_SEEK_CUR">
-<span id="CTR_FS_SEEK_CUR"></span><span class="target" id="project0fs-types_8h_1a63182a7543ac3be7fe820fb2d67f9cedae9b6d6d50dea8097b31045e81937827f"></span><code class="descname">CTR_FS_SEEK_CUR</code> = 0x01</dt>
+<span id="CTR_FS_SEEK_CUR"></span><span class="target" id="project0fs_8h_1a87ff1a5db0cb10371b93b17a6852c45fae9b6d6d50dea8097b31045e81937827f"></span><code class="descname">CTR_FS_SEEK_CUR</code> = 0x01</dt>
 <dd><p>Seek from the current position. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv215CTR_FS_SEEK_END">
-<span id="CTR_FS_SEEK_END"></span><span class="target" id="project0fs-types_8h_1a63182a7543ac3be7fe820fb2d67f9ceda17eed8b99fe951eaf5657c438c69088e"></span><code class="descname">CTR_FS_SEEK_END</code> = 0x02</dt>
+<span id="CTR_FS_SEEK_END"></span><span class="target" id="project0fs_8h_1a87ff1a5db0cb10371b93b17a6852c45fa17eed8b99fe951eaf5657c438c69088e"></span><code class="descname">CTR_FS_SEEK_END</code> = 0x02</dt>
 <dd><p>Seek from the end. </p>
 </dd></dl>
 
@@ -199,25 +260,25 @@
 
 <dl class="type">
 <dt id="_CPPv29CtrFsType">
-<span id="CtrFsType"></span><span class="target" id="project0fs-types_8h_1a5c506639acf9a2126f1ddc0a4c4419dc"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">CtrFsType</code></dt>
+<span id="CtrFsType"></span><span class="target" id="project0fs_8h_1a5c506639acf9a2126f1ddc0a4c4419dc"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">CtrFsType</code></dt>
 <dd><p>File types. </p>
 <p><em>Values:</em></p>
 <dl class="member">
 <dt id="_CPPv219CTR_FS_TYPE_UNKNOWN">
-<span id="CTR_FS_TYPE_UNKNOWN"></span><span class="target" id="project0fs-types_8h_1a5c506639acf9a2126f1ddc0a4c4419dca6ff12d283ddab1c80e0dc4b75f0c7661"></span><code class="descname">CTR_FS_TYPE_UNKNOWN</code> = 0x00</dt>
-<dd><p>Unknown. </p>
+<span id="CTR_FS_TYPE_UNKNOWN"></span><span class="target" id="project0fs_8h_1a5c506639acf9a2126f1ddc0a4c4419dca6ff12d283ddab1c80e0dc4b75f0c7661"></span><code class="descname">CTR_FS_TYPE_UNKNOWN</code> = 0x00</dt>
+<dd><p>Unrecognized entry. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv221CTR_FS_TYPE_DIRECTORY">
-<span id="CTR_FS_TYPE_DIRECTORY"></span><span class="target" id="project0fs-types_8h_1a5c506639acf9a2126f1ddc0a4c4419dca722462d8211ee75b885426ebba31e6b2"></span><code class="descname">CTR_FS_TYPE_DIRECTORY</code> = 0x01</dt>
-<dd><p>Directory. </p>
+<span id="CTR_FS_TYPE_DIRECTORY"></span><span class="target" id="project0fs_8h_1a5c506639acf9a2126f1ddc0a4c4419dca722462d8211ee75b885426ebba31e6b2"></span><code class="descname">CTR_FS_TYPE_DIRECTORY</code> = 0x01</dt>
+<dd><p>Directory entry. </p>
 </dd></dl>
 
 <dl class="member">
 <dt id="_CPPv219CTR_FS_TYPE_REGULAR">
-<span id="CTR_FS_TYPE_REGULAR"></span><span class="target" id="project0fs-types_8h_1a5c506639acf9a2126f1ddc0a4c4419dca30b8b9315fd1ed7ad83259db078c38e6"></span><code class="descname">CTR_FS_TYPE_REGULAR</code> = 0x02</dt>
-<dd><p>Regular. </p>
+<span id="CTR_FS_TYPE_REGULAR"></span><span class="target" id="project0fs_8h_1a5c506639acf9a2126f1ddc0a4c4419dca30b8b9315fd1ed7ad83259db078c38e6"></span><code class="descname">CTR_FS_TYPE_REGULAR</code> = 0x02</dt>
+<dd><p>Regular file entry. </p>
 </dd></dl>
 
 </dd></dl>
@@ -225,7 +286,7 @@
 <dl class="class">
 <dt id="_CPPv29CtrFsStat">
 <span id="CtrFsStat"></span><span class="target" id="project0struct_ctr_fs_stat"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">CtrFsStat</code></dt>
-<dd><p>File status. </p>
+<dd><p>File status and information. </p>
 <div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="member">
@@ -240,7 +301,7 @@
 <dl class="class">
 <dt id="_CPPv211CtrFsStatus">
 <span id="CtrFsStatus"></span><span class="target" id="project0struct_ctr_fs_status"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">CtrFsStatus</code></dt>
-<dd><p>Filesystem status. </p>
+<dd><p>Filesystem status and availability. </p>
 <div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="member">
@@ -285,23 +346,39 @@
 </div>
 </dd></dl>
 
+<dl class="type">
+<dt id="_CPPv216CtrFsContextData">
+<span id="CtrFsContextData"></span><span class="target" id="project0fs_8h_1a1420d831b2556df2956b455ad6f45bd0"></span><em class="property">typedef </em><code class="descclassname"></code><code class="descname">CtrFsContextData</code></dt>
+<dd><p>Filesystem Context Data. </p>
+<p><code class="docutils literal"><span class="pre">CtrFsContextData</span></code> is an opaque type. <em>It should NEVER be modified by users</em>. </p>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions</h2>
 <dl class="function">
-<dt id="_CPPv29ctrFsOpenPiPKci">
-<span id="ctrFsOpen__iP.cCP.i"></span><span class="target" id="project0fs_8h_1a26d4ee09645dfe1a4f88ca9dddf4f2ed"></span>int <code class="descclassname"></code><code class="descname">ctrFsOpen</code><span class="sig-paren">(</span>int *<em>fd</em>, <em class="property">const</em> char *<em>path</em>, int <em>flags</em><span class="sig-paren">)</span></dt>
-<dd><p>Open a file. </p>
+<dt id="_CPPv219ctrFsContextDataNewv">
+<span id="ctrFsContextDataNew__void"></span><span class="target" id="project0fs_8h_1a3278ec77954cf8b14a7381796e94c33c"></span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<code class="descclassname"></code><code class="descname">ctrFsContextDataNew</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span></dt>
+<dd><p>Create a new filesystem context. </p>
 <p><dl class="docutils">
+<dt><strong>Warning</strong></dt>
+<dd><em>NEVER</em> use this function to initialize CTR_FS_THIS. </dd>
 <dt><strong>Return</strong></dt>
-<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dd>A newly created Filesystem Context. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220ctrFsContextDataFreeP16CtrFsContextData">
+<span id="ctrFsContextDataFree__CtrFsContextDataP"></span><span class="target" id="project0fs_8h_1ab5158e8dd341676342c857c5c64e5ab2"></span>void <code class="descclassname"></code><code class="descname">ctrFsContextDataFree</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em><span class="sig-paren">)</span></dt>
+<dd><p>Release a Filesystem context. </p>
+<p><dl class="docutils">
+<dt><strong>Warning</strong></dt>
+<dd><em>NEVER</em> call this function for CTR_FS_THIS. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to file. </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">flags</span></code> - <p>Flags. Available flags are listed below. </p>
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem context to release. </p>
 </li>
 </ul>
 </dd>
@@ -310,14 +387,39 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv29ctrFsReadiPv8uint64_tP8uint64_t">
-<span id="ctrFsRead__i.voidP.uint64_t.uint64_tP"></span><span class="target" id="project0fs_8h_1ab0bfdfeee73178dc50644f19fe1dda25"></span>int <code class="descclassname"></code><code class="descname">ctrFsRead</code><span class="sig-paren">(</span>int <em>fd</em>, void *<em>buffer</em>, uint64_t <em>size</em>, uint64_t *<em>osize</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv29ctrFsOpenP16CtrFsContextDataPiPKci">
+<span id="ctrFsOpen__CtrFsContextDataP.iP.cCP.i"></span><span class="target" id="project0fs_8h_1a3ad79a77fd0974dda7257a27f9caece9"></span>int <code class="descclassname"></code><code class="descname">ctrFsOpen</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int *<em>fd</em>, <em class="property">const</em> char *<em>path</em>, int <em>flags</em><span class="sig-paren">)</span></dt>
+<dd><p>Open a file. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to file. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">flags</span></code> - <p>Flags. See CtrFsOpenFlags. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29ctrFsReadP16CtrFsContextDataiPv8uint64_tP8uint64_t">
+<span id="ctrFsRead__CtrFsContextDataP.i.voidP.uint64_t.uint64_tP"></span><span class="target" id="project0fs_8h_1a1df2dc5c2a40737f87b10eeef4bf7f2d"></span>int <code class="descclassname"></code><code class="descname">ctrFsRead</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em>, void *<em>buffer</em>, uint64_t <em>size</em>, uint64_t *<em>osize</em><span class="sig-paren">)</span></dt>
 <dd><p>Read from a file. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">buffer</span></code> - <p>Buffer to hold file contents. </p>
@@ -333,14 +435,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv210ctrFsWriteiPKv8uint64_tP8uint64_t">
-<span id="ctrFsWrite__i.voidCP.uint64_t.uint64_tP"></span><span class="target" id="project0fs_8h_1afd07cd077aa99485320238fc2ed8d7e9"></span>int <code class="descclassname"></code><code class="descname">ctrFsWrite</code><span class="sig-paren">(</span>int <em>fd</em>, <em class="property">const</em> void *<em>buffer</em>, uint64_t <em>size</em>, uint64_t *<em>osize</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv210ctrFsWriteP16CtrFsContextDataiPKv8uint64_tP8uint64_t">
+<span id="ctrFsWrite__CtrFsContextDataP.i.voidCP.uint64_t.uint64_tP"></span><span class="target" id="project0fs_8h_1a333e01be658428527b5dd540404f2c25"></span>int <code class="descclassname"></code><code class="descname">ctrFsWrite</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em>, <em class="property">const</em> void *<em>buffer</em>, uint64_t <em>size</em>, uint64_t *<em>osize</em><span class="sig-paren">)</span></dt>
 <dd><p>Write to a file. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">buffer</span></code> - <p>Buffer to write to file. </p>
@@ -356,14 +460,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv210ctrFsClosei">
-<span id="ctrFsClose__i"></span><span class="target" id="project0fs_8h_1a471d04d56ed81a5ef2c633d111d89be0"></span>int <code class="descclassname"></code><code class="descname">ctrFsClose</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv210ctrFsCloseP16CtrFsContextDatai">
+<span id="ctrFsClose__CtrFsContextDataP.i"></span><span class="target" id="project0fs_8h_1a8f4a672c65e1dd9284570dbe6a385a6f"></span>int <code class="descclassname"></code><code class="descname">ctrFsClose</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em><span class="sig-paren">)</span></dt>
 <dd><p>Close a file. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 </ul>
@@ -373,14 +479,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv212ctrFsOpendirPiPKc">
-<span id="ctrFsOpendir__iP.cCP"></span><span class="target" id="project0fs_8h_1a6497decccf0c4b56bb042ed10aeea4ab"></span>int <code class="descclassname"></code><code class="descname">ctrFsOpendir</code><span class="sig-paren">(</span>int *<em>fd</em>, <em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv212ctrFsOpendirP16CtrFsContextDataPiPKc">
+<span id="ctrFsOpendir__CtrFsContextDataP.iP.cCP"></span><span class="target" id="project0fs_8h_1aeabd7af50bb27c66f2c99452b20c7854"></span>int <code class="descclassname"></code><code class="descname">ctrFsOpendir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int *<em>fd</em>, <em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span></dt>
 <dd><p>Open a directory. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to directory. </p>
@@ -392,14 +500,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv212ctrFsReaddiriP11CtrFsDirent">
-<span id="ctrFsReaddir__i.CtrFsDirentP"></span><span class="target" id="project0fs_8h_1a90e0b3dc0e33a6f9ad876f75527076a1"></span>int <code class="descclassname"></code><code class="descname">ctrFsReaddir</code><span class="sig-paren">(</span>int <em>fd</em>, <a class="reference internal" href="#_CPPv211CtrFsDirent" title="CtrFsDirent">CtrFsDirent</a> *<em>dir</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv212ctrFsReaddirP16CtrFsContextDataiP11CtrFsDirent">
+<span id="ctrFsReaddir__CtrFsContextDataP.i.CtrFsDirentP"></span><span class="target" id="project0fs_8h_1a01d3f67d59b574c0a744e64ba2d66a41"></span>int <code class="descclassname"></code><code class="descname">ctrFsReaddir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em>, <a class="reference internal" href="#_CPPv211CtrFsDirent" title="CtrFsDirent">CtrFsDirent</a> *<em>dir</em><span class="sig-paren">)</span></dt>
 <dd><p>Read a directory entry. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">dir</span></code> - <p>Directory information. </p>
@@ -411,14 +521,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv213ctrFsClosediri">
-<span id="ctrFsClosedir__i"></span><span class="target" id="project0fs_8h_1ab53075b918f5282119f18178b398fe39"></span>int <code class="descclassname"></code><code class="descname">ctrFsClosedir</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv213ctrFsClosedirP16CtrFsContextDatai">
+<span id="ctrFsClosedir__CtrFsContextDataP.i"></span><span class="target" id="project0fs_8h_1ab13899630e4d4d8b0b22f597af4a24fc"></span>int <code class="descclassname"></code><code class="descname">ctrFsClosedir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em><span class="sig-paren">)</span></dt>
 <dd><p>Close a directory. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 </ul>
@@ -428,14 +540,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv29ctrFsStatPKcP9CtrFsStat">
-<span id="ctrFsStat__cCP.CtrFsStatP"></span><span class="target" id="project0fs_8h_1a3ed9df992cc9cabb9dcf1021a77b6e39"></span>int <code class="descclassname"></code><code class="descname">ctrFsStat</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em>, <a class="reference internal" href="#_CPPv29CtrFsStat" title="CtrFsStat">CtrFsStat</a> *<em>st</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv29ctrFsStatP16CtrFsContextDataPKcP9CtrFsStat">
+<span id="ctrFsStat__CtrFsContextDataP.cCP.CtrFsStatP"></span><span class="target" id="project0fs_8h_1a38b19a297aeede8aff3aa4975b15dede"></span>int <code class="descclassname"></code><code class="descname">ctrFsStat</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, <em class="property">const</em> char *<em>path</em>, <a class="reference internal" href="#_CPPv29CtrFsStat" title="CtrFsStat">CtrFsStat</a> *<em>st</em><span class="sig-paren">)</span></dt>
 <dd><p>Get file status/information (using a filename path). </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to a file or directory. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">st</span></code> - <p>File information. </p>
@@ -447,14 +561,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv210ctrFsFstatiP9CtrFsStat">
-<span id="ctrFsFstat__i.CtrFsStatP"></span><span class="target" id="project0fs_8h_1a9c45d6e1380f285bb818f6fa301dc987"></span>int <code class="descclassname"></code><code class="descname">ctrFsFstat</code><span class="sig-paren">(</span>int <em>fd</em>, <a class="reference internal" href="#_CPPv29CtrFsStat" title="CtrFsStat">CtrFsStat</a> *<em>st</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv210ctrFsFstatP16CtrFsContextDataiP9CtrFsStat">
+<span id="ctrFsFstat__CtrFsContextDataP.i.CtrFsStatP"></span><span class="target" id="project0fs_8h_1ae57b69ffc1f0ed3b2c77c604cc5fd575"></span>int <code class="descclassname"></code><code class="descname">ctrFsFstat</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em>, <a class="reference internal" href="#_CPPv29CtrFsStat" title="CtrFsStat">CtrFsStat</a> *<em>st</em><span class="sig-paren">)</span></dt>
 <dd><p>Get file status/information (using a file descriptor). </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">st</span></code> - <p>File information. </p>
@@ -466,14 +582,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv210ctrFsMkdirPKc9CtrFsMode">
-<span id="ctrFsMkdir__cCP.CtrFsMode"></span><span class="target" id="project0fs_8h_1a600aadc1f5efeee59c39c117320b5310"></span>int <code class="descclassname"></code><code class="descname">ctrFsMkdir</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em>, <a class="reference internal" href="#_CPPv29CtrFsMode" title="CtrFsMode">CtrFsMode</a> <em>mode</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv210ctrFsMkdirP16CtrFsContextDataPKc9CtrFsMode">
+<span id="ctrFsMkdir__CtrFsContextDataP.cCP.CtrFsMode"></span><span class="target" id="project0fs_8h_1a0e145c5ac74779f787f2a0d4b375adce"></span>int <code class="descclassname"></code><code class="descname">ctrFsMkdir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, <em class="property">const</em> char *<em>path</em>, <a class="reference internal" href="#_CPPv29CtrFsMode" title="CtrFsMode">CtrFsMode</a> <em>mode</em><span class="sig-paren">)</span></dt>
 <dd><p>Create a new directory. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to directory to be created. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">mode</span></code> - <p>Mode for the new directory. </p>
@@ -485,14 +603,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv211ctrFsRenamePKcPKc">
-<span id="ctrFsRename__cCP.cCP"></span><span class="target" id="project0fs_8h_1ab6221dc1c12f6ea9aa434bea7204e729"></span>int <code class="descclassname"></code><code class="descname">ctrFsRename</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>source</em>, <em class="property">const</em> char *<em>dest</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv211ctrFsRenameP16CtrFsContextDataPKcPKc">
+<span id="ctrFsRename__CtrFsContextDataP.cCP.cCP"></span><span class="target" id="project0fs_8h_1a461b18fb2ffd724aacc274681dd8ab0d"></span>int <code class="descclassname"></code><code class="descname">ctrFsRename</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, <em class="property">const</em> char *<em>source</em>, <em class="property">const</em> char *<em>dest</em><span class="sig-paren">)</span></dt>
 <dd><p>Change the name of a file. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">source</span></code> - <p>Path of an existing filename. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">dest</span></code> - <p>Path to the new filename. </p>
@@ -504,14 +624,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv210ctrFsRmdirPKc">
-<span id="ctrFsRmdir__cCP"></span><span class="target" id="project0fs_8h_1afce1f3e1a3770f0e9a80c4e74ac2ab88"></span>int <code class="descclassname"></code><code class="descname">ctrFsRmdir</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv210ctrFsRmdirP16CtrFsContextDataPKc">
+<span id="ctrFsRmdir__CtrFsContextDataP.cCP"></span><span class="target" id="project0fs_8h_1ab0eb676e282a3ad4004fdda51876599c"></span>int <code class="descclassname"></code><code class="descname">ctrFsRmdir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, <em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span></dt>
 <dd><p>Delete a directory. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to a directory. </p>
 </li>
 </ul>
@@ -521,14 +643,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv211ctrFsUnlinkPKc">
-<span id="ctrFsUnlink__cCP"></span><span class="target" id="project0fs_8h_1a83c4294d7fd5dcfcb2866664fd829448"></span>int <code class="descclassname"></code><code class="descname">ctrFsUnlink</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv211ctrFsUnlinkP16CtrFsContextDataPKc">
+<span id="ctrFsUnlink__CtrFsContextDataP.cCP"></span><span class="target" id="project0fs_8h_1a5a8d569f750010e43887da737f279db5"></span>int <code class="descclassname"></code><code class="descname">ctrFsUnlink</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, <em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span></dt>
 <dd><p>Delete a file. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to a file. </p>
 </li>
 </ul>
@@ -538,14 +662,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv210ctrFsLseeki7int64_t11ctrFsOriginP8uint64_t">
-<span id="ctrFsLseek__i.int64_t.ctrFsOrigin.uint64_tP"></span><span class="target" id="project0fs_8h_1adb8eafcf9cf41237b0d67ac472af3dca"></span>int <code class="descclassname"></code><code class="descname">ctrFsLseek</code><span class="sig-paren">(</span>int <em>fd</em>, int64_t <em>offset</em>, <a class="reference internal" href="#_CPPv211ctrFsOrigin" title="ctrFsOrigin">ctrFsOrigin</a> <em>origin</em>, uint64_t *<em>pos</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv210ctrFsLseekP16CtrFsContextDatai7int64_t11CtrFsOriginP8uint64_t">
+<span id="ctrFsLseek__CtrFsContextDataP.i.int64_t.CtrFsOrigin.uint64_tP"></span><span class="target" id="project0fs_8h_1a85c7e1dce80beefe1bf1f01426fc8449"></span>int <code class="descclassname"></code><code class="descname">ctrFsLseek</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em>, int64_t <em>offset</em>, <a class="reference internal" href="#_CPPv211CtrFsOrigin" title="CtrFsOrigin">CtrFsOrigin</a> <em>origin</em>, uint64_t *<em>pos</em><span class="sig-paren">)</span></dt>
 <dd><p>Change the current position of a file. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">offset</span></code> - <p>Offset from the origin. </p>
@@ -561,14 +687,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv210ctrFsFsynci">
-<span id="ctrFsFsync__i"></span><span class="target" id="project0fs_8h_1aeff7b09d4695c9b2279457926eb9346c"></span>int <code class="descclassname"></code><code class="descname">ctrFsFsync</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv210ctrFsFsyncP16CtrFsContextDatai">
+<span id="ctrFsFsync__CtrFsContextDataP.i"></span><span class="target" id="project0fs_8h_1a5690d7b3546995ba84c9b8c0148269a9"></span>int <code class="descclassname"></code><code class="descname">ctrFsFsync</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em><span class="sig-paren">)</span></dt>
 <dd><p>Synchronize a file&#8217;s data with the filesystem. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 </ul>
@@ -578,14 +706,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv215ctrFsSdmcStatusP11CtrFsStatus">
-<span id="ctrFsSdmcStatus__CtrFsStatusP"></span><span class="target" id="project0fs_8h_1aace6ce4e6d8b24c3624ee4c8e77cd1d7"></span>int <code class="descclassname"></code><code class="descname">ctrFsSdmcStatus</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211CtrFsStatus" title="CtrFsStatus">CtrFsStatus</a> *<em>status</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv215ctrFsSdmcStatusP16CtrFsContextDataP11CtrFsStatus">
+<span id="ctrFsSdmcStatus__CtrFsContextDataP.CtrFsStatusP"></span><span class="target" id="project0fs_8h_1a6f0b269ba240e0c08c16e935b95f8987"></span>int <code class="descclassname"></code><code class="descname">ctrFsSdmcStatus</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, <a class="reference internal" href="#_CPPv211CtrFsStatus" title="CtrFsStatus">CtrFsStatus</a> *<em>status</em><span class="sig-paren">)</span></dt>
 <dd><p>Get the SD card status. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">status</span></code> - <p>Current status. </p>
 </li>
 </ul>
@@ -595,14 +725,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv213ctrFsTruncatePKc8uint64_t">
-<span id="ctrFsTruncate__cCP.uint64_t"></span><span class="target" id="project0fs_8h_1a259c818ca125c624be3f13dde6b299da"></span>int <code class="descclassname"></code><code class="descname">ctrFsTruncate</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em>, uint64_t <em>size</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv213ctrFsTruncateP16CtrFsContextDataPKc8uint64_t">
+<span id="ctrFsTruncate__CtrFsContextDataP.cCP.uint64_t"></span><span class="target" id="project0fs_8h_1a344c904ecf5cd7e880c76272a72a1aad"></span>int <code class="descclassname"></code><code class="descname">ctrFsTruncate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, <em class="property">const</em> char *<em>path</em>, uint64_t <em>size</em><span class="sig-paren">)</span></dt>
 <dd><p>Change file size (using a filename path). </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">path</span></code> - <p>Path to a file. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">size</span></code> - <p>New file size. </p>
@@ -614,14 +746,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv214ctrFsFtruncatei8uint64_t">
-<span id="ctrFsFtruncate__i.uint64_t"></span><span class="target" id="project0fs_8h_1a84879b9518dafa72e4def4bcd9fc6a41"></span>int <code class="descclassname"></code><code class="descname">ctrFsFtruncate</code><span class="sig-paren">(</span>int <em>fd</em>, uint64_t <em>size</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv214ctrFsFtruncateP16CtrFsContextDatai8uint64_t">
+<span id="ctrFsFtruncate__CtrFsContextDataP.i.uint64_t"></span><span class="target" id="project0fs_8h_1abbe378e7a5b5cf43cf401b22e4e18660"></span>int <code class="descclassname"></code><code class="descname">ctrFsFtruncate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, int <em>fd</em>, uint64_t <em>size</em><span class="sig-paren">)</span></dt>
 <dd><p>Change file size (using a file descriptor). </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">fd</span></code> - <p>File descriptor. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">size</span></code> - <p>New file size. </p>
@@ -633,17 +767,36 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv221ctrFsGetAvailableSizeP8uint64_tP8uint64_t">
-<span id="ctrFsGetAvailableSize__uint64_tP.uint64_tP"></span><span class="target" id="project0fs_8h_1a7bf639aef428a992a605979cf51eb3b5"></span>int <code class="descclassname"></code><code class="descname">ctrFsGetAvailableSize</code><span class="sig-paren">(</span>uint64_t *<em>sdmc_size</em>, uint64_t *<em>nand_size</em><span class="sig-paren">)</span></dt>
+<dt id="_CPPv221ctrFsGetAvailableSizeP16CtrFsContextDataP8uint64_tP8uint64_t">
+<span id="ctrFsGetAvailableSize__CtrFsContextDataP.uint64_tP.uint64_tP"></span><span class="target" id="project0fs_8h_1a6309451ab65bb1e562fc2935e87e37c9"></span>int <code class="descclassname"></code><code class="descname">ctrFsGetAvailableSize</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em>, uint64_t *<em>sdmc_size</em>, uint64_t *<em>nand_size</em><span class="sig-paren">)</span></dt>
 <dd><p>Get free space on the SD card and NAND filesystem. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>On success, 0 is returned. On error, -1 is returned. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
+</li>
 <li><code class="first docutils literal"><span class="pre">sdmc_size</span></code> - <p>Available space on the SD card. </p>
 </li>
 <li><code class="first docutils literal"><span class="pre">nand_size</span></code> - <p>Available space on the NAND filesystem. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210ctrFsMountP16CtrFsContextData">
+<span id="ctrFsMount__CtrFsContextDataP"></span><span class="target" id="project0fs_8h_1aef0469326a1c53a241f07e98f6a26636"></span>int <code class="descclassname"></code><code class="descname">ctrFsMount</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv216CtrFsContextData" title="CtrFsContextData">CtrFsContextData</a> *<em>context</em><span class="sig-paren">)</span></dt>
+<dd><p>Mount the context as the default filesystem. </p>
+<p>A context that is mounted is used by newlib. So, calling <code class="docutils literal"><span class="pre">ctrFsMount(CTR_FS_THIS)</span></code> will allow an application to use the SD card filesystem with <code class="docutils literal"><span class="pre">fopen</span></code>/<code class="docutils literal"><span class="pre">fclose</span></code>. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>On success, 0 is returned. On error, -1 is returned. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">context</span></code> - <p>Filesystem Context Data. </p>
 </li>
 </ul>
 </dd>
@@ -659,6 +812,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gsp/index.html" class="btn btn-neutral float-right" title="GSP API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="fs-overview.html" class="btn btn-neutral" title="Filesystem Overview" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Atomic Reference &mdash; libctr</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="libctr" href="../index.html"/>
+        <link rel="up" title="Atomic API" href="index.html"/>
+        <link rel="next" title="Human Input Device API" href="../hid/index.html"/>
+        <link rel="prev" title="Atomic Overview" href="atomic-overview.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> libctr
+        
+
+        
+          
+          <img src="../_static/logo.svg" class="logo" />
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/concepts.html#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../system/system-overview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/system-reference.html">System Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Atomic API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hid/index.html">Human Input Device API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-overview.html">Human Input Device API Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-reference.html">Human Input Device API Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fs/index.html">Filesystem API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-overview.html">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#context-data">Context Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-reference.html">Filesystem Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">libctr</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Atomic API</a> &raquo;</li>
+      
+    <li>Atomic Reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="atomic-reference">
+<h1>Atomic Reference</h1>
+<div class="section" id="functions">
+<h2>Functions</h2>
+<dl class="function">
+<dt id="_CPPv212ctrAtomicAddP8uint32_tK8uint32_t">
+<span id="ctrAtomicAdd__uint32_tP.uint32_tC"></span><span class="target" id="project0atomic_8h_1a9f49eb75c694ddd140469702bbd57313"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicAdd</code><span class="sig-paren">(</span>uint32_t *<em>ea</em>, <em class="property">const</em> uint32_t <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically add a value to a variable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>Value to add to the variable. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212ctrAtomicSubP8uint32_tK8uint32_t">
+<span id="ctrAtomicSub__uint32_tP.uint32_tC"></span><span class="target" id="project0atomic_8h_1a2c579b0e4a7b4fd0deff7c742da0c532"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicSub</code><span class="sig-paren">(</span>uint32_t *<em>ea</em>, <em class="property">const</em> uint32_t <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically subtract a value from a variable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>Value to subtract from the variable. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212ctrAtomicAndP8uint32_tK8uint32_t">
+<span id="ctrAtomicAnd__uint32_tP.uint32_tC"></span><span class="target" id="project0atomic_8h_1a966b9f9d0a458f6e551798ff4418c9c0"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicAnd</code><span class="sig-paren">(</span>uint32_t *<em>ea</em>, <em class="property">const</em> uint32_t <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically perform an AND operation on a variable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>Value to AND with the variable. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211ctrAtomicOrP8uint32_tK8uint32_t">
+<span id="ctrAtomicOr__uint32_tP.uint32_tC"></span><span class="target" id="project0atomic_8h_1a70f1eada012837965eeeac84ef34ee34"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicOr</code><span class="sig-paren">(</span>uint32_t *<em>ea</em>, <em class="property">const</em> uint32_t <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically perform an OR operation on a variable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>Value to OR with the variable. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214ctrAtomicStoreP8uint32_tK8uint32_t">
+<span id="ctrAtomicStore__uint32_tP.uint32_tC"></span><span class="target" id="project0atomic_8h_1a21cd5f18f3b67f05a650badfc9d069d8"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicStore</code><span class="sig-paren">(</span>uint32_t *<em>ea</em>, <em class="property">const</em> uint32_t <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically set the value of a variable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>Value to OR with the variable. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218ctrAtomicIncrementP8uint32_t">
+<span id="ctrAtomicIncrement__uint32_tP"></span><span class="target" id="project0atomic_8h_1a4b799145cab54f4b368e6de1190a646d"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicIncrement</code><span class="sig-paren">(</span>uint32_t *<em>ea</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically increment a variable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218ctrAtomicDecrementP8uint32_t">
+<span id="ctrAtomicDecrement__uint32_tP"></span><span class="target" id="project0atomic_8h_1ac6b498c7ddcde0a495b58a55b20c52a9"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicDecrement</code><span class="sig-paren">(</span>uint32_t *<em>ea</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically decrement a variable. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223ctrAtomicCompareAndSwapP8uint32_t8uint32_t8uint32_t">
+<span id="ctrAtomicCompareAndSwap__uint32_tP.uint32_t.uint32_t"></span><span class="target" id="project0atomic_8h_1a4eafef8675fa829899b30c004336e727"></span>void <code class="descclassname"></code><code class="descname">ctrAtomicCompareAndSwap</code><span class="sig-paren">(</span>uint32_t *<em>ea</em>, uint32_t <em>compare</em>, uint32_t <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically replace the value of a variable, if it matches a certain value. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the value to atomically update. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">compare</span></code> - <p>Value to compare against. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">value</span></code> - <p>Replacement value, if the variable is a match. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213ctrAtomicReadP8uint32_t">
+<span id="ctrAtomicRead__uint32_tP"></span><span class="target" id="project0atomic_8h_1a5f6bf2db07d955f110dc7abf8ad4ca65"></span>uint32_t <code class="descclassname"></code><code class="descname">ctrAtomicRead</code><span class="sig-paren">(</span>uint32_t *<em>ea</em><span class="sig-paren">)</span></dt>
+<dd><p>Atomically read an integer value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Current value of the atomic variable. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">ea</span></code> - <p>Address of the variable to atomically read. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../hid/index.html" class="btn btn-neutral float-right" title="Human Input Device API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="atomic-overview.html" class="btn btn-neutral" title="Atomic Overview" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 Human Input Device API
-----------------------
+======================
 
 .. toctree::
    :hidden:

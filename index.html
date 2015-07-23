@@ -32,10 +32,8 @@
   
 
   
-        <link rel="author" title="About these documents"
-              href="about.html"/>
     <link rel="top" title="libctr" href="#"/>
-        <link rel="next" title="About" href="about.html"/> 
+        <link rel="next" title="About" href="guides/about.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -78,12 +76,44 @@
           
           
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/concepts.html#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/concepts.html#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="system/index.html">System API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="system/system-overview.html">System Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system/system-reference.html">System Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="system/system-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="system/system-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atomic/index.html">Atomic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atomic/atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atomic/atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic/atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="atomic/atomic-reference.html">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atomic/atomic-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -98,10 +128,29 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fs/index.html">Filesystem API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="fs/fs-overview.html">Filesystem Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fs/fs-overview.html">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fs/fs-overview.html#context-data">Context Data</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="fs/fs-reference.html">Filesystem Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="fs/fs-reference.html#data-structures">Data Structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fs/fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gsp/gsp-reference.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -146,19 +195,36 @@
 <p>This is the documentation for libctr - a free and open-source software
 library for developing Nintendo 3DS homebrew, developed specifically for
 OpenCTR.</p>
-<p>libctr is <em>heavily</em> based off of <a class="reference external" href="https://github.com/smealum/ctrulib">ctrulib</a>, by smealum.</p>
+<div class="section" id="guides">
+<h2>Guides</h2>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="docutils">
-<dt><a class="reference internal" href="about.html"><em>About</em></a></dt>
+<dt><a class="reference internal" href="guides/about.html"><em>About</em></a></dt>
 <dd>About libctr.</dd>
+<dt><a class="reference internal" href="guides/concepts.html"><em>Concepts</em></a></dt>
+<dd>Overview of several concepts used in libctr.</dd>
+<dt><a class="reference internal" href="guides/contributing.html"><em>Contributing</em></a></dt>
+<dd>Contributing to libctr.</dd>
+</dl>
+</div>
+<div class="section" id="references">
+<h2>References</h2>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="docutils">
 <dt><a class="reference internal" href="system/index.html"><em>System API</em></a></dt>
 <dd>System API.</dd>
+<dt><a class="reference internal" href="atomic/index.html"><em>Atomic API</em></a></dt>
+<dd>Atomic API.</dd>
 <dt><a class="reference internal" href="hid/index.html"><em>Human Input Device API</em></a></dt>
 <dd>Human Input Device API.</dd>
 <dt><a class="reference internal" href="fs/index.html"><em>Filesystem API</em></a></dt>
 <dd>Filesystem API.</dd>
+<dt><a class="reference internal" href="gsp/index.html"><em>GSP API</em></a></dt>
+<dd>GSP/GPU API.</dd>
 </dl>
+</div>
 </div>
 
 
@@ -167,7 +233,7 @@ OpenCTR.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="about.html" class="btn btn-neutral float-right" title="About" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="guides/about.html" class="btn btn-neutral float-right" title="About" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

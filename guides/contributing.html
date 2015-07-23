@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contributing &mdash; libctr</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="libctr" href="../index.html"/>
+        <link rel="next" title="System API" href="../system/index.html"/>
+        <link rel="prev" title="Concepts" href="concepts.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> libctr
+        
+
+        
+          
+          <img src="../_static/logo.svg" class="logo" />
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#acknowledgment">Acknowledgment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#important-notice">Important Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#thread-safety">Thread-safety</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#contexts">Contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pull-requests">Pull Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#joining-openctr">Joining OpenCTR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation-writers">Documentation Writers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#translations">Translations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../system/system-overview.html">System Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/system-reference.html">System Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../system/system-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../atomic/index.html">Atomic API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-overview.html">Atomic Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-overview.html#using">Using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../atomic/atomic-reference.html">Atomic Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../atomic/atomic-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hid/index.html">Human Input Device API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-overview.html">Human Input Device API Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hid/hid-reference.html">Human Input Device API Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hid/hid-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fs/index.html">Filesystem API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-overview.html">Filesystem Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#files">Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#using">Using</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-overview.html#context-data">Context Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fs/fs-reference.html">Filesystem Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fs/fs-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gsp/index.html">GSP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-overview.html">GSP Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-overview.html#concepts">Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gsp/gsp-reference.html">GSP Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#data-structures">Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gsp/gsp-reference.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">libctr</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="contributing">
+<h1>Contributing</h1>
+<p>This document provides guidelines to anyone who wishes to contribute to OpenCTR
+and/or libctr.</p>
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+<p>There is absolutely no requirement for who is able to contribute to libctr.
+Anyone interested may contribute. There are, however, several requirements
+on what will be accepted into libctr.</p>
+<p>libctr does have somewhat strict critera concerning what is permitted to become
+part of the public API, the part that developers use. To be included, a
+component (be it a function, file, structure, or any combination thereof) should
+meet the following criteria:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Is it neccessary?</li>
+<li>Will it probably undergo substantial changes very soon?</li>
+<li>Is it efficient enough to be used in production quality code?</li>
+<li>Is it easy to use correctly, and hard to use incorrectly?</li>
+<li>Is it as small as possible, without being any smaller?</li>
+</ol>
+</div></blockquote>
+<p>Those criteria reflect some of the most desirable characteristics in an API. As
+long as they are followed, we can always be positive that <em>any</em> changes to
+libctr will never hurt it, only add to it. Any pull requests or commits which
+publicly expose an API which violates any of those principles will be rejected,
+as will any changes to an existing API which cause it to violate a criteria.</p>
+<p>Documentation is also a required criteria. Any file, function, macro, or type
+added without any documentation will be removed. We believe that an API is
+useless without documentation, as without it, there is no way that new or
+returning users will be able to use it correctly (and you yourself will
+probably become a &#8220;returning user&#8221; yourself in a few weeks).</p>
+</div>
+<div class="section" id="pull-requests">
+<h2>Pull Requests</h2>
+<p>The recommended way of making a change to the master branch of libctr is through
+GitHub pull requests. Just clone libctr, make your changes, and then submit it
+as a pull request.</p>
+<p>Developers should add their name and email address to the <code class="docutils literal"><span class="pre">.mailmap</span></code> file as
+part of their pull requests. This helps us automatically track who is
+responsible for what.</p>
+<p>It is recommended (though not required) that developers use <code class="docutils literal"><span class="pre">clang-format</span></code> to
+format their code to the libctr guidelines before they merge their work. A
+<code class="docutils literal"><span class="pre">.clang-format</span></code> file is provided in the root of libctr, and should have all
+the required settings.</p>
+</div>
+<div class="section" id="joining-openctr">
+<h2>Joining OpenCTR</h2>
+<p>OpenCTR is an organization on GitHub. As such, individual developers can join
+OpenCTR, which gives them access to the OpenCTR repositories, including libctr.</p>
+<p>The OpenCTR project is not currently accepting new developers at this time. We
+are still getting everything setup, and we have limited experience with
+distributed development. Once everything has reached stable, we will begin
+accepting new members.</p>
+</div>
+<div class="section" id="documentation-writers">
+<h2>Documentation Writers</h2>
+<p>OpenCTR takes great pride in it&#8217;s emphasis on developer documentation. <em>Nothing</em>
+in OpenCTR should ever be left undocumented. If you see something that is, do
+not hesitate to bring it to our attention. Pull requests that add or improve
+documentation are always welcome.</p>
+<p>Technical writers are always welcome to contribute. If you are unable to
+contribute personally, even professional recommendations and tips will always
+be welcome.</p>
+</div>
+<div class="section" id="translations">
+<h2>Translations</h2>
+<p>At this time, OpenCTR is written primarily in english, but this will not always
+be the case. We are currently working on an infrastructure that will support
+more multilingual documentation for our projects. Once this is completed, we
+will need volunteers who are willing to translate the developer documentation.</p>
+<p>People who have experience with translating english into any of the following
+languages will be very valuable:</p>
+<ul class="simple">
+<li>Spanish</li>
+<li>French</li>
+<li>Chinese (Mandarin)</li>
+<li>Japanese</li>
+<li>Arabic</li>
+<li>Italian</li>
+<li>German</li>
+</ul>
+<p>Instructions on adding translations to libctr will be added in the future.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../system/index.html" class="btn btn-neutral float-right" title="System API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="concepts.html" class="btn btn-neutral" title="Concepts" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
