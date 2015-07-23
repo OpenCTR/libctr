@@ -1,4 +1,3 @@
-=====
 About
 =====
 
@@ -7,8 +6,19 @@ what it does, and explains the reasons behind several of its choices. After
 reading this, you should have a pretty good idea of whether or not libctr is
 what you are looking for - if it *fits the bill*.
 
+Acknowledgment
+--------------
+
+libctr is *heavily* based off of `ctrulib 
+<https://github.com/smealum/ctrulib>`__, by smealum.
+
+Some parts of libctr were directly copied from ctrulib, and a large part of the
+libctr architecture was influenced by the inner workings of ctrulib. 
+
+libctr is based off of ctrulib, and would not exist without it.
+
 Important Notice
-~~~~~~~~~~~~~~~~
+----------------
 
 The first and foremost disclaimer about libctr is this:
    libctr is not a catch-all, end-all, be-all solution. Some users will be
@@ -32,18 +42,11 @@ and easier maintainability. So the choice was made to exclude certain
 functionality from libctr, even if this does reduce the potential number of 
 users and use-cases.
 
-Second, it will be important to remember: libctr tries to be the best at what
-it does, but it doesn't try to do anything anything else. Nothing in libctr is
-exposed through the public API unless it meets the following criteria:
-   1. Is it neccessary?
-   2. Will it probably undergo substantial changes very soon?
-   3. Is it efficient enough to be used in production quality code?
-   4. Is it easy to use correctly, and hard to use incorrectly?
-   5. Is it as small as possible, without being any smaller?
+Overview
+--------
 
-Those criteria reflect some of the most desirable characteristics in an API. As
-long as they are followed, we can always be positive that *any* changes to
-libctr will never hurt it, only add to it. Any pull requests or commits which
-publicly expose an API which violates any of those principles will be rejected,
-as will any changes to an existing API which cause it to violate a criteria.
+**libctr** is a library created by Alex Shaw (Symbitic) as part of OpenCTR.
+It is meant to be an open source alternative to Nintendo's proprietary
+commercial SDK for the Nintendo 3DS handheld game console. It allows developers
+to create their own Nintendo 3DS homebrew, independent of Nintendo.
 

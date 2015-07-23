@@ -1,10 +1,12 @@
 Filesystem Reference
---------------------
+====================
 
 Data Structures
-~~~~~~~~~~~~~~~
+---------------
 
 .. doxygendefine:: CTR_FS_MAX_FILENAME_LENGTH
+
+.. doxygendefine:: CTR_FS_THIS
 
 .. doxygenenum:: CtrFsMode
 
@@ -21,8 +23,14 @@ Data Structures
 .. doxygenstruct:: CtrFsDirent
    :members:
 
+.. doxygentypedef:: CtrFsContextData
+
 Functions
-~~~~~~~~~
+---------
+
+.. doxygenfunction:: ctrFsContextDataNew
+
+.. doxygenfunction:: ctrFsContextDataFree
 
 .. doxygenfunction:: ctrFsOpen
 
@@ -61,4 +69,6 @@ Functions
 .. doxygenfunction:: ctrFsFtruncate
 
 .. doxygenfunction:: ctrFsGetAvailableSize
+
+.. doxygenfunction:: ctrFsMount
 

@@ -1,5 +1,5 @@
 Filesystem API
---------------
+==============
 
 .. toctree::
    :hidden:

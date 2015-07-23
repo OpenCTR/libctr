@@ -1,12 +1,12 @@
 GSP Overview
-------------
+============
 
 This is an overview of the GSP API.
 
 See :doc:`gsp-reference` for more information.
 
 Introduction
-~~~~~~~~~~~~
+------------
 
 GSP is an API for controlling and accessing the DMP PICA GPU. libgsp provides
 APIs for obtaining access to the GPU, which is a kernel-owned service, as well
@@ -22,5 +22,5 @@ provides a fully object-oriented interface to libgsp. libctrxx is not ready for
 use at this time, and more information will be available shortly.
 
 Concepts
-~~~~~~~~
+--------
 

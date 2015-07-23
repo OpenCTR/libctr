@@ -1,8 +1,14 @@
-========
-Overview
+Concepts
 ========
 
-This presents an overview of several concepts used in libctr.
+This presents an overview of several concepts used in libctr. libctr tries to
+be an excellent example of software engineering, exemplifying many of the best
+professional practices and metrics in software development.
+
+`Thread-safety`_ provides an overview for how libctr achieves thread-safety.
+`Contexts`_ provides an overview for how libctr prefers to encapsule data
+into a structure versus using global variables.
+
 
 Thread-safety
 -------------
