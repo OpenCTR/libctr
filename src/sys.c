@@ -32,7 +32,7 @@ int sys_control_memory(uint32_t* outaddr,
 
     ret = sys_control_memory_ex(outaddr, addr0, addr1, size, op, perm);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -44,7 +44,7 @@ int sys_query_memory(sys_memory_info* mem, sys_page_info* page, uint32_t addr) {
 
     ret = sys_query_memory_ex(mem, page, addr);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -60,18 +60,18 @@ int sys_thread_create(sys_thread_t* id,
     int ret;
 
     if(id == NULL) {
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return -1;
     }
 
     if(entry == NULL) {
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return -1;
     }
 
     ret = sys_thread_create_ex(id, entry, (uint32_t)arg, stack, prio, cpu);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -83,7 +83,7 @@ int sys_thread_join(sys_thread_t id) {
 
     ret = sys_wait_sync(id, UINT64_MAX);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -105,7 +105,7 @@ int sys_mutex_new(sys_mutex_t* mutex, sys_lock_t status) {
 
     ret = sys_mutex_new_ex(mutex, status);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -117,7 +117,7 @@ int sys_mutex_free(sys_mutex_t mutex_id) {
 
     ret = sys_close_handle(mutex_id);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -129,7 +129,7 @@ int sys_mutex_lock(sys_mutex_t mutex_id) {
 
     ret = sys_wait_sync(mutex_id, UINT64_MAX);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -141,7 +141,7 @@ int sys_mutex_unlock(sys_mutex_t mutex_id) {
 
     ret = sys_mutex_unlock_ex(mutex_id);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 

@@ -22,7 +22,7 @@
 #define __LIBCTR_GSP_H__
 
 /**
- * @file ctr/gsp/gsp.h
+ * @file ctr/gsp.h
  * @brief GSP API.
  */
 
@@ -52,7 +52,7 @@
  * @brief Global GSP Context Data.
  * @details A thread-safe reference to the global GSP context
  * data. This is created automatically during libctr
- * startup, and should <em>NEVER<em> be allocated or freed by the user.
+ * startup, and should <em>NEVER</em> be allocated or freed by the user.
  */
 #define CTR_GSP_THIS gGSP
 
@@ -130,12 +130,20 @@ typedef struct {
 } CtrGspTarget;
 
 /**
- * @struct CtrGspContextData
+ * @typedef CtrGspContextData
  * @brief GSP Context Data.
  * @details <code>CtrGspContextData</code> is an opaque type. <i>It
  * should NEVER be modified by users</i>.
  */
-CTR_CONTEXT_DECLARE(GSP, CtrGspContextData);
+typedef struct CtrGspContextDataPrivate CtrGspContextData;
+
+/**
+ * @private
+ * @brief Global GSP Context Data.
+ * @warning Users should never use this directly. Use
+ * CTR_GSP_THIS instead.
+ */
+extern CtrGspContextData *gGSP;
 
 /**
  * @brief Create a new GSP context.
@@ -175,6 +183,7 @@ CAPI int ctrGspFlush(CtrGspContextData *context) CTR_ARG_NONNULL(1);
 
 /**
  * @brief Wait for a vertical blank interrupt to occur on a screen.
+ * @param[in] context GSP context data.
  * @param[in] screen Screen to wait for.
  * @return On success, 0 is returned. On error, -1 is returned.
  */

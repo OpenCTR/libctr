@@ -61,6 +61,7 @@ add_library(ctr STATIC
 	src/atomic.s
 	src/fs.c
 	src/gsp.c
+	src/sdmc.c
 )
 
 # Export CTR::CTR instead of CTR::ctr

@@ -96,14 +96,12 @@ int sys_service_get_handle(uint32_t* handle, const char* name) {
 
     ret = sys_send_sync_request(ctr_service_handle);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
-        return -1;
+        return ret;
     }
 
     ret = cmdbuf[1];
     if(ret != 0) {
-        (*cerrorptr()) = ret;
-        return -1;
+        return ret;
     }
 
     if(handle != NULL) {

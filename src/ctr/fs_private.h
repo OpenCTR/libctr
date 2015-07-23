@@ -29,13 +29,43 @@
 #include "ctr/base_private.h"
 #include "ctr/fs.h"
 
+/** Up to 32 files can be opened at once. */
+#define CTR_FS_HANDLES_MAX (0x20)
+
 CTR_API_BEGIN
+
+/**
+ * @brief CTRFS file.
+ * @details Allows keeping track of file offsets, and
+ * allows us to keep a list of all opened files and
+ * directories.
+ */
+typedef struct {
+    /** File descriptor. */
+    uint32_t handle;
+    /** Flags. */
+    int flags;
+    /** Current file offset. */
+    uint64_t offset;
+} CtrFsFile;
 
 struct CtrFsContextDataPrivate {
     /**
      * @brief FS::USER Service Handle.
      */
     uint32_t handle;
+    /**
+     * @brief Filesystem archive the context is handling.
+     */
+    uint32_t archive;
+    /**
+     * @brief List of currently opened files and directories.
+     */
+    CtrFsFile files[CTR_FS_HANDLES_MAX];
+    /**
+     * @brief Boolean, indicating if the context has been mounted.
+     */
+    uint32_t mounted;
 };
 
 CTR_API_END

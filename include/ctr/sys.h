@@ -71,7 +71,7 @@ typedef uint32_t sys_thread_t;
 typedef uint32_t sys_mutex_t;
 
 /**
- * @typedef sys_thread_cb
+ * @typedef sys_thread_func
  * @brief Function to run inside a thread.
  * @details <code>void sys_thread_cb(void* arg)</code>
  * @param[in] arg Parameter passed to the thread function.

@@ -36,7 +36,7 @@
  * @brief Global Filesystem Context Data.
  * @details A thread-safe reference to the global Filesystem context
  * data. This is created automatically during libctr
- * startup, and should <em>NEVER<em> be allocated or freed by the user.
+ * startup, and should <em>NEVER</em> be allocated or freed by the user.
  * @note If the filesystem is mounted with ctrFsMount(), then users will
  * not need to use this. By default, libctr uses CTR_FS_THIS when mounting
  * the filesystem.
@@ -97,6 +97,24 @@ typedef enum {
 } CtrFsOpenFlags;
 
 /**
+ * @enum CtrFsArchiveType
+ * @brief Supported filesystem archives.
+ * @details An archive is a filesystem container, and is used to access
+ * files and directories.
+ * @note CTR_FS_ARCHIVE_SDMC is currently the only supported filesystem.
+ */
+typedef enum {
+    /** RomFS filesystem. */
+    CTR_FS_ARCHIVE_ROMFS = 0x00000003,
+    /** SaveData filesystem. */
+    CTR_FS_ARCHIVE_SAVEDATA = 0x00000004,
+    /** SDMC filesystem. */
+    CTR_FS_ARCHIVE_SDMC = 0x00000009,
+    /** NAND filesystem. */
+    CTR_FS_ARCHIVE_NAND = 0x1234567F,
+} CtrFsArchiveType;
+
+/**
  * @struct CtrFsStat
  * @brief File status and information.
  */
@@ -130,12 +148,20 @@ typedef struct {
 } CtrFsDirent;
 
 /**
- * @struct CtrFsContextData
+ * @typedef CtrFsContextData
  * @brief Filesystem Context Data.
  * @details <code>CtrFsContextData</code> is an opaque type. <i>It
  * should NEVER be modified by users</i>.
  */
-CTR_CONTEXT_DECLARE(FS, CtrFsContextData);
+typedef struct CtrFsContextDataPrivate CtrFsContextData;
+
+/**
+ * @private
+ * @brief Global Filesystem Context Data.
+ * @warning Users should never use this directly. Use
+ * CTR_FS_THIS instead.
+ */
+extern CtrFsContextData *gFS;
 
 /**
  * @brief Create a new filesystem context.
@@ -150,6 +176,15 @@ CAPI CtrFsContextData *ctrFsContextDataNew(void);
  * @param[in] context Filesystem context to release.
  */
 CAPI void ctrFsContextDataFree(CtrFsContextData *context) CTR_ARG_NONNULL(1);
+
+/**
+ * @brief Mount and use an archive on the given filesystem context.
+ * @param[in] context Filesystem context.
+ * @param[in] type Archive to add to the context.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+CAPI int ctrFsContextMount(CtrFsContextData *context, CtrFsArchiveType type)
+    CTR_ARG_NONNULL(1);
 
 /**
  * @brief Open a file.
@@ -352,6 +387,16 @@ CAPI int ctrFsFtruncate(CtrFsContextData *context, int fd, uint64_t size)
 CAPI int ctrFsGetAvailableSize(CtrFsContextData *context,
                                uint64_t *sdmc_size,
                                uint64_t *nand_size) CTR_ARG_NONNULL(1);
+
+/**
+ * @brief Mount the context as the default filesystem.
+ * @details A context that is mounted is used by newlib.
+ * So, calling <code>ctrFsMount(CTR_FS_THIS)</code> will allow an application
+ * to use the SD card filesystem with <code>fopen</code>/<code>fclose</code>.
+ * @param[in] context Filesystem Context Data.
+ * @return On success, 0 is returned. On error, -1 is returned.
+ */
+CAPI int ctrFsMount(CtrFsContextData *context);
 
 CTR_API_END
 

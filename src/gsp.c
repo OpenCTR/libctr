@@ -48,16 +48,16 @@ void* ctrGspLocalAlign(const uint32_t alignment, const uint32_t size) {
     uint32_t addr;
 
     if(alignment % 2 != 0) {
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return NULL;
     } else if(size <= 0) {
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return NULL;
     }
 
     ret = sys_control_memory(&addr, 0x00, 0x00, size, 0x00010003, 0x03);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return NULL;
     }
 
@@ -73,7 +73,7 @@ int ctrGspLocalFree(void* addr) {
 
     ret = sys_query_memory(&meminfo, &pageinfo, (uint32_t)addr);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -84,7 +84,7 @@ int ctrGspLocalFree(void* addr) {
                              0x0003,
                              0x00);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -96,14 +96,14 @@ int ctrGspSetTarget(CtrGspContextData* context, const CtrGspTarget* tgt) {
     int ret;
 
     if((context == NULL) || (tgt == NULL)) {
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return -1;
     }
 
     if((tgt->screen != CTR_GSP_TOP_SCREEN) &&
        (tgt->screen != CTR_GSP_BOTTOM_SCREEN)) {
         // TODO: CTR_GSP_ERROR_INVALID_SCREEN
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return -1;
     }
 
@@ -156,13 +156,13 @@ int ctrGspSetTarget(CtrGspContextData* context, const CtrGspTarget* tgt) {
 
     ret = sys_send_sync_request(context->handle);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
     ret = cmdbuf[1];
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return -1;
     }
 
@@ -176,7 +176,7 @@ CtrGspContextData* ctrGspContextDataNew(void) {
 
     context = (CtrGspContextData*)malloc(size);
     if(context == NULL) {
-        (*cerrorptr()) = ENOMEM;
+        cerror_set(ENOMEM);
         return NULL;
     }
 
@@ -184,7 +184,7 @@ CtrGspContextData* ctrGspContextDataNew(void) {
 
     ret = sys_service_get_handle(&context->handle, "gsp::Gpu");
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return NULL;
     }
 
@@ -192,20 +192,20 @@ CtrGspContextData* ctrGspContextDataNew(void) {
     /* Removed because Citra-emu doesn't implement AcquireRight. */
     ret = ctrGspAcquireRight(context);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return NULL;
     }
 #endif
 
     ret = ctrGspCreateEventHandler(context);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return NULL;
     }
 
     ret = ctrGspSetLcdForceBlack(context);
     if(ret != 0) {
-        (*cerrorptr()) = ret;
+        cerror_set(ret);
         return NULL;
     }
 
@@ -362,7 +362,7 @@ void ctrGspContextDataFree(CtrGspContextData* context) {
     uint8_t i;
 
     if(context == NULL) {
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return;
     }
 
@@ -448,13 +448,13 @@ int ctrGspWaitForVBlank(CtrGspContextData* context, CtrGspScreen screen) {
             sys_event_clear(context->events[CTR_GSP_EVENT_VBLANK1]);
             ret = sys_wait_sync2(&count, events, 2, 1, UINT64_MAX);
             if(ret != 0) {
-                (*cerrorptr()) = ret;
+                cerror_set(ret);
                 return -1;
             }
             break;
         }
         default: {
-            (*cerrorptr()) = EINVAL;
+            cerror_set(EINVAL);
             return -1;
         }
     }
@@ -466,7 +466,7 @@ int ctrGspFlush(CtrGspContextData* context) {
     int ret;
 
     if(context == NULL) {
-        (*cerrorptr()) = EINVAL;
+        cerror_set(EINVAL);
         return -1;
     }
 
@@ -479,7 +479,7 @@ int ctrGspFlush(CtrGspContextData* context) {
     if(context->top_framebuffer != NULL) {
         ret = ctrGspFlushDataCache(context, context->top_framebuffer, top_size);
         if(ret != 0) {
-            (*cerrorptr()) = ret;
+            cerror_set(ret);
             return ret;
         }
     }
@@ -488,7 +488,7 @@ int ctrGspFlush(CtrGspContextData* context) {
         ret = ctrGspFlushDataCache(
             context, context->stereo_framebuffer, top_size);
         if(ret != 0) {
-            (*cerrorptr()) = ret;
+            cerror_set(ret);
             return ret;
         }
     }
@@ -497,7 +497,7 @@ int ctrGspFlush(CtrGspContextData* context) {
         ret = ctrGspFlushDataCache(
             context, context->bottom_framebuffer, bottom_size);
         if(ret != 0) {
-            (*cerrorptr()) = ret;
+            cerror_set(ret);
             return ret;
         }
     }

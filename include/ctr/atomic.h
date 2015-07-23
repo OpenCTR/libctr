@@ -35,47 +35,47 @@ CTR_API_BEGIN
  * @param[in,out] ea Address of the value to atomically update.
  * @param[in] value Value to add to the variable.
  */
-void ctrAtomicAdd(uint32_t *ea, const uint32_t value);
+CAPI void ctrAtomicAdd(uint32_t *ea, const uint32_t value);
 
 /**
  * @brief Atomically subtract a value from a variable.
  * @param[in,out] ea Address of the value to atomically update.
  * @param[in] value Value to subtract from the variable.
  */
-void ctrAtomicSub(uint32_t *ea, const uint32_t value);
+CAPI void ctrAtomicSub(uint32_t *ea, const uint32_t value);
 
 /**
  * @brief Atomically perform an AND operation on a variable.
  * @param[in,out] ea Address of the value to atomically update.
  * @param[in] value Value to AND with the variable.
  */
-void ctrAtomicAnd(uint32_t *ea, const uint32_t value);
+CAPI void ctrAtomicAnd(uint32_t *ea, const uint32_t value);
 
 /**
  * @brief Atomically perform an OR operation on a variable.
  * @param[in,out] ea Address of the value to atomically update.
  * @param[in] value Value to OR with the variable.
  */
-void ctrAtomicOr(uint32_t *ea, const uint32_t value);
+CAPI void ctrAtomicOr(uint32_t *ea, const uint32_t value);
 
 /**
  * @brief Atomically set the value of a variable.
  * @param[in,out] ea Address of the value to atomically update.
  * @param[in] value Value to OR with the variable.
  */
-void ctrAtomicStore(uint32_t *ea, const uint32_t value);
+CAPI void ctrAtomicStore(uint32_t *ea, const uint32_t value);
 
 /**
  * @brief Atomically increment a variable.
  * @param[in,out] ea Address of the value to atomically update.
  */
-void ctrAtomicIncrement(uint32_t *ea);
+CAPI void ctrAtomicIncrement(uint32_t *ea);
 
 /**
  * @brief Atomically decrement a variable.
  * @param[in,out] ea Address of the value to atomically update.
  */
-void ctrAtomicDecrement(uint32_t *ea);
+CAPI void ctrAtomicDecrement(uint32_t *ea);
 
 /**
  * @brief Atomically replace the value of a variable, if it matches a certain
@@ -84,14 +84,16 @@ void ctrAtomicDecrement(uint32_t *ea);
  * @param[in] compare Value to compare against.
  * @param[in] value Replacement value, if the variable is a match.
  */
-void ctrAtomicCompareAndSwap(uint32_t *ea, uint32_t compare, uint32_t value);
+CAPI void ctrAtomicCompareAndSwap(uint32_t *ea,
+                                  uint32_t compare,
+                                  uint32_t value);
 
 /**
  * @brief Atomically read an integer value.
  * @param[in] ea Address of the variable to atomically read.
  * @return Current value of the atomic variable.
  */
-uint32_t ctrAtomicRead(uint32_t *ea);
+CAPI uint32_t ctrAtomicRead(uint32_t *ea);
 
 CTR_API_END
 
