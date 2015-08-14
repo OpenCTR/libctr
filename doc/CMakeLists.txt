@@ -105,10 +105,10 @@ if(ENABLE_UPLOAD)
 	set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "upload")
 endif()
 
-# Install bookmarks
+# Install documentation
 install(DIRECTORY ${HTML_PATH}/
 	DESTINATION share/doc/libctr
-	REGEX "\\." EXCLUDE
+	PATTERN ".*" EXCLUDE
 )
 
 # Cleanup
