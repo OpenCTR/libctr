@@ -58,7 +58,10 @@ target_include_directories(ctr PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-set_property(TARGET ctr PROPERTY INTERFACE_INCLUDE_DIRECTORIES "include")
+set_property(TARGET ctr APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+    $<INSTALL_INTERFACE:include>
+)
+
 set_property(TARGET ctr PROPERTY EXPORT_NAME "CTR")
 
 configure_package_config_file(libctr-config.cmake.in
