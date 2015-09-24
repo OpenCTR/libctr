@@ -36,7 +36,6 @@ endif()
 
 find_package(CTR CONFIG QUIET REQUIRED artool)
 
-# Enable Assembly
 enable_language(ASM)
 
 add_library(ctr STATIC 
@@ -53,46 +52,39 @@ add_library(ctr STATIC
     src/sdmc.c
 )
 
-target_include_directories(ctr INTERFACE
-    $<INSTALL_INTERFACE:include/ctr>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+target_include_directories(ctr PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-# Export CTR::CTR instead of CTR::ctr
+set_property(TARGET ctr PROPERTY INTERFACE_INCLUDE_DIRECTORIES "include")
 set_property(TARGET ctr PROPERTY EXPORT_NAME "CTR")
 
-# Configure libctr-config.cmake
 configure_package_config_file(libctr-config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/libctr-config.cmake
     INSTALL_DESTINATION lib/cmake/libctr
 )
 
-# Create libctr-config-version.cmake
 write_basic_package_version_file(
     ${CMAKE_CURRENT_BINARY_DIR}/libctr-config-version.cmake
     COMPATIBILITY AnyNewerVersion 
     VERSION ${LIBCTR_VERSION}
 )
 
-# Install libctru.a
 install(TARGETS ctr DESTINATION lib EXPORT libctr)
 
-# Install libctr headers
 install(DIRECTORY include/
     DESTINATION include
     PATTERN ".*" EXCLUDE
 )
 
-# Install libctr-targets.cmake
 install(EXPORT libctr
     DESTINATION lib/cmake/libctr
     FILE libctr-targets.cmake
     NAMESPACE CTR::
 )
 
-# Install libctr-config.cmake and libctr-config-version.cmake
 install(FILES 
     ${CMAKE_CURRENT_BINARY_DIR}/libctr-config.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/libctr-config-version.cmake
